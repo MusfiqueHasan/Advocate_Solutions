@@ -1,15 +1,11 @@
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import About from "./pages/about/About";
 import CaseStudy from "./pages/case-study/CaseStudy";
 import Consultation from "./pages/consultation/Consultation";
 import FAQ from "./pages/faq/FAQ";
 import Home from "./pages/home/Home";
 import News from "./pages/news/News";
-
 
 function App() {
   return (
@@ -23,7 +19,6 @@ function App() {
         <Route path="/news" element={<News />} />
       </Routes>
     </BrowserRouter>
-
   );
 }
 

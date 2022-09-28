@@ -23,140 +23,139 @@ const Attorneys = () => {
         </div>
       </div>
 
-      <div className=" grid grid-cols-4 gap-5  px-44 py-5">
+      <div className=" grid grid-cols-4 gap-7  px-36 py-5">
         <div className=" shadow-md p-3">
           <img src={lawyer1} alt="" />
           <h1 className=" text-xl font-bold">David Vigo Michel</h1>
-          <p className=" text-lg text-yellow-700">Family Lawyer</p>
+          <p className=" text-lg text-yellow-600">Family Lawyer</p>
           <div className=" border-b-2 mr-7 my-5"></div>
           <div className=" flex justify-start items-center gap-x-5 my-2">
-            <button className=" text-yellow-700">
+            <button className=" text-yellow-600">
               <LocalPhoneIcon />
             </button>
             <p className=" text-gray-400">98765-12-345</p>
           </div>
           <div className=" flex justify-start items-center gap-x-5">
-            <button className=" text-yellow-700">
+            <button className=" text-yellow-600">
               <MailOutlineIcon />
             </button>
             <p className=" text-gray-400">Davidvigo@domain.com</p>
           </div>
 
           <div className=" flex justify-start gap-x-5 items-center my-3">
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <FacebookOutlinedIcon />
             </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <GoogleIcon />
             </button>
-            <button className="border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className="border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <TwitterIcon />
             </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <LinkedInIcon />
             </button>
           </div>
         </div>
         <div className=" shadow-md p-3">
-          <img src={lawyer1} alt="" />
+          <img src={lawyer2} alt="" />
           <h1 className=" text-xl font-bold">David Vigo Michel</h1>
-          <p className=" text-lg text-yellow-700">Family Lawyer</p>
+          <p className=" text-lg text-yellow-600">Family Lawyer</p>
           <div className=" border-b-2 mr-7 my-5"></div>
           <div className=" flex justify-start items-center gap-x-5 my-2">
-            <button className=" text-yellow-700">
+            <button className=" text-yellow-600">
               <LocalPhoneIcon />
             </button>
             <p className=" text-gray-400">98765-12-345</p>
           </div>
           <div className=" flex justify-start items-center gap-x-5">
-            <button className=" text-yellow-700">
+            <button className=" text-yellow-600">
               <MailOutlineIcon />
             </button>
             <p className=" text-gray-400">Davidvigo@domain.com</p>
           </div>
 
           <div className=" flex justify-start gap-x-5 items-center my-3">
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <FacebookOutlinedIcon />
             </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <GoogleIcon />
             </button>
-            <button className="border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className="border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <TwitterIcon />
             </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <LinkedInIcon />
             </button>
           </div>
         </div>
         <div className=" shadow-md p-3">
-          <img src={lawyer1} alt="" />
+          <img src={lawyer3} alt="" />
           <h1 className=" text-xl font-bold">David Vigo Michel</h1>
-          <p className=" text-lg text-yellow-700">Family Lawyer</p>
+          <p className=" text-lg text-yellow-600">Family Lawyer</p>
           <div className=" border-b-2 mr-7 my-5"></div>
           <div className=" flex justify-start items-center gap-x-5 my-2">
-            <button className=" text-yellow-700">
+            <button className=" text-yellow-600">
               <LocalPhoneIcon />
             </button>
             <p className=" text-gray-400">98765-12-345</p>
           </div>
           <div className=" flex justify-start items-center gap-x-5">
-            <button className=" text-yellow-700">
+            <button className=" text-yellow-600">
               <MailOutlineIcon />
             </button>
             <p className=" text-gray-400">Davidvigo@domain.com</p>
           </div>
 
           <div className=" flex justify-start gap-x-5 items-center my-3">
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all rounded-md">
               <FacebookOutlinedIcon />
             </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <GoogleIcon />
             </button>
-            <button className="border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className="border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <TwitterIcon />
             </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <LinkedInIcon />
             </button>
           </div>
         </div>
         <div className=" shadow-md p-3">
-          <img src={lawyer1} alt="" />
+          <img src={lawyer4} alt="" />
           <h1 className=" text-xl font-bold">David Vigo Michel</h1>
-          <p className=" text-lg text-yellow-700">Family Lawyer</p>
+          <p className=" text-lg text-yellow-600">Family Lawyer</p>
           <div className=" border-b-2 mr-7 my-5"></div>
           <div className=" flex justify-start items-center gap-x-5 my-2">
-            <button className=" text-yellow-700">
+            <button className=" text-yellow-600">
               <LocalPhoneIcon />
             </button>
             <p className=" text-gray-400">98765-12-345</p>
           </div>
           <div className=" flex justify-start items-center gap-x-5">
-            <button className=" text-yellow-700">
+            <button className=" text-yellow-600">
               <MailOutlineIcon />
             </button>
             <p className=" text-gray-400">Davidvigo@domain.com</p>
           </div>
 
           <div className=" flex justify-start gap-x-5 items-center my-3">
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <FacebookOutlinedIcon />
             </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <GoogleIcon />
             </button>
-            <button className="border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className="border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <TwitterIcon />
             </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white transition-all">
+            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-yellow-600 hover:text-white rounded-md transition-all">
               <LinkedInIcon />
             </button>
           </div>
         </div>
-       
       </div>
     </div>
   );
