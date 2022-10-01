@@ -1,4 +1,5 @@
 import React from "react";
+import News from "../news/News";
 import Attorneys from "./attorneys/Attorneys";
 import Footer from "./footer/Footer";
 import Header from "./header/Header";
@@ -10,6 +11,7 @@ const Home = () => {
       <Header />
       <Attorneys />
       <Testimonial />
+      <News />
       <Footer />
     </>
   );

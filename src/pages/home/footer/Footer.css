@@ -1,0 +1,12 @@
+.footerBg {
+    background: #223555;
+    color: #ffffffff;
+    padding: 0px 15px;
+}
+
+.line {
+    width: 70px;
+    height: 1px;
+    margin: 20px auto;
+    background: white
+}
