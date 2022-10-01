@@ -1,0 +1,32 @@
+.testimonialBg {
+    background-image: linear-gradient(to top, #0f0c29e3, #302b63de, #24243e), url("../../../Assets/images/bg-testimonials.jpg");
+    /* opacity: 0.95; */
+    right: 0px;
+    top: 0px;
+    /* width: 2000px; */
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right center;
+    /* z-index: 1; */
+}
+
+.clientbg {
+    background: #9999991c;
+    right: 0px;
+    top: 0px;
+    /* width: 2000px; */
+    height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: right center;
+}
+
+.centerTestimonial {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
