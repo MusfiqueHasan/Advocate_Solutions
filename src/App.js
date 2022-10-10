@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import About from "./pages/about/About";
 import CaseStudy from "./pages/case-study/CaseStudy";
+import CategoryWiseAdvocate from "./pages/consultation/CategoryWiseAdvocate/CategoryWiseAdvocate";
 import Consultation from "./pages/consultation/Consultation";
 import FAQ from "./pages/faq/FAQ";
 import Home from "./pages/home/Home";
@@ -15,6 +16,7 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/case_study" element={<CaseStudy />} />
         <Route path="/consultation" element={<Consultation />} />
+        <Route path="/advocates/:catname" element={<CategoryWiseAdvocate />} />
         <Route path="/faq" element={<FAQ />} />
         <Route path="/news" element={<News />} />
       </Routes>
