@@ -8,16 +8,24 @@ import FAQ from "./pages/faq/FAQ";
 import Home from "./pages/home/Home";
 import News from "./pages/news/News";
 
+import LoginRegistration from './pages/Auth/LoginRegistration';
+import LoginRegistrationLawyer from './pages/Auth/LoginRegistrationLawyer';
+import Contactus from './pages/Contacts/Contactus';
+
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<LoginRegistration />} />
+        <Route path="/lawyerAuth" element={<LoginRegistrationLawyer />} />
+        <Route path="/signup" element={<Home />} />
+        <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/case_study" element={<CaseStudy />} />
         <Route path="/consultation" element={<Consultation />} />
         <Route path="/advocates/:catname" element={<CategoryWiseAdvocate />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/contact" element={<Contactus />} />
         <Route path="/news" element={<News />} />
       </Routes>
     </BrowserRouter>

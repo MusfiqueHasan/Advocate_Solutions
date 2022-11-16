@@ -1,4 +1,5 @@
 import React from "react";
+import Blogs from "../Blogs/Blogs";
 import News from "../news/News";
 import Attorneys from "./attorneys/Attorneys";
 import TotalCounting from "./counter/TotalCounting";
@@ -14,6 +15,7 @@ const Home = () => {
       <HeaderCarousel />
       <Attorneys />
       <TotalCounting />
+      <Blogs />
       <Testimonial />
       <News />
       <Footer />
