@@ -11,7 +11,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 
 const News = () => {
   return (
-    <div>
+    <div className="mt-12">
       <div className="news_title flex flex-col justify-center items-center gap-y-3 ">
         <h1 className=" text-3xl font-bold text-center mt-5 ">
           Our Latest News

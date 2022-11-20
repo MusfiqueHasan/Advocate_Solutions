@@ -11,7 +11,6 @@ const Header = () => {
       <TopHeader />
       <MidHeader />
       <MenuBar />
-    
     </Box>
   )
 }
