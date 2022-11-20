@@ -70,10 +70,18 @@ const HeaderCarousel = () => {
             justifyContent: 'center',
             alignItems: 'flex-end',
           }}>
-            <Typography sx={{ fontFamily: '-moz-initial', fontWeight: 'bold', fontSize: 40, }}>We Are Lawyer Justice</Typography>
-            <Typography sx={{ fontFamily: '-moz-initial', fontWeight: 500, fontSize: 70, lineHeight: 1, my: 2, textAlign: 'end' }}>Attrorneys Fighting For <br /> Your Freedom </Typography>
-            <Typography sx={{ fontWeight: 500, textAlign: 'end' }}>We Have Helped Thousands of People to Get Relief From National Wide <br /> Fights WrongfullDenials. Now They Trusted Our Attorneys.
+            <Typography sx={{ fontFamily: '-moz-initial', fontWeight: 'bold', fontSize: 40, }}>
+              We Are Lawyer Justice
             </Typography>
+
+            <Typography sx={{ fontFamily: '-moz-initial', fontWeight: 500, fontSize: 70, lineHeight: 1, my: 2, textAlign: 'end' }}>
+              Attrorneys Fighting For <br /> Your Freedom
+            </Typography>
+
+            <Typography sx={{ fontWeight: 500, textAlign: 'end' }}>
+              We Have Helped Thousands of People to Get Relief From National Wide <br /> Fights WrongfullDenials. Now They Trusted Our Attorneys.
+            </Typography>
+            
             <Box>
               <Button sx={{
                 bgcolor: '#192a56', color: 'white', fontWeight: 'bold', boxSizing: 'border-box', px: 5, py: 2, mt: 6,
