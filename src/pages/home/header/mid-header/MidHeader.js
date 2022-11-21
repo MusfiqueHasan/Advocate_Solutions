@@ -1,6 +1,6 @@
 import React from "react";
 import { Box, Container } from "@mui/material";
-import logo from "../../../../assets/images/logo.png";
+import logo from "../../../../Assets/images/logo.png";
 import { useNavigate, useLocation } from "react-router";
 
 const MidHeader = () => {
