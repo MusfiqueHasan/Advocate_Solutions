@@ -1,6 +1,6 @@
 import { AiOutlineLock, AiFillMinusCircle } from "react-icons/ai";
 import { useState } from "react";
-import img from "../../../assets/images/lawyer1.jpg";
+import img from "../../../Assets/images/lawyer1.jpg";
 import PersonalInfo from "./PersonalInfo";
 import Documents from "./Documents";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +26,11 @@ const Details = () => {
           <Form className="w-[100%] h-full">
             <div>
               <AppSubNav
-                navbarData={["Personal Information", "Documents", "Appointments"]}
+                navbarData={[
+                  "Personal Information",
+                  "Documents",
+                  "Appointments",
+                ]}
                 callback={(item) => handleSelectedSubNav(item)}
               />
             </div>
@@ -34,7 +38,9 @@ const Details = () => {
               <PersonalInfo />
             ) : selectedNav?.key === "Documents" ? (
               <Documents />
-            ):'hello world'}
+            ) : (
+              "hello world"
+            )}
           </Form>
         </div>
 
