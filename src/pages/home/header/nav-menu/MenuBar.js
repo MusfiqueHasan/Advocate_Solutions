@@ -28,6 +28,10 @@ const MenuBar = () => {
       navigate("/attorney");
     } else if (path === "blogs") {
       navigate("/blogs");
+    } else if (path === "contact") {
+      navigate("/contact");
+    } else if (path === "usefull_links") {
+      navigate("/usefull_links");
     }
   };
 
@@ -71,7 +75,7 @@ const MenuBar = () => {
             <Grid item xs={9}>
               <Box
                 sx={{
-                  width: "90%",
+                  width: "95%",
                   height: "100%",
                   display: "flex",
                   justifyContent: "space-evenly",
@@ -139,7 +143,7 @@ const MenuBar = () => {
                   }}
                 >
                   {" "}
-                  Case Study{" "}
+                  For Student's{" "}
                 </Button>
                 <Button
                   onClick={() => navigationHandler("attorney")}
@@ -245,6 +249,27 @@ const MenuBar = () => {
                 >
                   {" "}
                   Contact{" "}
+                </Button>
+                <Button
+                  onClick={() => navigationHandler("usefull_links")}
+                  sx={{
+                    height: 100,
+                    color: "white",
+                    fontFamily: "-moz-initial",
+                    fontWeight: "bold",
+                    boxSizing: "border-box",
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                    "&:hover": {
+                      borderTop: "3.5px solid #ccae62",
+                      color: "white",
+                      bgcolor: "#192a56",
+                    },
+                  }}
+                >
+                  {" "}
+                  Usefull-Link's{" "}
                 </Button>
               </Box>
             </Grid>

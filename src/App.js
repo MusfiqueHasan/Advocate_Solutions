@@ -14,8 +14,8 @@ import UserLoginReg from "./pages/Auth/UserLoginReg";
 import AdvocateLoginReg from "./pages/Auth/AdvocateLoginReg";
 import Blogs from "./pages/Blogs/Blogs";
 import Attorneys from "./pages/home/attorneys/Attorneys";
-import Contact from './Contact/Contact';
-
+import ContactUs from "./Contact/ContactUs";
+import UsefullLinks from "./pages/UsefullLinks/UsefullLinks";
 
 function App() {
   return (
@@ -36,9 +36,11 @@ function App() {
           {/* <Route path="/advocates/:catname" element={<CategoryWiseAdvocate />} /> */}
           <Route path="/attorney" element={<Attorneys />} />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/contact" element={<ContactUs />} />
+          \
           <Route path="/news" element={<News />} />
           <Route path="/blogs" element={<Blogs />} />
+          <Route path="/usefull_links" element={<UsefullLinks />} />
         </Routes>
         <Footer />
       </BrowserRouter>
