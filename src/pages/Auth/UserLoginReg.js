@@ -13,6 +13,7 @@ import "./LoginRegistration.css";
 //   updateDoc,
 // } from "firebase/firestore";
 // import { db } from "../../Firebase/Firebase-config";
+
 const UserLoginReg = () => {
   const [addclass, setaddclass] = useState("");
   // const {
@@ -25,8 +26,10 @@ const UserLoginReg = () => {
   // } = useAuth();
 
   const [logindata, setLogindata] = useState({});
-  const location = useLocation();
-  const navigate = useNavigate();
+  // const location = useLocation();
+  // const navigate = useNavigate();
+
+
   const handleOnChange = (e) => {
     const field = e.target.name;
     const value = e.target.value;
