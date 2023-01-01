@@ -26,8 +26,8 @@ const MenuBar = () => {
       navigate("/news");
     } else if (path === "attorney") {
       navigate("/attorney");
-    } else if (path === "blogs") {
-      navigate("/blogs");
+    } else if (path === "all_blogs") {
+      navigate("/all_blogs");
     } else if (path === "contact") {
       navigate("/contact");
     } else if (path === "usefull_links") {
@@ -188,7 +188,7 @@ const MenuBar = () => {
                   News{" "}
                 </Button>
                 <Button
-                  onClick={() => navigationHandler("blogs")}
+                  onClick={() => navigationHandler("all_blogs")}
                   sx={{
                     height: 100,
                     color: "white",

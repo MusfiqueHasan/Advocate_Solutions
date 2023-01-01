@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./News.css";
 import titlelineimg from "../../Assets/icons/title-line-image-2.png";
 import blogimg from "../../Assets/images/blog-image-1.jpg";
@@ -8,8 +8,27 @@ import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SmsIcon from "@mui/icons-material/Sms";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../Firebase/Firebase-config";
+import { Link } from 'react-router-dom';
 const News = () => {
+  const [newses, setNews] = useState([]);
+  // console.log(newses);
+
+  const newsesCollectionRef = collection(db, "news");
+
+  useEffect(() => {
+
+    const getnewses = async () => {
+
+      const data = await getDocs(newsesCollectionRef);
+
+      console.log(data, "data");
+      setNews(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getnewses();
+  }, []);
   return (
     <div className="mt-12">
       <div className="news_title flex flex-col justify-center items-center gap-y-3 ">
@@ -19,7 +38,7 @@ const News = () => {
         <img src={titlelineimg} alt="title-line-img" />
       </div>
       <div className=" grid grid-cols-3 gap-7  px-40 py-5">
-        <div className=" shadow-md relative bg-slate-50 text-slate-500 ">
+        {newses?.slice(0, 3).map((news) => (<div className=" shadow-md relative bg-slate-50 text-slate-500 ">
           <div className=" bgshadow">
             <img className=" w-full " src={blogimg} alt="blogimage" />
           </div>
@@ -27,24 +46,21 @@ const News = () => {
           <div className="  p-5 relative">
             <div className=" bg-blue-900 hover:bg-gold transition duration-700 p-3 -mt-16 z-50 w-16">
               <p className=" text-center text-white font-bold text-lg">
-                20 <br /> Jul
+                {news?.date?.slice(0, 2)} <br />  {news?.date?.slice(2)}
               </p>
             </div>
             <div className=" flex justify-start items-center mt-6 gap-2 ">
               <LocalOfferIcon fontSize="small" />
               <h3 className=" text-sm ">
                 {" "}
-                <span className=" text-base font-bold">Tags: </span> Criminal
-                Law , Kidnapping
+                <span className=" text-base font-bold">Tags: </span> {news?.tags ? <>{news?.tags}</> : "none"}
               </h3>
             </div>
             <h1 className=" text-xl text-gray-800 py-3  hover:text-gold">
-              We won against criminal !
+              {news?.title}
             </h1>
             <p className=" text-slate-400 text-justify">
-              In this, Kidnapping the unlawful taking away or transportation of
-              person against that person's will, usually to hold the person
-              unlawfully........
+              {news?.description.slice(0, 120)} ........
             </p>
             <button className=" text-gray-700 font-semibold hover:text-gold text-sm py-5">
               READ MORE
@@ -55,111 +71,21 @@ const News = () => {
           <div className=" flex justify-around items-center text-xs px-5  my-3">
             <button className=" flex justify-around items-center gap-2 text-gray-500 hover:text-gold transition duration-300">
               <AccountCircleIcon />
-              admin
+              {news?.author}
             </button>
             <button className=" flex justify-around items-center gap-2 text-gray-500 hover:text-gold transition duration-300 whitespace-nowrap">
-              <SmsIcon />2 comments
+              <SmsIcon />
+              {news?.comment ? <>{news?.comment}</> : 0}
+              comments
             </button>
             <button className=" flex justify-around items-center gap-2 text-gray-500 hover:text-gold transition duration-300  whitespace-nowrap">
               <FavoriteIcon />
-              12 Likes
+              {news?.react ? <>{news?.react}</> : 0}
+              Likes
             </button>
           </div>
-        </div>
-        <div className=" shadow-md relative bg-slate-50 text-slate-500 ">
-          <div className=" bgshadow">
-            <img className=" w-full " src={blogimg2} alt="blogimage" />
-          </div>
+        </div>))}
 
-          <div className="  p-5 relative">
-            <div className=" bg-blue-900 hover:bg-gold transition duration-700 p-3 -mt-16 z-50 w-16">
-              <p className=" text-center text-white font-bold text-lg">
-                10 <br /> Aug
-              </p>
-            </div>
-            <div className=" flex justify-start items-center mt-6 gap-2 ">
-              <LocalOfferIcon fontSize="small" />
-              <h3 className=" text-sm ">
-                {" "}
-                <span className=" text-base font-bold">Tags: </span> Adultery,
-                Family Law
-              </h3>
-            </div>
-            <h1 className=" text-xl text-gray-800 py-3  hover:text-gold">
-              Legal issues regarding paternity !
-            </h1>
-            <p className=" text-slate-400 text-justify">
-              Adultery is extramarital sex that is considered objectionable on
-              social, religious, moral or legal grounds though what sexual
-              activities.........
-            </p>
-            <button className=" text-gray-700 font-semibold hover:text-gold text-sm py-5">
-              READ MORE
-            </button>
-          </div>
-          <p style={{ border: "1px solid #e1e1e1", width: "100%" }}></p>
-
-          <div className=" flex justify-around items-center text-xs px-5  my-3">
-            <button className=" flex justify-around items-center gap-2 text-gray-500 hover:text-gold transition duration-300">
-              <AccountCircleIcon />
-              admin
-            </button>
-            <button className=" flex justify-around items-center gap-2 text-gray-500 hover:text-gold transition duration-300 whitespace-nowrap">
-              <SmsIcon />2 comments
-            </button>
-            <button className=" flex justify-around items-center gap-2 text-gray-500 hover:text-gold transition duration-300  whitespace-nowrap">
-              <FavoriteIcon />
-              12 Likes
-            </button>
-          </div>
-        </div>
-        <div className=" shadow-md relative bg-slate-50 text-slate-500 ">
-          <div className=" bgshadow">
-            <img className=" w-full " src={blogimg3} alt="blogimage" />
-          </div>
-
-          <div className="  p-5 relative">
-            <div className=" bg-blue-900 hover:bg-gold transition duration-700 p-3 -mt-16 z-50 w-16">
-              <p className=" text-center text-white font-bold text-lg">
-                5 <br /> Sep
-              </p>
-            </div>
-            <div className=" flex justify-start items-center mt-6 gap-2 ">
-              <LocalOfferIcon fontSize="small" />
-              <h3 className=" text-sm ">
-                {" "}
-                <span className=" text-base font-bold">Tags: </span> Consumer
-                Law, Privacy
-              </h3>
-            </div>
-            <h1 className=" text-xl text-gray-800 py-3  hover:text-gold">
-              Judgement, Unfair business !
-            </h1>
-            <p className=" text-slate-400 text-justify">
-              Consumer prottection law or consumeer law is considered an area of
-              law that regulates private law relationships between
-              individual.........
-            </p>
-            <button className=" text-gray-700 font-semibold hover:text-gold text-sm py-5">
-              READ MORE
-            </button>
-          </div>
-          <p style={{ border: "1px solid #e1e1e1", width: "100%" }}></p>
-
-          <div className=" flex justify-around items-center text-xs px-5  my-3">
-            <button className=" flex justify-around items-center gap-2 text-gray-500 hover:text-gold transition duration-300">
-              <AccountCircleIcon />
-              admin
-            </button>
-            <button className=" flex justify-around items-center gap-2 text-gray-500 hover:text-gold transition duration-300 whitespace-nowrap">
-              <SmsIcon />2 comments
-            </button>
-            <button className=" flex justify-around items-center gap-2 text-gray-500 hover:text-gold transition duration-300  whitespace-nowrap">
-              <FavoriteIcon />
-              12 Likes
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );
