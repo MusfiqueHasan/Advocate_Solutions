@@ -46,13 +46,13 @@ const Blogs = () => {
         </Link>
 
       </div>
-      <div className=" grid grid-cols-3 gap-7  px-40 py-5">
+      <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7  px-40 py-5">
         {blogs.slice(0, 3).map((blog) => (
-          <div className=" shadow-md relative bg-slate-50 text-slate-500 ">
-            <div className=" bgshadow">
-              <img className=" w-full " src={blogimg2} alt="blogimage" />
+          <div key={blog?.id} className=" shadow-md relative bg-slate-50 text-slate-500 ">
+           
+            <div className="bgshadow  h-[200px]">
+              <img src={blog?.image} alt="" className=" w-full h-full" />
             </div>
-
             <div className="  p-5 relative">
               <div className=" bg-blue-900 hover:bg-gold transition duration-700 p-3 -mt-16 z-50 w-16">
                 <p className=" text-center text-white font-bold text-lg">

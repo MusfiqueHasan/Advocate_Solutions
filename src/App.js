@@ -17,6 +17,7 @@ import Attorneys from "./pages/home/attorneys/Attorneys";
 import ContactUs from "./Contact/ContactUs";
 import UsefullLinks from "./pages/UsefullLinks/UsefullLinks";
 import ViewAllBlogs from "./pages/Blogs/ViewAllBlogs";
+import ViewAllNews from './pages/news/ViewAllNews';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/contact" element={<ContactUs />} />
 
           <Route path="/news" element={<News />} />
+          <Route path="/all_news" element={<ViewAllNews />} />
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/all_blogs" element={<ViewAllBlogs />} />
           <Route path="/usefull_links" element={<UsefullLinks />} />

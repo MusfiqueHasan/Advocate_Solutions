@@ -22,8 +22,8 @@ const MenuBar = () => {
       navigate("/consultation");
     } else if (path === "faq") {
       navigate("/faq");
-    } else if (path === "news") {
-      navigate("/news");
+    } else if (path === "all_news") {
+      navigate("/all_news");
     } else if (path === "attorney") {
       navigate("/attorney");
     } else if (path === "all_blogs") {
@@ -39,7 +39,7 @@ const MenuBar = () => {
     <Box
       sx={
         navbar
-          ? { height: 100, position: "fixed", left: "12%", width: "76%" }
+          ? { height: 100, position: "fixed", left: "8%", width: "85%" }
           : { height: 100, position: "fixed", top: 0, width: "100%" }
       }
       style={{ zIndex: 100 }}
@@ -167,7 +167,7 @@ const MenuBar = () => {
                   Attorneys{" "}
                 </Button>
                 <Button
-                  onClick={() => navigationHandler("news")}
+                  onClick={() => navigationHandler("all_news")}
                   sx={{
                     height: 100,
                     color: "white",

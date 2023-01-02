@@ -41,7 +41,7 @@ const ViewAllBlogs = () => {
       {/* <div className=" flex justify-end pr-6">
         <button className="text-xl font-bold text-end hover:text-sky-500">View All</button>
       </div> */}
-      <div className=" grid grid-cols-3 gap-7  px-40 py-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7  px-40 py-5">
         {blogs.map((blog) => (
           <div className=" shadow-md relative bg-slate-50 text-slate-500 ">
             <div className=" bgshadow">
