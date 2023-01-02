@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import lawer from "../../../Assets/images/lawyer1.jpg";
+import lawer from "../../../assets/images/lawyer1.jpg";
 
 const CategoryCard = () => {
   const navigate = useNavigate();

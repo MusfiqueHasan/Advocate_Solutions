@@ -10,18 +10,22 @@ import Footer from "./pages/home/footer/Footer";
 import Header from "./pages/home/header/Header";
 import Home from "./pages/home/Home";
 import News from "./pages/news/News";
+// import NewsFeed from "../src/src/NewsFeed";
 import UserLoginReg from "./pages/Auth/UserLoginReg";
 import AdvocateLoginReg from "./pages/Auth/AdvocateLoginReg";
 import Blogs from "./pages/Blogs/Blogs";
 import Attorneys from "./pages/home/attorneys/Attorneys";
 import ContactUs from "./Contact/ContactUs";
 import UsefullLinks from "./pages/UsefullLinks/UsefullLinks";
+import NewsFeed from "./pages/newsfeed/NewsFeed";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
+          {/* <Route path="/news" element={<NewsFeed />} /> */}
+          <Route path="/comunity" element={<NewsFeed />} />
           <Route path="/" element={<UserLoginReg />} />
           <Route path="/lawyerAuth" element={<AdvocateLoginReg />} />
         </Routes>
@@ -37,8 +41,8 @@ function App() {
           <Route path="/attorney" element={<Attorneys />} />
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<ContactUs />} />
-          \
-          <Route path="/news" element={<News />} />
+          {/* <Route path="/contact" element={<ContactUs />} /> */}
+
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/usefull_links" element={<UsefullLinks />} />
         </Routes>

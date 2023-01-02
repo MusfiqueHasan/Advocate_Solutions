@@ -1,10 +1,10 @@
 import React from "react";
 import "./Attorneys.css";
-import titlelineimg from "../../../Assets/icons/title-line-image-2.png";
-import lawyer1 from "../../../Assets/images/lawyer1.jpg";
-import lawyer2 from "../../../Assets/images/lawyer2.jpg";
-import lawyer3 from "../../../Assets/images/lawyer3.jpg";
-import lawyer4 from "../../../Assets/images/lawyer4.jpg";
+import titlelineimg from "../../../assets/icons/title-line-image-2.png";
+import lawyer1 from "../../../assets/images/lawyer1.jpg";
+import lawyer2 from "../../../assets/images/lawyer2.jpg";
+import lawyer3 from "../../../assets/images/lawyer3.jpg";
+import lawyer4 from "../../../assets/images/lawyer4.jpg";
 import FacebookOutlinedIcon from "@mui/icons-material/FacebookOutlined";
 import GoogleIcon from "@mui/icons-material/Google";
 import TwitterIcon from "@mui/icons-material/Twitter";
