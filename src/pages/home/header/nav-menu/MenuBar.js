@@ -43,7 +43,7 @@ const MenuBar = () => {
     <Box
       sx={
         navbar
-          ? { height: 100, position: "fixed", left: "8%", width: "85%" }
+          ? { height: 100, position: "fixed", left: "5%", width: "90%" }
           : { height: 100, position: "fixed", top: 0, width: "100%" }
       }
       style={{ zIndex: 100 }}
@@ -68,7 +68,7 @@ const MenuBar = () => {
                   alignItems: "center",
                 }
               : {
-                  width: "85%",
+                  width: "95%",
                   height: "100%",
                   display: "flex",
                   alignItems: "center",
