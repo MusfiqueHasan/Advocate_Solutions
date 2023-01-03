@@ -5,7 +5,7 @@ import MidHeader from "./mid-header/MidHeader";
 import MenuBar from "./nav-menu/MenuBar";
 import { useLocation } from "react-router-dom";
 
-const ignoreArr = ["/", "/lawyerAuth"];
+const ignoreArr = ["/", "/lawyerAuth",'/comunity'];
 const Header = () => {
   const location = useLocation();
   if (ignoreArr.includes(location.pathname)) {

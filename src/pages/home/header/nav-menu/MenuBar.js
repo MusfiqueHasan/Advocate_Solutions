@@ -22,6 +22,10 @@ const MenuBar = () => {
       navigate("/consultation");
     } else if (path === "faq") {
       navigate("/faq");
+    } else if (path === "news") {
+      navigate("/news");
+    } else if (path === "comunity") {
+      navigate("/comunity");
     } else if (path === "all_news") {
       navigate("/all_news");
     } else if (path === "attorney") {
@@ -39,7 +43,7 @@ const MenuBar = () => {
     <Box
       sx={
         navbar
-          ? { height: 100, position: "fixed", left: "8%", width: "85%" }
+          ? { height: 100, position: "fixed", left: "5%", width: "90%" }
           : { height: 100, position: "fixed", top: 0, width: "100%" }
       }
       style={{ zIndex: 100 }}
@@ -64,15 +68,15 @@ const MenuBar = () => {
                   alignItems: "center",
                 }
               : {
-                  width: "76%",
+                  width: "95%",
                   height: "100%",
                   display: "flex",
                   alignItems: "center",
                 }
           }
         >
-          <Grid container spacing={2}>
-            <Grid item xs={9}>
+          <Grid container spacing={1}>
+            <Grid item xs={10}>
               <Box
                 sx={{
                   width: "95%",
@@ -188,6 +192,27 @@ const MenuBar = () => {
                   News{" "}
                 </Button>
                 <Button
+                  onClick={() => navigationHandler("comunity")}
+                  sx={{
+                    height: 100,
+                    color: "white",
+                    fontFamily: "-moz-initial",
+                    fontWeight: "bold",
+                    boxSizing: "border-box",
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                    "&:hover": {
+                      borderTop: "3.5px solid #ccae62",
+                      color: "white",
+                      bgcolor: "#192a56",
+                    },
+                  }}
+                >
+                  {" "}
+                  Comunity{" "}
+                </Button>
+                <Button
                   onClick={() => navigationHandler("all_blogs")}
                   sx={{
                     height: 100,
@@ -273,7 +298,7 @@ const MenuBar = () => {
                 </Button>
               </Box>
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={2}>
               <Box
                 sx={{
                   width: "90%",
