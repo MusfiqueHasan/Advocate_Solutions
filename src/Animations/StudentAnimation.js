@@ -1,6 +1,6 @@
 import React from "react";
 import Lottie from "react-lottie";
-import animationData from "../Assets/animations/student.json";
+import animationData from "../assets/animations/student.json";
 export default function StudentAnimation() {
   const defaultOptions = {
     loop: true,

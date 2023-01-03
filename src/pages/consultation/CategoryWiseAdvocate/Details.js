@@ -1,11 +1,12 @@
 import { AiOutlineLock, AiFillMinusCircle } from "react-icons/ai";
 import { useState } from "react";
-import img from "../../../Assets/images/lawyer1.jpg";
+import img from "../../../assets/images/lawyer1.jpg";
 import PersonalInfo from "./PersonalInfo";
 import Documents from "./Documents";
 import { useNavigate } from "react-router-dom";
 import Form from "../../../services/ui/Form";
 import AppSubNav from "../../../services/ui/AppSubNav";
+import AppointmentForm from "./AppointmentForm";
 
 const Details = () => {
   const [selectedNav, setSelectedNav] = useState();
@@ -21,9 +22,9 @@ const Details = () => {
 
   return (
     <div className="my-20">
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 gap-4 mx-5">
         <div className="h-[34rem] col-span-2">
-          <Form className="w-[100%] h-full">
+          <Form className=" h-full" width="!w-[100%]">
             <div>
               <AppSubNav
                 navbarData={[
@@ -39,15 +40,15 @@ const Details = () => {
             ) : selectedNav?.key === "Documents" ? (
               <Documents />
             ) : (
-              "hello world"
+             <AppointmentForm/>
             )}
           </Form>
         </div>
 
         <div className="h-[34rem]">
-          <Form title="" className="w-full h-full">
+          <Form title="" className=" h-full" width="!w-full">
             <div className="flex flex-col items-center justify-center">
-              <div className=" lg:w-[20rem] lg:h-[15rem]">
+              <div className=" lg:w-[20rem] lg:h-[15rem] flex justify-center">
                 <img
                   src={img}
                   alt=""
