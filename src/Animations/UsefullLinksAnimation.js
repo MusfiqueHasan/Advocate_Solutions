@@ -1,6 +1,6 @@
 import React from "react";
 import Lottie from "react-lottie";
-import animationData from "../assets/animations/links.json";
+import animationData from "../Assets/animations/links.json";
 export default function UsefullLinksAnimation() {
   const defaultOptions = {
     loop: true,

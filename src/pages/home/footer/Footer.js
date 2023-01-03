@@ -3,15 +3,12 @@ import "./Footer.css";
 import PlaceIcon from "@mui/icons-material/Place";
 import PhoneIcon from "@mui/icons-material/Phone";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import { useLocation } from "react-router-dom";
 const Footer = () => {
-
-  const location = useLocation().pathname
   return (
-    <div className={`${location==='/comunity'?'hidden':'block'} footerBg mt-20`}>
+    <div className=" footerBg mt-20">
       <div className=" grid grid-cols-3 gap-5 px-20">
         <div className=" flex flex-col justify-center items-center">
-          <div className=" bg-gold hover:animate-pulse text-center transition duration-700 p-4 -mt-10 z-50 w-16">
+          {/* <div className=" bg-gold hover:animate-pulse text-center transition duration-700 p-4 -mt-10 z-50 w-16">
             <PlaceIcon fontSize="large" />
           </div>
           <div className=" text-center pt-5 pb-20">
@@ -21,7 +18,7 @@ const Footer = () => {
               5648, VK 26th Lane Sparks Steet, <br /> Opp Joe Park-Florida
               26154.
             </p>
-          </div>
+          </div> */}
         </div>
         <div className=" flex flex-col justify-center items-center">
           <div className=" bg-gold hover:animate-pulse text-center transition duration-700 p-4 -mt-10 z-50 w-16">
@@ -36,7 +33,7 @@ const Footer = () => {
           </div>
         </div>
         <div className=" flex flex-col justify-center items-center">
-          <div className=" bg-gold hover:animate-pulse text-center transition duration-700 p-4 -mt-10 z-50 w-16">
+          {/* <div className=" bg-gold hover:animate-pulse text-center transition duration-700 p-4 -mt-10 z-50 w-16">
             <AccessTimeIcon fontSize="large" />
           </div>
           <div className=" text-center pt-5 pb-20">
@@ -46,7 +43,7 @@ const Footer = () => {
               Monday-Satday: 09.00am to 15.00pm <br />
               Sunday Holiday
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

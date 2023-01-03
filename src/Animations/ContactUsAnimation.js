@@ -1,6 +1,6 @@
 import React from "react";
 import Lottie from "react-lottie";
-import animationData from "../assets/animations/contact-us.json";
+import animationData from "../Assets/animations/contact-us.json";
 export default function ContactUsAnimation() {
   const defaultOptions = {
     loop: true,
