@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Attorneys.css";
 import titlelineimg from "../../../assets/icons/title-line-image-2.png";
 import lawyer1 from "../../../assets/images/lawyer1.jpg";
@@ -11,7 +11,30 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import AssuredWorkloadOutlinedIcon from '@mui/icons-material/AssuredWorkloadOutlined';
+
+import { collection, getDocs } from "firebase/firestore";
+
+import { Link } from 'react-router-dom';
+import { db } from "../../../Firebase/Firebase-config";
 const Attorneys = () => {
+  const [advocates, setAdvocates] = useState([]);
+  console.log(advocates, "advocates data");
+
+  const advocatesCollectionRef = collection(db, "advocates");
+
+  useEffect(() => {
+
+    const getadvocates = async () => {
+
+      const data = await getDocs(advocatesCollectionRef);
+
+      console.log(data, "data");
+      setAdvocates(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getadvocates();
+  }, []);
   return (
     <div>
       <div className=" mt-12 ">
@@ -23,139 +46,47 @@ const Attorneys = () => {
         </div>
       </div>
 
-      <div className=" grid grid-cols-4 gap-7  px-36 py-5">
-        <div className=" shadow-md p-3">
-          <img src={lawyer1} alt="" />
-          <h1 className=" text-xl font-bold">David Vigo Michel</h1>
-          <p className=" text-lg text-gold">Family Lawyer</p>
-          <div className=" border-b-2 mr-7 my-5"></div>
-          <div className=" flex justify-start items-center gap-x-5 my-2">
-            <button className=" text-gold">
-              <LocalPhoneIcon />
-            </button>
-            <p className=" text-gray-400">98765-12-345</p>
-          </div>
-          <div className=" flex justify-start items-center gap-x-5">
-            <button className=" text-gold">
-              <MailOutlineIcon />
-            </button>
-            <p className=" text-gray-400">Davidvigo@domain.com</p>
-          </div>
+      <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-7  px-36 py-5">
+        {advocates?.map((elem) => (
+          <div key={elem.id} className=" shadow-md p-3">
+            <div className=" w-[200px] h-[200px]">
+              <img src={elem?.image} alt="" className=" w-full h-full" />
+            </div>
 
-          <div className=" flex justify-start gap-x-5 items-center my-3">
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <FacebookOutlinedIcon />
-            </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <GoogleIcon />
-            </button>
-            <button className="border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <TwitterIcon />
-            </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <LinkedInIcon />
-            </button>
-          </div>
-        </div>
-        <div className=" shadow-md p-3">
-          <img src={lawyer2} alt="" />
-          <h1 className=" text-xl font-bold">David Vigo Michel</h1>
-          <p className=" text-lg text-gold">Family Lawyer</p>
-          <div className=" border-b-2 mr-7 my-5"></div>
-          <div className=" flex justify-start items-center gap-x-5 my-2">
-            <button className=" text-gold">
-              <LocalPhoneIcon />
-            </button>
-            <p className=" text-gray-400">98765-12-345</p>
-          </div>
-          <div className=" flex justify-start items-center gap-x-5">
-            <button className=" text-gold">
-              <MailOutlineIcon />
-            </button>
-            <p className=" text-gray-400">Davidvigo@domain.com</p>
-          </div>
+            <h1 className=" text-xl font-bold">{elem?.fname} {elem?.lname}</h1>
+            <p className=" text-lg text-gold">{elem?.designation}</p>
+            <div className=" border-b-2 mr-7 my-5"></div>
+            <div className=" flex justify-start items-center gap-x-5 my-2">
+              <button className=" text-gold">
+                <AssuredWorkloadOutlinedIcon />
+              </button>
+              <p className=" text-gray-400">{elem?.area_of_practice}</p>
+            </div>
+            <div className=" flex justify-start items-center gap-x-5">
+              <button className=" text-gold">
+                <MailOutlineIcon />
+              </button>
+              <p className=" text-gray-400">{elem?.email}</p>
+            </div>
 
-          <div className=" flex justify-start gap-x-5 items-center my-3">
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <FacebookOutlinedIcon />
-            </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <GoogleIcon />
-            </button>
-            <button className="border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <TwitterIcon />
-            </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <LinkedInIcon />
-            </button>
+            <div className=" flex justify-start gap-x-5 items-center my-3">
+              <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
+                <FacebookOutlinedIcon />
+              </button>
+              <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
+                <GoogleIcon />
+              </button>
+              <button className="border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
+                <TwitterIcon />
+              </button>
+              <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
+                <LinkedInIcon />
+              </button>
+            </div>
           </div>
-        </div>
-        <div className=" shadow-md p-3">
-          <img src={lawyer3} alt="" />
-          <h1 className=" text-xl font-bold">David Vigo Michel</h1>
-          <p className=" text-lg text-gold">Family Lawyer</p>
-          <div className=" border-b-2 mr-7 my-5"></div>
-          <div className=" flex justify-start items-center gap-x-5 my-2">
-            <button className=" text-gold">
-              <LocalPhoneIcon />
-            </button>
-            <p className=" text-gray-400">98765-12-345</p>
-          </div>
-          <div className=" flex justify-start items-center gap-x-5">
-            <button className=" text-gold">
-              <MailOutlineIcon />
-            </button>
-            <p className=" text-gray-400">Davidvigo@domain.com</p>
-          </div>
+        ))}
 
-          <div className=" flex justify-start gap-x-5 items-center my-3">
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white transition duration-300 rounded-md">
-              <FacebookOutlinedIcon />
-            </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <GoogleIcon />
-            </button>
-            <button className="border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <TwitterIcon />
-            </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <LinkedInIcon />
-            </button>
-          </div>
-        </div>
-        <div className=" shadow-md p-3">
-          <img src={lawyer4} alt="" />
-          <h1 className=" text-xl font-bold">David Vigo Michel</h1>
-          <p className=" text-lg text-gold">Family Lawyer</p>
-          <div className=" border-b-2 mr-7 my-5"></div>
-          <div className=" flex justify-start items-center gap-x-5 my-2">
-            <button className=" text-gold">
-              <LocalPhoneIcon />
-            </button>
-            <p className=" text-gray-400">98765-12-345</p>
-          </div>
-          <div className=" flex justify-start items-center gap-x-5">
-            <button className=" text-gold">
-              <MailOutlineIcon />
-            </button>
-            <p className=" text-gray-400">Davidvigo@domain.com</p>
-          </div>
 
-          <div className=" flex justify-start gap-x-5 items-center my-3">
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <FacebookOutlinedIcon />
-            </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <GoogleIcon />
-            </button>
-            <button className="border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <TwitterIcon />
-            </button>
-            <button className=" border shadow-sm p-2 text-gray-500 hover:bg-gold hover:text-white rounded-md transition duration-300">
-              <LinkedInIcon />
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   );

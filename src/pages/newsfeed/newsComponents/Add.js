@@ -122,8 +122,8 @@ const Add = () => {
         aria-describedby="modal-modal-description"
       >
         <Box
-          width={500}
-          height={400}
+          width={800}
+          height={700}
           bgcolor={"background.default"}
           color={"text.primary"}
           p={3}

@@ -11,11 +11,10 @@ import SmsIcon from "@mui/icons-material/Sms";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../Firebase/Firebase-config";
-import { Link } from 'react-router-dom';
 
-const Blogs = () => {
+const ViewAllBlogs = () => {
   const [blogs, setBlogs] = useState([]);
-  // console.log(blogs);
+  console.log(blogs);
 
   const blogsCollectionRef = collection(db, "Blogs");
 
@@ -39,20 +38,16 @@ const Blogs = () => {
         </h1>
         <img src={titlelineimg} alt="title-line-img" />
       </div>
-      <div className=" flex justify-end pr-6">
-        <Link to="/all_blogs">
-          <button className="text-xl font-bold text-end hover:text-sky-500">View All</button>
-
-        </Link>
-
-      </div>
-      <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7  px-40 py-5">
-        {blogs.slice(0, 3).map((blog) => (
-          <div key={blog?.id} className=" shadow-md relative bg-slate-50 text-slate-500 ">
-           
-            <div className="bgshadow  h-[200px]">
-              <img src={blog?.image} alt="" className=" w-full h-full" />
+      {/* <div className=" flex justify-end pr-6">
+        <button className="text-xl font-bold text-end hover:text-sky-500">View All</button>
+      </div> */}
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7  px-40 py-5">
+        {blogs.map((blog) => (
+          <div className=" shadow-md relative bg-slate-50 text-slate-500 ">
+            <div className=" bgshadow">
+              <img className=" w-full " src={blogimg2} alt="blogimage" />
             </div>
+
             <div className="  p-5 relative">
               <div className=" bg-blue-900 hover:bg-gold transition duration-700 p-3 -mt-16 z-50 w-16">
                 <p className=" text-center text-white font-bold text-lg">
@@ -101,4 +96,4 @@ const Blogs = () => {
   );
 };
 
-export default Blogs;
+export default ViewAllBlogs;

@@ -32,6 +32,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import { Box } from "@mui/system";
 import { BiSend } from "react-icons/bi";
+import CommentMain from "./CommentMain";
 
 const Post = ({ postInfo }) => {
   const {
@@ -121,7 +122,7 @@ const Post = ({ postInfo }) => {
           checkedIcon={<BookmarkIcon color="primary" />}
         />
       </CardActions>
-      <Box sx={{ mx: 1, my: 3, display: "flex", alignItems: "center" }}>
+      {/* <Box sx={{ mx: 1, my: 3, display: "flex", alignItems: "center" }}>
         <TextField
           id="outlined-basic"
           label="Comment"
@@ -138,8 +139,9 @@ const Post = ({ postInfo }) => {
       </Box>
       <Box>
         <Typography>{sendComment}</Typography>
-      </Box>
+      </Box> */}
 
+      <CommentMain/>
       <Menu
         anchorEl={anchorEl}
         id="account-menu"

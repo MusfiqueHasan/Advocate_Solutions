@@ -26,10 +26,12 @@ const MenuBar = () => {
       navigate("/news");
     } else if (path === "comunity") {
       navigate("/comunity");
+    } else if (path === "all_news") {
+      navigate("/all_news");
     } else if (path === "attorney") {
       navigate("/attorney");
-    } else if (path === "blogs") {
-      navigate("/blogs");
+    } else if (path === "all_blogs") {
+      navigate("/all_blogs");
     } else if (path === "contact") {
       navigate("/contact");
     } else if (path === "usefull_links") {
@@ -41,7 +43,7 @@ const MenuBar = () => {
     <Box
       sx={
         navbar
-          ? { height: 100, position: "fixed", left: "12%", width: "80%" }
+          ? { height: 100, position: "fixed", left: "8%", width: "85%" }
           : { height: 100, position: "fixed", top: 0, width: "100%" }
       }
       style={{ zIndex: 100 }}
@@ -169,7 +171,7 @@ const MenuBar = () => {
                   Attorneys{" "}
                 </Button>
                 <Button
-                  onClick={() => navigationHandler("news")}
+                  onClick={() => navigationHandler("all_news")}
                   sx={{
                     height: 100,
                     color: "white",
@@ -208,10 +210,10 @@ const MenuBar = () => {
                   }}
                 >
                   {" "}
-                  comunity{" "}
+                  Comunity{" "}
                 </Button>
                 <Button
-                  onClick={() => navigationHandler("blogs")}
+                  onClick={() => navigationHandler("all_blogs")}
                   sx={{
                     height: 100,
                     color: "white",
