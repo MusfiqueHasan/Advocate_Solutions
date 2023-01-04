@@ -19,7 +19,8 @@ import ContactUs from "./Contact/ContactUs";
 import UsefullLinks from "./pages/UsefullLinks/UsefullLinks";
 import NewsFeed from "./pages/newsfeed/NewsFeed";
 import ViewAllBlogs from "./pages/Blogs/ViewAllBlogs";
-import ViewAllNews from './pages/news/ViewAllNews';
+import ViewAllNews from "./pages/news/ViewAllNews";
+import PrivateRoute from "./pages/Auth/PrivateRoute";
 
 function App() {
   return (
@@ -33,7 +34,14 @@ function App() {
         </Routes>
         <Header />
         <Routes>
-          <Route path="/home" element={<Home />} />
+          <Route
+            path="/home"
+            element={
+                <Home />
+              // <PrivateRoute>
+              // </PrivateRoute>
+            }
+          />
           <Route path="/about" element={<About />} />
           <Route path="/case-study" element={<CaseStudy />} />
           <Route path="/consultation" element={<Consultation />} />
@@ -44,7 +52,6 @@ function App() {
           <Route path="/faq" element={<FAQ />} />
           <Route path="/contact" element={<ContactUs />} />
           {/* <Route path="/contact" element={<ContactUs />} /> */}
-
 
           <Route path="/news" element={<News />} />
           <Route path="/all_news" element={<ViewAllNews />} />

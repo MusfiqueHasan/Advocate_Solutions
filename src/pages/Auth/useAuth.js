@@ -1,3 +1,4 @@
+import { useState } from "react";
 import React from "react";
 import {
   getAuth,
@@ -10,8 +11,18 @@ import {
   updateProfile,
   getIdToken,
 } from "firebase/auth";
+import {
+  collection,
+  getDocs,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  doc,
+} from "firebase/firestore";
+import { db } from "../../Firebase/Firebase-config";
 
 const useAuth = () => {
+  let usersCollectionRef = collection(db, "newsfeeds");
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [authError, setAuthError] = useState("");
@@ -43,12 +54,14 @@ const useAuth = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const loginUser = (email, password, location, history) => {
+  const loginUser = (email, password, location, navigate) => {
+    console.log(email, password);
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const destination = location?.state?.from || "/dashboard";
-        history.replace(destination);
+        const destination = location?.state?.from || "/";
+        console.log(destination);
+        // navigate(destination);
         setAuthError("");
       })
       .catch((error) => {
@@ -66,6 +79,16 @@ const useAuth = () => {
       .catch((error) => {})
       .finally(() => setIsLoading(false));
   };
+
+  const savedUser = async (email, displayName) => {
+    const user = { email: email, displayName: displayName };
+    await addDoc(usersCollectionRef, user);
+    console.log("created successfully");
+    // axios
+    //   .post("https://lit-anchorage-11150.herokuapp.com/users", user)
+    //   .then((res) => {});
+  };
+
   return {
     user,
     admin,
@@ -75,7 +98,6 @@ const useAuth = () => {
     loginUser,
     isLoading,
     authError,
-    signInWithGoogle,
   };
 };
 

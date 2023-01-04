@@ -5,10 +5,13 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { useLocation } from "react-router-dom";
 const Footer = () => {
-
-  const location = useLocation().pathname
+  const location = useLocation().pathname;
   return (
-    <div className={`${location==='/comunity'?'hidden':'block'} footerBg mt-20`}>
+    <div
+      className={`${
+        location === "/comunity" || location === "/" ? "hidden" : "block"
+      } footerBg mt-20`}
+    >
       <div className=" grid grid-cols-3 gap-5 px-20">
         <div className=" flex flex-col justify-center items-center">
           <div className=" bg-gold hover:animate-pulse text-center transition duration-700 p-4 -mt-10 z-50 w-16">

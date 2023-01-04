@@ -35,9 +35,9 @@ export const getNewsFeeds = () => async (dispatch) => {
     console.log(error);
   }
 };
-export const createNewsFeeds = (post) => async (dispatch) => {
 
-    console.log(post)
+export const createNewsFeeds = (post) => async (dispatch) => {
+  console.log(post);
   try {
     await addDoc(usersCollectionRef, post);
     dispatch({ type: CREATE_NWESFEED });
