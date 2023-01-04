@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import titlelineimg from "../../assets/icons/title-line-image-2.png";
-import blogimg from "../../assets/images/cybe-defamation.jpg";
-import blogimg2 from "../../assets/images/banking-attorneys.jpg";
-import blogimg3 from "../../assets/images/legal-questions.jpg";
+import titlelineimg from "../../Assets/icons/title-line-image-2.png";
+import blogimg from "../../Assets/images/cybe-defamation.jpg";
+import blogimg2 from "../../Assets/images/banking-attorneys.jpg";
+import blogimg3 from "../../Assets/images/legal-questions.jpg";
 
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
