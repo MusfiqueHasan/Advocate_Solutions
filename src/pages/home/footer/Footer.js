@@ -3,7 +3,7 @@ import "./Footer.css";
 import PlaceIcon from "@mui/icons-material/Place";
 import PhoneIcon from "@mui/icons-material/Phone";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 const Footer = () => {
   const location = useLocation().pathname;
   return (
