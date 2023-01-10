@@ -1,4 +1,5 @@
-import React from "react";
+import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
+import React, { useCallback, useRef } from "react";
 import Blogs from "../Blogs/Blogs";
 import News from "../news/News";
 import Attorneys from "./attorneys/Attorneys";
@@ -7,6 +8,30 @@ import HeaderCarousel from "./slider/HeaderCarousel";
 import Testimonial from "./testimonial/Testimonial";
 
 const Home = () => {
+  const tawkMessengerRef = useRef();
+
+  const onChatMaximized = useCallback(() => {
+    tawkMessengerRef.current.setAttributes(
+      {
+        id: "hello",
+      },
+      function (error) {
+        console.log(error);
+      }
+    );
+    // const { firstName, lastName } = authUser?.profile || {};
+    // const fullName = firstName + ' ' + lastName ? lastName : '';
+    tawkMessengerRef.current.setAttributes(
+      {
+        name: "Musfique",
+        email: "musfiquehasan08@gmail.com",
+        // hash: uniqueId(),
+      },
+      function (error) {
+        console.log(error);
+      }
+    );
+  }, []);
   return (
     <div className=" overflow-hidden">
       <HeaderCarousel />
@@ -22,6 +47,12 @@ const Home = () => {
       <Blogs />
       <Testimonial />
       <News />
+      <TawkMessengerReact
+        propertyId="63bcf58dc2f1ac1e202c9bdc"
+        widgetId="1gmd1uctb"
+        ref={tawkMessengerRef}
+        onChatMaximized={onChatMaximized}
+      />
     </div>
   );
 };

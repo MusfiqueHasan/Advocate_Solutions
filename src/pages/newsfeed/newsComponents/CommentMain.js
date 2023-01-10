@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { BiSend } from "react-icons/bi";
 import { ImUserTie } from "react-icons/im";
-import img from "../../../Assets/images/profile-img.png";
+import img from "../../../assets/images/profile-img.png";
 
 const CommentMain = () => {
   const [comment, setComment] = useState("");

@@ -1,6 +1,6 @@
 import { AiOutlineLock, AiFillMinusCircle } from "react-icons/ai";
 import { useState } from "react";
-import img from "../../../Assets/images/lawyer1.jpg";
+import img from "../../../assets/images/lawyer1.jpg";
 import PersonalInfo from "./PersonalInfo";
 import Documents from "./Documents";
 import { useNavigate } from "react-router-dom";

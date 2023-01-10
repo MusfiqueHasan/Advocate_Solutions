@@ -1,11 +1,11 @@
 import React from "react";
 import { Box, Button, Container, Typography } from "@mui/material";
 import Slider from "react-slick";
-import img1 from "../../../Assets/images/slider-img3.png";
-import img4 from "../../../Assets/images/slider-img4.png";
-import img5 from "../../../Assets/images/slider-img5.png";
-import img6 from "../../../Assets/images/slider-img6png.webp";
-import img2 from "../../../Assets/images/slider-img2.png";
+import img1 from "../../../assets/images/slider-img3.png";
+import img4 from "../../../assets/images/slider-img4.png";
+import img5 from "../../../assets/images/slider-img5.png";
+import img6 from "../../../assets/images/slider-img6png.webp";
+import img2 from "../../../assets/images/slider-img2.png";
 
 const HeaderCarousel = () => {
   const settings = {
