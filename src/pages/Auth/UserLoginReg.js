@@ -86,7 +86,7 @@ const UserLoginReg = () => {
       navigate("/home");
       sessionStorage.setItem("url", "/home");
     }
-  }, [email]);
+  }, []);
 
   return (
     <div className="bodylog">
@@ -94,8 +94,8 @@ const UserLoginReg = () => {
         <div className="form-container sign-up-container">
           <form
             className="formlog"
-            // onSubmit={handleRegisterSubmit}
-            // onClick={createUser}
+          // onSubmit={handleRegisterSubmit}
+          // onClick={createUser}
           >
             <h3>Create A User Account</h3>
 
