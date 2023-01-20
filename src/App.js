@@ -21,6 +21,9 @@ import NewsFeed from "./pages/newsfeed/NewsFeed";
 import ViewAllBlogs from "./pages/Blogs/ViewAllBlogs";
 import ViewAllNews from "./pages/news/ViewAllNews";
 import PrivateRoute from "./pages/Auth/PrivateRoute";
+import Bidding from "./pages/bidding/Bidding";
+import BiddingAmount from "./pages/bidding/BidComponents/BiddingAmount";
+import BiddHistory from "./pages/bidding/BidComponents/BiddHistory";
 
 function App() {
   return (
@@ -37,7 +40,7 @@ function App() {
           <Route
             path="/home"
             element={
-                <Home />
+              <Home />
               // <PrivateRoute>
               // </PrivateRoute>
             }
@@ -58,6 +61,9 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/all_blogs" element={<ViewAllBlogs />} />
           <Route path="/usefull_links" element={<UsefullLinks />} />
+          <Route path="/bidding" element={<Bidding />} />
+          <Route path="/bidding_amount" element={<BiddingAmount />} />
+          <Route path="/bidding_history" element={<BiddHistory />} />
         </Routes>
         <Footer />
       </BrowserRouter>

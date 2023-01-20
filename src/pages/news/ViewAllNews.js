@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./News.css";
 import titlelineimg from "../../assets/icons/title-line-image-2.png";
 import blogimg from "../../assets/images/blog-image-1.jpg";
-import blogimg2 from "../../assets/images/blog-image-2.jpg";
-import blogimg3 from "../../assets/images/blog-image-3.jpg";
+
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SmsIcon from "@mui/icons-material/Sms";

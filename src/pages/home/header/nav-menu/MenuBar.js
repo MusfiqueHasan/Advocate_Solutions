@@ -37,6 +37,9 @@ const MenuBar = () => {
     } else if (path === "usefull_links") {
       navigate("/usefull_links");
     }
+     else if (path === "bidding") {
+      navigate("/bidding");
+    }
   };
 
   return (
@@ -296,12 +299,33 @@ const MenuBar = () => {
                   {" "}
                   Usefull-Link's{" "}
                 </Button>
+                <Button
+                  onClick={() => navigationHandler("bidding")}
+                  sx={{
+                    height: 100,
+                    color: "white",
+                    fontFamily: "-moz-initial",
+                    fontWeight: "bold",
+                    boxSizing: "border-box",
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                    "&:hover": {
+                      borderTop: "3.5px solid #ccae62",
+                      color: "white",
+                      bgcolor: "#192a56",
+                    },
+                  }}
+                >
+                  {" "}
+                  Bidding{" "}
+                </Button>
               </Box>
             </Grid>
             <Grid item xs={2}>
               <Box
                 sx={{
-                  width: "90%",
+                  width: "100%",
                   height: "100%",
                   display: "flex",
                   alignItems: "center",
@@ -314,7 +338,7 @@ const MenuBar = () => {
                     color: "black",
                     fontWeight: "bold",
                     boxSizing: "border-box",
-                    px: 5,
+                    px: 2,
                     py: 2,
                     "&:hover": {
                       bgcolor: "#ccae62",
