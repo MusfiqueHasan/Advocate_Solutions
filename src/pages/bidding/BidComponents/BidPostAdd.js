@@ -126,7 +126,7 @@ const BidPostAdd = () => {
                 // sx={{ overflowY: "scroll" }}
                 >
                     <Typography variant="h6" color="gray" textAlign="center">
-                        {singlePost.id ? "Edit" : "Create"} post
+                        {singlePost.id ? "Edit" : "Create"} A Post
                     </Typography>
                     <UserBox>
                         <Avatar
@@ -175,34 +175,34 @@ const BidPostAdd = () => {
                         fullWidth
                         variant="contained"
                         aria-label="outlined primary button group"
-                        sx={{ marginTop:5}}
+                        sx={{ marginTop: 5 }}
                     >
                         <Button
-                            // onClick={() => {
-                            //     let options = {
-                            //         weekday: "long",
-                            //         year: "numeric",
-                            //         month: "long",
-                            //         day: "numeric",
-                            //     };
-                            //     let date = new Date();
-                            //     let copyPost = { ...post };
-                            //     // copyPost.userName = currentUser?.displayName;
-                            //     // copyPost.userUrl = currentUser?.photoURL;
-                            //     // copyPost.email = currentUser?.email;
-                            //     copyPost.createdDate = Date.now();
-                            //     copyPost.date = date.toLocaleString("en-US", options);
+                        // onClick={() => {
+                        //     let options = {
+                        //         weekday: "long",
+                        //         year: "numeric",
+                        //         month: "long",
+                        //         day: "numeric",
+                        //     };
+                        //     let date = new Date();
+                        //     let copyPost = { ...post };
+                        //     // copyPost.userName = currentUser?.displayName;
+                        //     // copyPost.userUrl = currentUser?.photoURL;
+                        //     // copyPost.email = currentUser?.email;
+                        //     copyPost.createdDate = Date.now();
+                        //     copyPost.date = date.toLocaleString("en-US", options);
 
-                            //     if (singlePost.id) {
-                            //         dispatch(updateNewsFeed(copyPost, copyPost.id));
-                            //     } else {
-                            //         dispatch(createNewsFeeds(copyPost));
-                            //     }
-                            //     dispatch(updateStateModal(false));
-                            //     dispatch(updateStateDialog(false));
-                            //     setPost(initPost);
-                            //     setSelectImage("");
-                            // }}
+                        //     if (singlePost.id) {
+                        //         dispatch(updateNewsFeed(copyPost, copyPost.id));
+                        //     } else {
+                        //         dispatch(createNewsFeeds(copyPost));
+                        //     }
+                        //     dispatch(updateStateModal(false));
+                        //     dispatch(updateStateDialog(false));
+                        //     setPost(initPost);
+                        //     setSelectImage("");
+                        // }}
                         >
                             Post
                         </Button>
