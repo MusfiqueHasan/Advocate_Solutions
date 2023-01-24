@@ -48,8 +48,9 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/case-study" element={<CaseStudy />} />
           <Route path="/consultation" element={<Consultation />} />
-          <Route path="/consultation/details" element={<Details />} />
-          <Route path="/advocates" element={<CategoryWiseAdvocate />} />
+          <Route path="/consultation/details/:catId/:advName" element={<Details />} />
+          <Route path="/advocates/:catId" element={<CategoryWiseAdvocate />} />
+
           {/* <Route path="/advocates/:catname" element={<CategoryWiseAdvocate />} /> */}
           <Route path="/attorney" element={<Attorneys />} />
           <Route path="/faq" element={<FAQ />} />
