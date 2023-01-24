@@ -19,3 +19,7 @@ export const GOOGLE_SIGNOUT_SUCCESS = "google_signiout_success"
 export const GOOGLE_SIGNOUT_FAIL = "google_signout_fail"
 
 
+export const GET_BIDDING = "get_bidding"
+export const CREATE_BIDDING = "create_biding"
+export const GET_SINGLE_BIDDING = "get_single_bidding"
+export const UPDATE_BIDDING = "update_biding"

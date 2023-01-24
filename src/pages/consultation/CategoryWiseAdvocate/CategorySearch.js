@@ -58,9 +58,20 @@ const CategorySearch = () => {
       <div className="mt-3">
         <p className="font-bold mb-3">Experience</p>
         <div className="flex justify-between">
-          <TextField sx={{width:'45%'}} size="small" id="outlined-basic" label="Min" variant="outlined" />
-          <TextField sx={{width:'45%'}} size="small" id="outlined-basic" label="Max" variant="outlined" />
-          
+          <TextField
+            sx={{ width: "45%" }}
+            size="small"
+            id="outlined-basic"
+            label="Min"
+            variant="outlined"
+          />
+          <TextField
+            sx={{ width: "45%" }}
+            size="small"
+            id="outlined-basic"
+            label="Max"
+            variant="outlined"
+          />
         </div>
       </div>
     </div>
