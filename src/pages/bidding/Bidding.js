@@ -1,13 +1,22 @@
-import React from 'react'
+import React from "react";
 import titlelineimg from "../../assets/icons/title-line-image-2.png";
 import { Box, createTheme, Stack, ThemeProvider } from "@mui/material";
 import { useState } from "react";
-import BidPostAdd from './BidComponents/BidPostAdd';
-import AllBidCard from './BidComponents/AllBidCard';
-import Sidebar from '../newsfeed/newsComponents/Sidebar';
+import BidPostAdd from "./BidComponents/BidPostAdd";
+import AllBidCard from "./BidComponents/AllBidCard";
+
+export const initPost = {
+  casedescription: "",
+  caseTitle: "",
+  caseCategory: "",
+  createdDate: 0,
+  biddingHistory: [],
+};
 
 function Bidding() {
-  const [mode, setMode] = useState("light");
+  const [post, setPost] = useState(initPost);
+  const [mode] = useState("light");
+
 
   const darkTheme = createTheme({
     palette: {
@@ -16,9 +25,6 @@ function Bidding() {
   });
   return (
     <div className="mt-12 mb-40">
-
-
-
       <ThemeProvider theme={darkTheme}>
         <Box bgcolor={"background.default"} color={"text.primary"}>
           <div className="news_title flex flex-col justify-center items-center gap-y-3 ">
@@ -31,16 +37,13 @@ function Bidding() {
           <Stack>
             {/* <Sidebar setMode={setMode} mode={mode} /> */}
 
-
-          
-            <AllBidCard />
-
+            <AllBidCard setPost={setPost} post={post} />
           </Stack>
-  <BidPostAdd />
+          <BidPostAdd setPost={setPost} post={post} />
         </Box>
       </ThemeProvider>
     </div>
-  )
+  );
 }
 
-export default Bidding
+export default Bidding;

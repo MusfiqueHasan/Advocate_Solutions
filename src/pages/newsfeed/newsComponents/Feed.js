@@ -20,9 +20,13 @@ const Feed = () => {
       sortedPosts.bookmarked = false
     }
   }, [isBooked.length, sortedPosts])
+
+  
   useEffect(() => {
     dispatch(getNewsFeeds())
   }, [dispatch])
+
+
   return (
     <Box flex={4} p={{ xs: 0, md: 2 }}>
       {loading ? (
