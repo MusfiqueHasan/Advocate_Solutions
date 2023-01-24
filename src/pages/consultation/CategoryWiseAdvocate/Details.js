@@ -1,16 +1,55 @@
 import { AiOutlineLock, AiFillMinusCircle } from "react-icons/ai";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import img from "../../../assets/images/lawyer1.jpg";
 import PersonalInfo from "./PersonalInfo";
 import Documents from "./Documents";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Form from "../../../services/ui/Form";
 import AppSubNav from "../../../services/ui/AppSubNav";
 import AppointmentForm from "./AppointmentForm";
+import { collection, getDocs } from "firebase/firestore";
 
+import { Link } from "react-router-dom";
+import { db } from "../../../Firebase/Firebase-config";
 const Details = () => {
-  const [selectedNav, setSelectedNav] = useState();
+  const params = useParams();
   const navigate = useNavigate();
+
+
+  console.log(
+    params?.catId, "paramadv", params?.advName, "advName"
+  );
+  const [selectedNav, setSelectedNav] = useState();
+  const [category, setCategory] = useState([]);
+  const [advocate, setAdvocate] = useState([]);
+  console.log(advocate, "advocate");
+
+  const categorysCollectionRef = collection(db, "categorys");
+
+  useEffect(() => {
+
+    const getcategory = async () => {
+
+      const data = await getDocs(categorysCollectionRef);
+
+      console.log(data, "data");
+
+      setCategory(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+
+
+
+    };
+
+    getcategory();
+  }, []);
+
+  const found = category.find(obj => {
+    return obj.id === params?.catId;
+  });
+  const findAdv = found?.all_advocates?.find(obj => {
+    return obj.name === params?.advName;
+  });
+  console.log(findAdv, "findAdv");
 
   const handleSelectedSubNav = (item) => {
     console.log(item);
@@ -36,11 +75,11 @@ const Details = () => {
               />
             </div>
             {selectedNav?.key === "PersonalInformation" ? (
-              <PersonalInfo />
+              <PersonalInfo findAdv={findAdv} />
             ) : selectedNav?.key === "Documents" ? (
               <Documents />
             ) : (
-             <AppointmentForm/>
+              <AppointmentForm />
             )}
           </Form>
         </div>
@@ -50,19 +89,17 @@ const Details = () => {
             <div className="flex flex-col items-center justify-center">
               <div className=" lg:w-[20rem] lg:h-[15rem] flex justify-center">
                 <img
-                  src={img}
+                  src={findAdv?.img}
                   alt=""
                   className=" w-[100%] h-[100%] rounded-md"
                 />
               </div>
-              <p className=" font-bold text-2xl mt-14 mb-1">Dr. Faysal Rana</p>
-              <p className="">MBBS</p>
+              <p className=" font-bold text-2xl mt-14 mb-1">{findAdv?.name}</p>
+              <p className="">     {findAdv?.email}</p>
               <p className="text-sm font-sans text-gray-800">
-                Genaral Physician, Pediatrics, Covid Unit
+                {findAdv?.court}
               </p>
-              <p className="text-sm font-sans text-gray-800">
-                Upozila Health Complex, Faridgang, Chandpur
-              </p>
+
             </div>
           </Form>
         </div>
