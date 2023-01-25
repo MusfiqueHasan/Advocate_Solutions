@@ -13,9 +13,12 @@ import {
 } from "../../../redux/actions/biddingAction";
 
 const BiddingAmount = () => {
+  const { currentUser } = useSelector((state) => state.authentication);
+  const [isLoginUserId, setIsLoginUserId] = useState("");
   const [biddingInfo, setHistory] = useState({
-    bidderName: "",
+    bidderName: currentUser?.displayName,
     biddingAmount: 0,
+    bidderId: "",
     status: "pending",
   });
   let usersCollectionRef = collection(db, "loginUser");
@@ -24,8 +27,9 @@ const BiddingAmount = () => {
   const { data } = location.state;
   const [historyData, setHistoryData] = useState(data);
   const allPosts = useSelector((state) => state?.bidding?.biddingPosts);
-  const { currentUser } = useSelector((state) => state.authentication);
+
   const [isAdvocate, setIsAdvocate] = useState("");
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const getLogedinUserId = async () => {
     const data = await getDocs(usersCollectionRef);
@@ -35,18 +39,34 @@ const BiddingAmount = () => {
         item.email === currentUser?.email &&
         item.displayName === currentUser?.displayName
     );
+    const isLogedin = allPosts?.map((elm) =>
+      elm.biddingHistory.find((item) => item.bidderId === credential?.id)
+    );
+    if (isLogedin[0] !== undefined) {
+      setIsDisabled(true);
+    } else {
+      setIsDisabled(false);
+    }
+    console.log(isLogedin[0]);
+
     setIsAdvocate(credential?.role);
+    setHistory({ ...biddingInfo, bidderId: credential?.id });
   };
 
   useEffect(() => {
     getLogedinUserId();
-  }, [currentUser]);
+  }, []);
 
   const handleUpdate = () => {
-    let copyPost = { ...historyData };
+    if (biddingInfo?.bidderName === "" && biddingInfo?.biddingAmount === 0) {
+      return;
+    } else {
+      let copyPost = { ...historyData };
 
-    copyPost.biddingHistory.push(biddingInfo);
-    dispatch(updateBiddingPost(copyPost, copyPost?.id));
+      copyPost.biddingHistory.push(biddingInfo);
+      dispatch(updateBiddingPost(copyPost, copyPost?.id));
+      localStorage.setItem("isDisabled", true);
+    }
   };
 
   useEffect(() => {
@@ -105,7 +125,8 @@ const BiddingAmount = () => {
               </button>
             </Link>
             <button
-              className=" mt-2 text-center font-bold px-10 py-2 rounded-xl text-white  bg-green-500 hover:bg-green-600 "
+              disabled={isDisabled}
+              className=" disabled:bg-slate-300 disabled:cursor-pointer mt-2 text-center font-bold px-10 py-2 rounded-xl text-white  bg-green-500 hover:bg-green-600 "
               onClick={handleUpdate}
             >
               Bidd

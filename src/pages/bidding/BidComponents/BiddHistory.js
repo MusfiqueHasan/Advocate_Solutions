@@ -27,6 +27,11 @@ const BiddHistory = () => {
     setIsDisabled("pending");
   };
 
+  const getStatus = ()=> {
+   const isConfirmed= historyData?.biddingHistory?.filter(elm=> elm.status==="confirmed")
+   console.log(isConfirmed)
+  }
+
   console.log(isDisabled);
 
   useEffect(() => {
@@ -40,6 +45,10 @@ const BiddHistory = () => {
       const status = localStorage.getItem("status");
       setIsDisabled(status);
     }
+  }, []);
+
+  useEffect(() => {
+    getStatus()
   }, []);
 
   return (

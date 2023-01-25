@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./LoginRegistration.css";
 import useAuth from "./useAuth";
 
 const AdvocateLoginReg = () => {
+  const { currentUser } = useSelector((state) => state.authentication);
   const [addclass, setaddclass] = useState("");
-  const {
-    loginUser,
-    registerUser,
-    authError,
-  } = useAuth();
+  const { loginUser, registerUser, authError, authSucces } = useAuth();
 
   const [logindata, setLogindata] = useState({});
   const location = useLocation();
+  const navigate = useNavigate();
 
   const handleOnChange = (e) => {
     const field = e.target.name;
@@ -23,7 +23,7 @@ const AdvocateLoginReg = () => {
   };
 
   const handleLoginSubmit = (e) => {
-    loginUser(logindata.email, logindata.password, location);
+    loginUser(logindata.email, logindata.password,  location);
     e.preventDefault();
   };
 
@@ -32,18 +32,22 @@ const AdvocateLoginReg = () => {
       logindata.email,
       logindata.password,
       logindata.name,
-      'advocate'
+      "advocate"
     );
     e.preventDefault();
   };
-
+  useEffect(() => {
+    if (currentUser?.email && currentUser?.accessToken) {
+      navigate("/profile");
+    }
+  }, [currentUser?.accessToken, currentUser?.email, navigate]);
   return (
     <div className="bodylog">
       <div className={`containerlog ${addclass}`} id="container">
         <div className="form-container sign-up-container">
           <form
             className="formlog"
-           
+
             // onClick={createUser}
           >
             <h3>Create A Lawayer Account</h3>
@@ -104,12 +108,17 @@ const AdvocateLoginReg = () => {
               name="password"
               onChange={handleOnChange}
             />
-              {!(authError === "") && (
+            {!(authError === "") && (
               <p className="mb-5 text-sm text-center text-red-500 font-bold">
                 The email address is already in use by another account.
               </p>
             )}
-            <button className="btnlog"  onClick={handleRegisterSubmit}>
+            {authSucces !== "" && (
+              <p className="mb-5 text-sm text-center text-green-500 font-bold">
+                {authSucces}
+              </p>
+            )}
+            <button className="btnlog" onClick={handleRegisterSubmit}>
               REGISTER
             </button>
             <Link to="/">
@@ -156,8 +165,10 @@ const AdvocateLoginReg = () => {
                 The password is invalid or the user does not have a password.
               </p>
             )}
+
+        
             <Link to="/home">
-              <button className="btnlog" onClick={handleLoginSubmit} >
+              <button className="btnlog" onClick={handleLoginSubmit}>
                 Login
               </button>
             </Link>

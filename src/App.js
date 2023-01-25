@@ -24,13 +24,13 @@ import PrivateRoute from "./pages/Auth/PrivateRoute";
 import Bidding from "./pages/bidding/Bidding";
 import BiddingAmount from "./pages/bidding/BidComponents/BiddingAmount";
 import BiddHistory from "./pages/bidding/BidComponents/BiddHistory";
+import Profile from "./pages/profile/Profile";
 
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
-          {/* <Route path="/news" element={<NewsFeed />} /> */}
           <Route
             path="/comunity"
             element={
@@ -93,7 +93,15 @@ function App() {
             }
           />
 
-          {/* <Route path="/advocates/:catname" element={<CategoryWiseAdvocate />} /> */}
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <Profile />
+              </PrivateRoute>
+            }
+          />
+
           <Route
             path="/attorney"
             element={
@@ -111,7 +119,6 @@ function App() {
               </PrivateRoute>
             }
           />
-          {/* <Route path="/contact" element={<ContactUs />} /> */}
 
           <Route
             path="/news"
