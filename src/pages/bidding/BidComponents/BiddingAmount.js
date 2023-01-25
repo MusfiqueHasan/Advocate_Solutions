@@ -29,7 +29,7 @@ const BiddingAmount = () => {
   const allPosts = useSelector((state) => state?.bidding?.biddingPosts);
 
   const [isAdvocate, setIsAdvocate] = useState("");
-  const [isDisabled, setIsDisabled] = useState(false);
+  const [isError, setIsError] = useState("");
 
   const getLogedinUserId = async () => {
     const data = await getDocs(usersCollectionRef);
@@ -39,27 +39,29 @@ const BiddingAmount = () => {
         item.email === currentUser?.email &&
         item.displayName === currentUser?.displayName
     );
-    const isLogedin = allPosts?.map((elm) =>
-      elm.biddingHistory.find((item) => item.bidderId === credential?.id)
-    );
-    if (isLogedin[0] !== undefined) {
-      setIsDisabled(true);
-    } else {
-      setIsDisabled(false);
-    }
-    console.log(isLogedin[0]);
-
+    setIsLoginUserId(credential?.id)
     setIsAdvocate(credential?.role);
     setHistory({ ...biddingInfo, bidderId: credential?.id });
   };
+
+  const getStatus = () => {
+    const isConfirmed = historyData?.biddingHistory?.filter(
+      (elm) => elm.bidderId === isLoginUserId
+    );
+    return  isConfirmed.length > 0 ? true : false;
+  };
+
 
   useEffect(() => {
     getLogedinUserId();
   }, []);
 
   const handleUpdate = () => {
-    if (biddingInfo?.bidderName === "" && biddingInfo?.biddingAmount === 0) {
-      return;
+    if (biddingInfo?.bidderName === "" || biddingInfo?.biddingAmount === 0 || biddingInfo?.biddingAmount === '') {
+      setIsError('Please Fill the Amount first')
+      setTimeout(()=>{
+        setIsError('')
+      },2500)
     } else {
       let copyPost = { ...historyData };
 
@@ -117,6 +119,7 @@ const BiddingAmount = () => {
               placeholder=" Bidd Your Expected Amount"
               variant="outlined"
             />
+           {isError!==''&& <p className="text-left text-red-500 font-bold text-sm mt-2">{isError}</p>}
           </div>
           <div className=" flex justify-center gap-2">
             <Link to="/bidding">
@@ -125,7 +128,7 @@ const BiddingAmount = () => {
               </button>
             </Link>
             <button
-              disabled={isDisabled}
+              disabled={getStatus()}
               className=" disabled:bg-slate-300 disabled:cursor-pointer mt-2 text-center font-bold px-10 py-2 rounded-xl text-white  bg-green-500 hover:bg-green-600 "
               onClick={handleUpdate}
             >

@@ -178,7 +178,7 @@ const UserLoginReg = () => {
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              {/* <h1 className="text-2xl font-bold ">Hello, Friend!</h1> */}
+              <h1 className="text-4xl font-bold ">Welcome To Advocate Solutions</h1>
               <p className=" plog heading">
                 Enter your personal details and start journey with us.
               </p>

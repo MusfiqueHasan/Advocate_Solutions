@@ -23,16 +23,16 @@ const BiddHistory = () => {
 
     copyPost.biddingHistory.find((_, i) => i === index).status = "confirmed";
     dispatch(updateBiddingPost(copyPost, copyPost?.id));
-    localStorage.setItem("status", "pending")
+    localStorage.setItem("status", "pending");
     setIsDisabled("pending");
   };
 
-  const getStatus = ()=> {
-   const isConfirmed= historyData?.biddingHistory?.filter(elm=> elm.status==="confirmed")
-   console.log(isConfirmed)
-  }
-
-  console.log(isDisabled);
+  const getStatus = () => {
+    const isConfirmed = historyData?.biddingHistory?.filter(
+      (elm) => elm.status === "confirmed"
+    );
+    return isConfirmed.length > 0 ? true : false;
+  };
 
   useEffect(() => {
     dispatch(getBiddingData());
@@ -47,9 +47,9 @@ const BiddHistory = () => {
     }
   }, []);
 
-  useEffect(() => {
-    getStatus()
-  }, []);
+  // useEffect(() => {
+
+  // }, []);
 
   return (
     <div className=" my-16">
@@ -89,12 +89,7 @@ const BiddHistory = () => {
                       <td className=" p-5">{elm?.biddingAmount}</td>
                       <td className=" p-5">
                         <button
-                          disabled={
-                            isDisabled === "pending" &&
-                            elm?.status === "pending"
-                              ? true
-                              : false
-                          }
+                          disabled={getStatus()}
                           className={` disabled:cursor-not-allowed disabled:bg-slate-400 mt-2 text-center font-bold px-10 py-2 rounded-xl text-white cursor-pointer capitalize ${
                             elm?.status === "pending"
                               ? " bg-sky-500 hover:bg-sky-600 "

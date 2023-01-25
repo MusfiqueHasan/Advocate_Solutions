@@ -47,23 +47,16 @@ const AdvocateLoginReg = () => {
         <div className="form-container sign-up-container">
           <form
             className="formlog"
-
-            // onClick={createUser}
           >
             <h3>Create A Lawayer Account</h3>
 
             <div class="">
               <button
-                // onClick={handleGoogleSignIn}
-                // onClick={handleGoogleSignIn}
                 className="social"
               >
                 <i class="fab fa-google-plus-g"></i>
               </button>
             </div>
-            {/* <span className="spanlog heading_two">
-              or use your email for registration
-            </span> */}
 
             <input
               type="text"
@@ -130,21 +123,16 @@ const AdvocateLoginReg = () => {
         </div>
         <div className="form-container sign-in-container">
           <form className="formlog">
-            {/* onSubmit={handleLoginSubmit} */}
             <h1 className="h1log">Lawayer Login</h1>
 
             <div class="social-container">
-              {/* <button onClick={handleGoogleSignIn} className=" social">
-                <i class="fab fa-google-plus-g"></i>
-              </button> */}
             </div>
-            {/* <span className="heading_two spanlog">or use your account</span> */}
 
             <input
               required
               type="email"
               className="inputlog"
-              // className="w-8/12 my-2 border border-transparent focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+              
               placeholder="Your  Email"
               name="email"
               onChange={handleOnChange}
@@ -154,7 +142,7 @@ const AdvocateLoginReg = () => {
               className="inputlog"
               required
               placeholder="Your Password"
-              // className="w-8/12 my-2 border border-transparent focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
+            
               type="password"
               name="password"
               onChange={handleOnChange}
@@ -198,7 +186,7 @@ const AdvocateLoginReg = () => {
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              {/* <h1 className="text-2xl font-bold ">Hello, Friend!</h1> */}
+            <h1 className="text-4xl font-bold ">Welcome To Advocate Solutions</h1>
               <p className="  plog heading">
                 Enter your personal details and start journey with us.
               </p>
