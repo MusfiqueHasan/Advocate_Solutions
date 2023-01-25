@@ -59,7 +59,7 @@ const Details = () => {
   return (
     <div className="my-20">
       <div className="grid grid-cols-3 gap-4 mx-5">
-        <div className="h-[34rem] col-span-2">
+        <div className=" col-span-2">
           <Form className=" h-full" width="!w-[100%]">
             <div>
               <AppSubNav
@@ -76,13 +76,13 @@ const Details = () => {
             ) : selectedNav?.key === "Documents" ? (
               <Documents />
             ) : (
-              <AppointmentForm />
+              <AppointmentForm findAdv={findAdv} />
             )}
           </Form>
         </div>
 
-        <div className="h-[34rem]">
-          <Form title="" className=" h-full" width="!w-full">
+        <div className="">
+          <div className=" h-full border-2" >
             <div className="flex flex-col items-center justify-center">
               <div className=" lg:w-[20rem] lg:h-[15rem] flex justify-center">
                 <img
@@ -97,8 +97,9 @@ const Details = () => {
                 {findAdv?.court}
               </p>
 
+
             </div>
-          </Form>
+          </div>
         </div>
       </div>
 
