@@ -1,9 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import lawer from "../../../assets/images/lawyer1.jpg";
+import { collection, getDocs } from "firebase/firestore";
 
-const CategoryCard = () => {
+import { Link } from "react-router-dom";
+import { db } from "../../../Firebase/Firebase-config";
+const CategoryCard = (param) => {
   const navigate = useNavigate();
+  console.log(
+    param?.param, "param"
+  );
+
+  const [category, setCategory] = useState([]);
+  const [advocate, setAdvocate] = useState([]);
+  console.log(category);
+
+  const categorysCollectionRef = collection(db, "categorys");
+
+  useEffect(() => {
+
+    const getcategory = async () => {
+
+      const data = await getDocs(categorysCollectionRef);
+
+      console.log(data, "data");
+      setCategory(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+
+    getcategory();
+  }, []);
+
+  const found = category.find(obj => {
+    return obj.id === param?.param;
+  });
+  console.log(found, "found");
   return (
     <div>
       <div
@@ -11,7 +41,7 @@ const CategoryCard = () => {
         onClick={() => navigate("/consultation/details")}
       >
         <figure className="w-[15rem] p-3">
-          <img src={lawer} alt="Movie" className="h-full rounded-md" />
+          <img src={found?.img} alt="Movie" className="h-full rounded-md" />
         </figure>
         <div className=" h-full flex items-center w-[80rem]">
           <div className="grid grid-cols-3 w-full">

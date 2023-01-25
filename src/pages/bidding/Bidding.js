@@ -29,7 +29,7 @@ function Bidding() {
         <Box bgcolor={"background.default"} color={"text.primary"}>
           <div className="news_title flex flex-col justify-center items-center gap-y-3 ">
             <h1 className=" text-3xl font-bold text-center mt-5 ">
-              Welcome to Our Bidding Platform
+              Biding
             </h1>
             <img src={titlelineimg} alt="title-line-img" />
           </div>
