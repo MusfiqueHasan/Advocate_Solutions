@@ -1,7 +1,5 @@
-import { useState } from "react";
-import React from "react";
+import { useEffect, useState } from "react";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
@@ -16,22 +14,23 @@ import {
   getDocs,
   addDoc,
   updateDoc,
-  deleteDoc,
   doc,
 } from "firebase/firestore";
-import { db } from "../../Firebase/Firebase-config";
+import { auth, db } from "../../Firebase/Firebase-config";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const useAuth = () => {
-  let usersCollectionRef = collection(db, "newsfeeds");
+  let usersCollectionRef = collection(db, "loginUser");
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [authError, setAuthError] = useState("");
-  const [admin, setAdmin] = useState(false);
+  // const [admin, setAdmin] = useState(false);
   const [token, setToken] = useState("");
-  const auth = getAuth();
+  const navigate = useNavigate();
   const googleProvider = new GoogleAuthProvider();
 
-  const registerUser = (email, password, name, history) => {
+  const location = useLocation();
+  const registerUser = (email, password, name, role) => {
     setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
@@ -39,33 +38,37 @@ const useAuth = () => {
         const newUser = { email, displayName: name };
         setUser(newUser);
         // save user to database
-        savedUser(email, name);
+        savedUser(email, name, role, "register");
         // send name to firebase after creation
         updateProfile(auth.currentUser, {
           displayName: name,
         })
           .then(() => {})
           .catch((error) => {});
-        history.replace("/");
       })
       .catch((error) => {
         setAuthError(error.message);
+        setTimeout(() => {
+          setAuthError("");
+        }, 2000);
       })
       .finally(() => setIsLoading(false));
   };
 
-  const loginUser = (email, password, location, navigate) => {
-    console.log(email, password);
+  const loginUser = (email, password, location) => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const destination = location?.state?.from || "/";
+        const destination = location?.state?.from || "/home";
         console.log(destination);
-        // navigate(destination);
+        navigate("/home");
         setAuthError("");
       })
       .catch((error) => {
         setAuthError(error.message);
+        setTimeout(() => {
+          setAuthError("");
+        }, 2000);
       })
       .finally(() => setIsLoading(false));
   };
@@ -80,24 +83,81 @@ const useAuth = () => {
       .finally(() => setIsLoading(false));
   };
 
-  const savedUser = async (email, displayName) => {
-    const user = { email: email, displayName: displayName };
-    await addDoc(usersCollectionRef, user);
-    console.log("created successfully");
-    // axios
-    //   .post("https://lit-anchorage-11150.herokuapp.com/users", user)
-    //   .then((res) => {});
+  const signInWithGoogle = () => {
+    setIsLoading(true);
+    signInWithPopup(auth, googleProvider)
+      .then((result) => {
+        const user = result.user;
+        savedUser(user.email, user.displayName, "user", "google");
+        setAuthError("");
+        // const destination = location?.state?.from || "/home";
+        navigate("/home");
+      })
+      .catch((error) => {
+        setAuthError(error.message);
+      })
+      .finally(() => setIsLoading(false));
+  };
+
+  // observe user state
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setUser(user);
+        getIdToken(user).then((idToken) => {
+          setToken(idToken);
+          console.log(idToken);
+        });
+      } else {
+        setUser({});
+      }
+      setIsLoading(false);
+    });
+
+    return () => unsubscribe;
+  }, []);
+
+  
+
+  const savedUser = async (email, displayName, role, isGoogle) => {
+    if (isGoogle === "google") {
+      const data = await getDocs(usersCollectionRef);
+      const allData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      const credential = allData.find(
+        (item) =>
+          item.email === email &&
+          item.displayName === displayName &&
+          item.role === role
+      );
+      const credentialData = { ...credential };
+      delete credentialData.id;
+
+      if (!!credential) {
+        const userDoc = doc(db, "loginUser", credential?.id);
+        await updateDoc(userDoc, credentialData);
+        console.log("updated successfully");
+      } else {
+        const user = { email: email, displayName: displayName, role: role };
+        await addDoc(usersCollectionRef, user);
+        console.log("created successfully");
+      }
+    }
+    if (isGoogle === "register") {
+      const user = { email: email, displayName: displayName, role: role };
+      await addDoc(usersCollectionRef, user);
+      console.log("created successfully");
+    }
   };
 
   return {
     user,
-    admin,
     token,
     registerUser,
     logOut,
     loginUser,
     isLoading,
     authError,
+    signInWithGoogle,
   };
 };
 

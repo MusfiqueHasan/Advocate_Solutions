@@ -1,80 +1,49 @@
 import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./LoginRegistration.css";
+import useAuth from "./useAuth";
 
-// import useAuth from "../../hooks/useAuth";
-
-// import {
-//   addDoc,
-//   collection,
-//   deleteDoc,
-//   doc,
-//   getDocs,
-//   updateDoc,
-// } from "firebase/firestore";
-// import { db } from "../../Firebase/Firebase-config";
 const AdvocateLoginReg = () => {
   const [addclass, setaddclass] = useState("");
-  // const {
-  //   user,
-  //   loginUser,
-  //   signInWithGoogle,
-  //   registerUser,
-  //   isLoading,
-  //   authError,
-  // } = useAuth();
+  const {
+    loginUser,
+    registerUser,
+    authError,
+  } = useAuth();
 
   const [logindata, setLogindata] = useState({});
   const location = useLocation();
-  const navigate = useNavigate();
+
   const handleOnChange = (e) => {
     const field = e.target.name;
     const value = e.target.value;
-    // // console.log(field, value);
     const newLoginData = { ...logindata };
     newLoginData[field] = value;
     setLogindata(newLoginData);
   };
-  // const handleLoginSubmit = (e) => {
-  //   loginUser(logindata.email, logindata.password, location, navigate);
-  //   e.preventDefault();
-  // };
-  // const handleRegisterSubmit = (e) => {
-  //   registerUser(
-  //     logindata.email,
-  //     logindata.password,
-  //     logindata.name,
-  //     logindata.githubname,
-  //     logindata.phoneNumber,
-  //     navigate
-  //   );
-  //   e.preventDefault();
-  // };
-  // const handleGoogleSignIn = () => {
-  //   signInWithGoogle(location, navigate);
-  // };
-  // const usersCollectionRef = collection(db, "users");
-  // const createUser = async () => {
-  //   await addDoc(usersCollectionRef, {
-  //     name: logindata.name,
-  //     email: logindata.email,
-  //     githubname: logindata.githubname,
-  //     phoneNumber: logindata.phoneNumber,
-  //   });
-  // };
-  // const createUsergoogle = async () => {
-  //   await addDoc(usersCollectionRef, {
-  //     name: logindata.displayName,
-  //     email: logindata.email,
-  //   });
-  // };
+
+  const handleLoginSubmit = (e) => {
+    loginUser(logindata.email, logindata.password, location);
+    e.preventDefault();
+  };
+
+  const handleRegisterSubmit = (e) => {
+    registerUser(
+      logindata.email,
+      logindata.password,
+      logindata.name,
+      'advocate'
+    );
+    e.preventDefault();
+  };
+
   return (
     <div className="bodylog">
       <div className={`containerlog ${addclass}`} id="container">
         <div className="form-container sign-up-container">
           <form
             className="formlog"
-            // onSubmit={handleRegisterSubmit}
+           
             // onClick={createUser}
           >
             <h3>Create A Lawayer Account</h3>
@@ -97,35 +66,35 @@ const AdvocateLoginReg = () => {
               className="inputlog"
               placeholder="Full Name"
               name="name"
-              onBlur={handleOnChange}
+              onChange={handleOnChange}
             />
             <input
               type="email"
               className="inputlog"
               placeholder="Email"
               name="email"
-              onBlur={handleOnChange}
+              onChange={handleOnChange}
             />
             <input
               type="number"
               name="phoneNumber"
               className="inputlog"
               placeholder="Phone Number"
-              onBlur={handleOnChange}
+              onChange={handleOnChange}
             />
             <input
               type="text"
               name="Specialization"
               className="inputlog"
               placeholder="Specialization"
-              onBlur={handleOnChange}
+              onChange={handleOnChange}
             />
             <input
               type="text"
               name="PracticingCourts"
               className="inputlog"
               placeholder="Practicing Courts"
-              onBlur={handleOnChange}
+              onChange={handleOnChange}
             />
 
             <input
@@ -133,9 +102,14 @@ const AdvocateLoginReg = () => {
               className="inputlog"
               placeholder="Password"
               name="password"
-              onBlur={handleOnChange}
+              onChange={handleOnChange}
             />
-            <button className="btnlog" type="submit">
+              {!(authError === "") && (
+              <p className="mb-5 text-sm text-center text-red-500 font-bold">
+                The email address is already in use by another account.
+              </p>
+            )}
+            <button className="btnlog"  onClick={handleRegisterSubmit}>
               REGISTER
             </button>
             <Link to="/">
@@ -164,7 +138,7 @@ const AdvocateLoginReg = () => {
               // className="w-8/12 my-2 border border-transparent focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
               placeholder="Your  Email"
               name="email"
-              onBlur={handleOnChange}
+              onChange={handleOnChange}
             />
             <br />
             <input
@@ -174,11 +148,16 @@ const AdvocateLoginReg = () => {
               // className="w-8/12 my-2 border border-transparent focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
               type="password"
               name="password"
-              onBlur={handleOnChange}
+              onChange={handleOnChange}
             />
             <br />
+            {!(authError === "") && (
+              <p className="mb-5 text-sm text-center text-red-500 font-bold">
+                The password is invalid or the user does not have a password.
+              </p>
+            )}
             <Link to="/home">
-              <button className="btnlog" type="submit">
+              <button className="btnlog" onClick={handleLoginSubmit} >
                 Login
               </button>
             </Link>

@@ -1,43 +1,16 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./LoginRegistration.css";
 import useAuth from "./useAuth";
-import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-  signInWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-  updateProfile,
-  getIdToken,
-} from "firebase/auth";
-import { auth, db } from "../../Firebase/Firebase-config";
-import { addDoc, collection, getDocs } from "firebase/firestore";
-import { useEffect } from "react";
 
 const UserLoginReg = () => {
-  let usersCollectionRef = collection(db, "loginUser");
   const [addclass, setaddclass] = useState("");
-  const [isLoading, setIsLoading] = useState(true);
-  const [authError, setAuthError] = useState("");
-  const [email, setEmail] = useState("");
-  const { user, loginUser } = useAuth();
+  const {token, user,signInWithGoogle, authError, loginUser, registerUser } = useAuth();
   const [logindata, setLogindata] = useState({});
 
-  const getNewsFeeds = async () => {
-    try {
-      const data = await getDocs(usersCollectionRef);
-      const allData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-      setEmail(allData?.email);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  console.log(user);
 
-  const googleProvider = new GoogleAuthProvider();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -51,40 +24,17 @@ const UserLoginReg = () => {
   };
 
   const handleSubmit = (e) => {
-    loginUser(logindata.email, logindata.password, location, navigate);
+    loginUser(logindata.email, logindata.password, location);
+    e.preventDefault();
+  };
+  const handleRegisterSubmit = (e) => {
+    registerUser(logindata.email, logindata.password, logindata.name, "user");
     e.preventDefault();
   };
 
-  const signInWithGoogle = () => {
-    setIsLoading(true);
-    signInWithPopup(auth, googleProvider)
-      .then((result) => {
-        const user = result.user;
-        savedUser(user.email, user.displayName);
-        setAuthError("");
-        const destination = location?.state?.from || "/home";
-        navigate(destination);
-      })
-      .catch((error) => {
-        setAuthError(error.message);
-      })
-      .finally(() => setIsLoading(false));
-  };
-
-  const savedUser = async (email, displayName) => {
-    const user = { email: email, displayName: displayName };
-    await addDoc(usersCollectionRef, user);
-    console.log("created successfully");
-  };
-
   useEffect(() => {
-    getNewsFeeds();
-  }, []);
-
-  useEffect(() => {
-    if (!(email === "")) {
+    if (user?.email && token) {
       navigate("/home");
-      sessionStorage.setItem("url", "/home");
     }
   }, []);
 
@@ -92,39 +42,30 @@ const UserLoginReg = () => {
     <div className="bodylog">
       <div className={`containerlog ${addclass}`} id="container">
         <div className="form-container sign-up-container">
-          <form
-            className="formlog"
-          // onSubmit={handleRegisterSubmit}
-          // onClick={createUser}
-          >
+          <form className="formlog">
             <h3>Create A User Account</h3>
 
-            <div class="">
+            <div >
               <button
-                // onClick={handleGoogleSignIn}
-                // onClick={handleGoogleSignIn}
                 className="social"
               >
                 <i class="fab fa-google-plus-g"></i>
               </button>
             </div>
-            {/* <span className="spanlog heading_two">
-              or use your email for registration
-            </span> */}
 
             <input
               type="text"
               className="inputlog"
               placeholder="Full Name"
               name="name"
-              onBlur={handleOnchange}
+              onChange={handleOnchange}
             />
             <input
               type="email"
               className="inputlog"
               placeholder="Email"
               name="email"
-              onBlur={handleOnchange}
+              onChange={handleOnchange}
             />
 
             <input
@@ -132,16 +73,21 @@ const UserLoginReg = () => {
               name="phoneNumber"
               className="inputlog"
               placeholder="Phone Number"
-              onBlur={handleOnchange}
+              onChange={handleOnchange}
             />
             <input
               type="password"
               className="inputlog"
               placeholder="Password"
               name="password"
-              onBlur={handleOnchange}
+              onChange={handleOnchange}
             />
-            <button className="btnlog" type="submit">
+              {!(authError === "") && (
+              <p className="mb-5 text-sm text-center text-red-500 font-bold">
+                The email address is already in use by another account.
+              </p>
+            )}
+            <button className="btnlog" onClick={handleRegisterSubmit}>
               REGISTER
             </button>
 
@@ -171,7 +117,7 @@ const UserLoginReg = () => {
               // className="w-8/12 my-2 border border-transparent focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
               placeholder="Your  Email"
               name="email"
-              onBlur={handleOnchange}
+              onChange={handleOnchange}
             />
             <br />
             <input
@@ -181,11 +127,16 @@ const UserLoginReg = () => {
               // className="w-8/12 my-2 border border-transparent focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-transparent"
               type="password"
               name="password"
-              onBlur={handleOnchange}
+              onChange={handleOnchange}
             />
             <br />
 
-            <button onSubmit={handleSubmit} className="btnlog" type="submit">
+            {!(authError === "") && (
+              <p className="mb-5 text-sm text-center text-red-500 font-bold">
+                The password is invalid or the user does not have a password.
+              </p>
+            )}
+            <button onClick={handleSubmit} className="btnlog">
               Login
             </button>
             <p>--------------------------------------</p>
@@ -199,7 +150,7 @@ const UserLoginReg = () => {
             <br />
 
             <Link to="/lawyerAuth">
-              <p className=" text-sm text-red-600 hover:text-sky-600 hover:text-base duration-1000">
+              <p className=" text-sm text-blue-600 hover:text-sky-600 hover:text-base duration-1000">
                 Are You a Lawyer? please click here{" "}
               </p>
             </Link>

@@ -40,12 +40,19 @@ function App() {
           <Route
             path="/home"
             element={
-              <Home />
-              // <PrivateRoute>
-              // </PrivateRoute>
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
             }
           />
-          <Route path="/about" element={<About />} />
+          <Route
+            path="/about"
+            element={
+              <PrivateRoute>
+                <About />
+              </PrivateRoute>
+            }
+          />
           <Route path="/case-study" element={<CaseStudy />} />
           <Route path="/consultation" element={<Consultation />} />
           <Route path="/consultation/details" element={<Details />} />
