@@ -17,7 +17,6 @@ import { db } from "../../Firebase/Firebase-config";
 import { Link } from "react-router-dom";
 const Consultation = () => {
   const [category, setCategory] = useState([]);
-  console.log(category);
 
   const categorysCollectionRef = collection(db, "categorys");
 
@@ -26,8 +25,6 @@ const Consultation = () => {
     const getcategory = async () => {
 
       const data = await getDocs(categorysCollectionRef);
-
-      console.log(data, "data");
       setCategory(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 

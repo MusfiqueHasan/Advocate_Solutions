@@ -23,3 +23,5 @@ export const GET_BIDDING = "get_bidding"
 export const CREATE_BIDDING = "create_biding"
 export const GET_SINGLE_BIDDING = "get_single_bidding"
 export const UPDATE_BIDDING = "update_biding"
+
+export const SET_USERINFO = "set_userinfo"

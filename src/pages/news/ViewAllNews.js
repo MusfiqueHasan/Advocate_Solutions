@@ -12,7 +12,6 @@ import { db } from "../../Firebase/Firebase-config";
 import { Link } from 'react-router-dom';
 const ViewAllNews = () => {
     const [newses, setNews] = useState([]);
-    console.log(newses);
 
     const newsesCollectionRef = collection(db, "news");
 
@@ -21,8 +20,6 @@ const ViewAllNews = () => {
         const getnewses = async () => {
 
             const data = await getDocs(newsesCollectionRef);
-
-            console.log(data, "data");
             setNews(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
         };
 

@@ -31,7 +31,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           {/* <Route path="/news" element={<NewsFeed />} /> */}
-          <Route path="/comunity" element={<NewsFeed />} />
+          <Route
+            path="/comunity"
+            element={
+              <PrivateRoute>
+                <NewsFeed />
+              </PrivateRoute>
+            }
+          />
           <Route path="/" element={<UserLoginReg />} />
           <Route path="/lawyerAuth" element={<AdvocateLoginReg />} />
         </Routes>
@@ -40,31 +47,136 @@ function App() {
           <Route
             path="/home"
             element={
-              <Home />
-              // <PrivateRoute>
-              // </PrivateRoute>
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
             }
           />
-          <Route path="/about" element={<About />} />
-          <Route path="/case-study" element={<CaseStudy />} />
-          <Route path="/consultation" element={<Consultation />} />
-          <Route path="/consultation/details/:catId/:advName" element={<Details />} />
-          <Route path="/advocates/:catId" element={<CategoryWiseAdvocate />} />
+          <Route
+            path="/about"
+            element={
+              <PrivateRoute>
+                <About />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/case-study"
+            element={
+              <PrivateRoute>
+                <CaseStudy />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/consultation"
+            element={
+              <PrivateRoute>
+                <Consultation />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/consultation/details/:catId/:advName"
+            element={
+              <PrivateRoute>
+                <Details />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/advocates/:catId"
+            element={
+              <PrivateRoute>
+                <CategoryWiseAdvocate />
+              </PrivateRoute>
+            }
+          />
 
           {/* <Route path="/advocates/:catname" element={<CategoryWiseAdvocate />} /> */}
-          <Route path="/attorney" element={<Attorneys />} />
+          <Route
+            path="/attorney"
+            element={
+              <PrivateRoute>
+                <Attorneys />
+              </PrivateRoute>
+            }
+          />
           <Route path="/faq" element={<FAQ />} />
-          <Route path="/contact" element={<ContactUs />} />
+          <Route
+            path="/contact"
+            element={
+              <PrivateRoute>
+                <ContactUs />
+              </PrivateRoute>
+            }
+          />
           {/* <Route path="/contact" element={<ContactUs />} /> */}
 
-          <Route path="/news" element={<News />} />
-          <Route path="/all_news" element={<ViewAllNews />} />
-          <Route path="/blogs" element={<Blogs />} />
-          <Route path="/all_blogs" element={<ViewAllBlogs />} />
-          <Route path="/usefull_links" element={<UsefullLinks />} />
-          <Route path="/bidding" element={<Bidding />} />
-          <Route path="/bidding_amount" element={<BiddingAmount />} />
-          <Route path="/bidding_history" element={<BiddHistory />} />
+          <Route
+            path="/news"
+            element={
+              <PrivateRoute>
+                <News />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/all_news"
+            element={
+              <PrivateRoute>
+                <ViewAllNews />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/blogs"
+            element={
+              <PrivateRoute>
+                <Blogs />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/all_blogs"
+            element={
+              <PrivateRoute>
+                <ViewAllBlogs />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/usefull_links"
+            element={
+              <PrivateRoute>
+                <UsefullLinks />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/bidding"
+            element={
+              <PrivateRoute>
+                <Bidding />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/bidding_amount"
+            element={
+              <PrivateRoute>
+                <BiddingAmount />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/bidding_history"
+            element={
+              <PrivateRoute>
+                <BiddHistory />
+              </PrivateRoute>
+            }
+          />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -36,7 +36,6 @@ const FAQ = () => {
     },
   ];
   const [faqes, setFaqs] = useState([]);
-  // console.log(faqs);
 
   const faqsCollectionRef = collection(db, "faqs");
 
@@ -45,8 +44,6 @@ const FAQ = () => {
     const getfaqs = async () => {
 
       const data = await getDocs(faqsCollectionRef);
-
-      console.log(data, "data");
       setFaqs(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 

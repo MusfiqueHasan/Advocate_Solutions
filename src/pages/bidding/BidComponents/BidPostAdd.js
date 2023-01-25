@@ -10,7 +10,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Add as AddIcon } from "@mui/icons-material";
 import { Box } from "@mui/material";
@@ -20,6 +20,9 @@ import {
 } from "../../../redux/actions/newxfeedAction";
 import { createBiddingPost } from "../../../redux/actions/biddingAction";
 import { initPost } from "../Bidding";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../../Firebase/Firebase-config";
+import { useEffect } from "react";
 
 const SytledModal = styled(Modal)({
   display: "flex",
@@ -35,36 +38,69 @@ const UserBox = styled(Box)({
 });
 
 const BidPostAdd = ({ setPost, post }) => {
-  const [, setSelectImage] = useState("");
+  const [userLoginId, setUserLoginId] = useState("");
+  const [isAdvocate, setIsAdvocate] = useState("");
+  let usersCollectionRef = collection(db, "loginUser");
   const dispatch = useDispatch();
   const isDialogOpen = useSelector((state) => state?.newsfeed?.openDialog);
 
   const { currentUser } = useSelector((state) => state.authentication);
 
+  const getLogedinUserId = async () => {
+    const data = await getDocs(usersCollectionRef);
+    const allData = data.docs?.map((doc) => ({ ...doc.data(), id: doc.id }));
+    const credential = allData?.find(
+      (item) =>
+        item.email === currentUser?.email &&
+        item.displayName === currentUser?.displayName
+    );
+    setIsAdvocate(credential?.role);
+    setUserLoginId(credential?.id);
+  };
+
+
+  useEffect(() => {
+    getLogedinUserId();
+  }, [currentUser]);
+
+  const handleAddBidding = () => {
+    let options = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    let date = new Date();
+    let copyPost = { ...post };
+    copyPost.caseId = Date.now();
+    copyPost.userId = userLoginId;
+    copyPost.createdDate = date.toLocaleString("en-US", options);
+    dispatch(createBiddingPost(copyPost));
+    dispatch(updateStateModal(false));
+    dispatch(updateStateDialog(false));
+    setPost(initPost);
+  };
 
   return (
     <>
-      <Tooltip
-        onClick={() => {
-          dispatch(updateStateDialog(true));
-          dispatch(updateStateModal(false));
-          // if (currentUser?.email) {
-          // } else {
-          //   dispatch(updateStateDialog(false))
-          //   dispatch(updateStateModal(true))
-          // }
-        }}
-        title="Create Post"
-        sx={{
-          position: "fixed",
-          bottom: 20,
-          left: { xs: "calc(50% - 25px)", md: 30 },
-        }}
-      >
-        <Fab color="primary" aria-label="add">
-          <AddIcon />
-        </Fab>
-      </Tooltip>
+      {isAdvocate !== "advocate" && (
+        <Tooltip
+          onClick={() => {
+            dispatch(updateStateDialog(true));
+            dispatch(updateStateModal(false));
+          }}
+          title="Create Post"
+          sx={{
+            position: "fixed",
+            bottom: 20,
+            left: { xs: "calc(50% - 25px)", md: 30 },
+          }}
+        >
+          <Fab color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        </Tooltip>
+      )}
       <SytledModal
         open={isDialogOpen}
         onClose={(e) => {
@@ -141,27 +177,7 @@ const BidPostAdd = ({ setPost, post }) => {
             aria-label="outlined primary button group"
             sx={{ marginTop: 5 }}
           >
-            <Button
-              onClick={() => {
-                let options = {
-                  weekday: "long",
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                };
-                let date = new Date();
-                let copyPost = { ...post };
-                copyPost.caseId = Date.now();
-                copyPost.createdDate = date.toLocaleString("en-US", options);
-                dispatch(createBiddingPost(copyPost));
-                dispatch(updateStateModal(false));
-                dispatch(updateStateDialog(false));
-                setPost(initPost);
-                setSelectImage("");
-              }}
-            >
-              Post
-            </Button>
+            <Button onClick={handleAddBidding}>Post</Button>
           </ButtonGroup>
         </Box>
       </SytledModal>

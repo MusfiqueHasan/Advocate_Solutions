@@ -16,22 +16,31 @@ const BiddHistory = () => {
   const { history } = location.state;
   const [historyData, setHistoryData] = useState(history);
   const allPosts = useSelector((state) => state?.bidding?.biddingPosts);
+  const [isDisabled, setIsDisabled] = useState("");
 
   const handleUpdateStatus = (index) => {
     let copyPost = { ...historyData };
 
     copyPost.biddingHistory.find((_, i) => i === index).status = "confirmed";
     dispatch(updateBiddingPost(copyPost, copyPost?.id));
-    setTimeout(() => {
-      navigate("/bidding");
-    }, 2000);
+    localStorage.setItem("status", "pending")
+    setIsDisabled("pending");
   };
+
+  console.log(isDisabled);
 
   useEffect(() => {
     dispatch(getBiddingData());
     const data = allPosts.find((post) => post.id === history.id);
     setHistoryData(data);
   }, [allPosts, dispatch, history.id]);
+
+  useEffect(() => {
+    if (isDisabled !== "") {
+      const status = localStorage.getItem("status");
+      setIsDisabled(status);
+    }
+  }, []);
 
   return (
     <div className=" my-16">
@@ -71,7 +80,13 @@ const BiddHistory = () => {
                       <td className=" p-5">{elm?.biddingAmount}</td>
                       <td className=" p-5">
                         <button
-                          className={` mt-2 text-center font-bold px-10 py-2 rounded-xl text-white cursor-pointer capitalize ${
+                          disabled={
+                            isDisabled === "pending" &&
+                            elm?.status === "pending"
+                              ? true
+                              : false
+                          }
+                          className={` disabled:cursor-not-allowed disabled:bg-slate-400 mt-2 text-center font-bold px-10 py-2 rounded-xl text-white cursor-pointer capitalize ${
                             elm?.status === "pending"
                               ? " bg-sky-500 hover:bg-sky-600 "
                               : " bg-green-500 hover:bg-green-600 "
@@ -91,17 +106,6 @@ const BiddHistory = () => {
             <Link to="/bidding">
               <button className=" mt-2 capitalize text-center font-bold px-10 py-2 rounded-xl text-white  bg-green-600 hover:bg-green-700 ">
                 see all post
-              </button>
-            </Link>
-            <Link
-              to="/bidding"
-              //  state={{ data: postInfo }}
-            >
-              <button
-                className=" mt-2 capitalize text-center font-bold px-10 py-2 rounded-xl text-white  bg-indigo-600 hover:bg-indigo-700 "
-                onClick={() => navigate(-1)}
-              >
-                Go to Bidd box
               </button>
             </Link>
           </div>

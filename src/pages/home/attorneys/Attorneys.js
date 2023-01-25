@@ -19,7 +19,6 @@ import { Link } from 'react-router-dom';
 import { db } from "../../../Firebase/Firebase-config";
 const Attorneys = () => {
   const [advocates, setAdvocates] = useState([]);
-  console.log(advocates, "advocates data");
 
   const advocatesCollectionRef = collection(db, "advocates");
 
@@ -28,8 +27,6 @@ const Attorneys = () => {
     const getadvocates = async () => {
 
       const data = await getDocs(advocatesCollectionRef);
-
-      console.log(data, "data");
       setAdvocates(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 

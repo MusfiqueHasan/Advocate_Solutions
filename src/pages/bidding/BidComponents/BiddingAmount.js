@@ -1,10 +1,12 @@
 import { TextField } from "@mui/material";
+import { collection, getDocs } from "firebase/firestore";
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import BiddingAnimation from "../../../Animations/BiddingAnimation";
+import { db } from "../../../Firebase/Firebase-config";
 import {
   getBiddingData,
   updateBiddingPost,
@@ -16,12 +18,29 @@ const BiddingAmount = () => {
     biddingAmount: 0,
     status: "pending",
   });
+  let usersCollectionRef = collection(db, "loginUser");
   const dispatch = useDispatch();
   const location = useLocation();
   const { data } = location.state;
   const [historyData, setHistoryData] = useState(data);
   const allPosts = useSelector((state) => state?.bidding?.biddingPosts);
+  const { currentUser } = useSelector((state) => state.authentication);
+  const [isAdvocate, setIsAdvocate] = useState("");
 
+  const getLogedinUserId = async () => {
+    const data = await getDocs(usersCollectionRef);
+    const allData = data.docs?.map((doc) => ({ ...doc.data(), id: doc.id }));
+    const credential = allData?.find(
+      (item) =>
+        item.email === currentUser?.email &&
+        item.displayName === currentUser?.displayName
+    );
+    setIsAdvocate(credential?.role);
+  };
+
+  useEffect(() => {
+    getLogedinUserId();
+  }, [currentUser]);
 
   const handleUpdate = () => {
     let copyPost = { ...historyData };
@@ -91,11 +110,13 @@ const BiddingAmount = () => {
             >
               Bidd
             </button>
-            <Link to="/bidding_history" state={{ history: data }}>
-              <button className=" mt-2 text-center font-bold px-10 py-2 rounded-xl text-white bg-teal-500 hover:bg-teal-600  ">
-                See Bidding History
-              </button>
-            </Link>
+            {isAdvocate !== "advocate" && (
+              <Link to="/bidding_history" state={{ history: data }}>
+                <button className=" mt-2 text-center font-bold px-10 py-2 rounded-xl text-white bg-teal-500 hover:bg-teal-600  ">
+                  See Bidding History
+                </button>
+              </Link>
+            )}
           </div>
         </div>
         <div>

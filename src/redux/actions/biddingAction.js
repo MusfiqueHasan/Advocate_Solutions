@@ -19,7 +19,6 @@ export const getBiddingData = () => async (dispatch) => {
   try {
     const data = await getDocs(usersCollectionRef);
     const allData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    // console.log(allData)
     dispatch({
       type:  GET_BIDDING,
       payload: allData,
@@ -30,7 +29,6 @@ export const getBiddingData = () => async (dispatch) => {
 };
 
 export const createBiddingPost = (post) => async (dispatch) => {
-  console.log(post);
   try {
     await addDoc(usersCollectionRef, post);
     dispatch({ type: CREATE_BIDDING });
@@ -40,6 +38,8 @@ export const createBiddingPost = (post) => async (dispatch) => {
     console.log(error);
   }
 };
+
+
 export const getSingleBiddingData = (id) => async (dispatch) => {
   try {
     const data = await getDocs(usersCollectionRef);

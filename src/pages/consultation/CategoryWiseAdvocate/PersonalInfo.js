@@ -1,7 +1,6 @@
 import React from 'react';
 
 const PersonalInfo = (params) => {
-  // console.log(params.findAdv, "paramsfindAdv");
   const advocate = params?.findAdv;
   return (
 

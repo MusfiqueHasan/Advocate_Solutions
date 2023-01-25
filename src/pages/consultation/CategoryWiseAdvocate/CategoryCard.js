@@ -7,13 +7,11 @@ import { Link } from "react-router-dom";
 import { db } from "../../../Firebase/Firebase-config";
 const CategoryCard = (param) => {
   const navigate = useNavigate();
-  console.log(
-    param?.param, "param"
-  );
+
 
   const [category, setCategory] = useState([]);
   const [advocate, setAdvocate] = useState([]);
-  console.log(category);
+
 
   const categorysCollectionRef = collection(db, "categorys");
 
@@ -23,7 +21,6 @@ const CategoryCard = (param) => {
 
       const data = await getDocs(categorysCollectionRef);
 
-      console.log(data, "data");
       setCategory(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
@@ -33,7 +30,7 @@ const CategoryCard = (param) => {
   const found = category.find(obj => {
     return obj.id === param?.param;
   });
-  console.log(found, "found");
+
   return (
     <div>
       <div

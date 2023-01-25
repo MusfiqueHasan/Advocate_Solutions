@@ -14,7 +14,6 @@ import {
 
 const useFirebase = () => {
   const [user, setUser] = useState({});
-  // console.log(user);
   const [isLoading, setIsLoading] = useState(true);
   const [authError, setAuthError] = useState("");
   const [admin, setAdmin] = useState(false);
@@ -98,7 +97,7 @@ const useFirebase = () => {
       setIsLoading(false);
     });
     return () => unSubscribe;
-  }, [auth]);
+  }, []);
 
   //save data to my database \
   const createUsergoogle = async (displayName, email) => {

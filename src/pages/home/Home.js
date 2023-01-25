@@ -32,6 +32,8 @@ const Home = () => {
       }
     );
   }, []);
+
+  
   return (
     <div className=" overflow-hidden">
       <HeaderCarousel />

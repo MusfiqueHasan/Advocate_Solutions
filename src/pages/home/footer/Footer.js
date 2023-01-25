@@ -1,14 +1,12 @@
 import React from "react";
 import "./Footer.css";
-import PlaceIcon from "@mui/icons-material/Place";
 import PhoneIcon from "@mui/icons-material/Phone";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import { useLocation } from "react-router-dom";
 const Footer = () => {
   const location = useLocation().pathname;
   return (
     <div
-      className={`${location === "/comunity" || location === "/" ? "hidden" : "block"
+      className={`${location === "/comunity" || location === "/" || location === "/lawyerAuth" ? "hidden" : "block"
         } footerBg mt-20`}
     >
       <div className=" grid grid-cols-3 gap-5 px-20">

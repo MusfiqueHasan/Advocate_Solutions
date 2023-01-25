@@ -13,7 +13,6 @@ const Feed = () => {
   const sortedPosts = allPosts.sort((a, b) => b.createdDate - a.createdDate)
 
   const isBooked = sortedPosts.filter(booked => booked.bookmarked === true && booked.bookmarkedUserEmail === currentUser?.email)
-  // console.log(isBooked.length)
   useEffect(() => {
 
     if (isBooked.length === 0) {

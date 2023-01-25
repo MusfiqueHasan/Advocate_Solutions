@@ -1,13 +1,10 @@
-import { collection, getDocs } from "firebase/firestore";
+// import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
-import { db } from "../../Firebase/Firebase-config";
-// import { useAuth } from "../../services/useAuth";
 
-async function PrivateRoute({ children}) {
-    const usersCollectionRef = collection(db, "loginUser");
-    const data = await getDocs(usersCollectionRef);
-    const allData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+ function PrivateRoute({ children }) {
+  const {currentUser} = useSelector((state)=> state.authentication)
 
-    return allData?.email ? children : <Navigate to="/" />;
-  }
-  export default PrivateRoute;
+  return currentUser?.email && currentUser?.accessToken ? children : <Navigate to="/" />;
+}
+export default PrivateRoute;

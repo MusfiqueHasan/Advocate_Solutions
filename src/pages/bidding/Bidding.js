@@ -9,6 +9,8 @@ export const initPost = {
   casedescription: "",
   caseTitle: "",
   caseCategory: "",
+  userId: "",
+  userRole: "user",
   createdDate: 0,
   biddingHistory: [],
 };
