@@ -1,18 +1,51 @@
-import { Autocomplete, Button, Grid, TextField } from "@mui/material";
-import { LocalizationProvider } from "@mui/x-date-pickers-pro";
-import { AdapterDayjs } from "@mui/x-date-pickers-pro/AdapterDayjs";
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
+import React, { useState } from 'react';
+import firebase from 'firebase/app';
+import 'firebase/firestore';
 import { Box } from "@mui/system";
-import React from "react";
+import { addDoc, collection, doc, getDocs, setDoc } from "firebase/firestore";
 import dayjs from "dayjs";
+import { db } from '../../../Firebase/Firebase-config';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
-const AppointmentForm = () => {
-    const [value, setValue] = React.useState(dayjs(''));
+const AppointmentForm = (params) => {
+  const navigate = useNavigate();
+  const advocate = params?.findAdv;
+  const [appointment, setAppointment] = useState({
+    name: '',
+    date: '',
+    trxId: '',
+    address: '',
+  });
 
-    const handleChange = (newValue) => {
-      setValue(newValue);
-    };
-  
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!appointment.trxId) {
+      toast.warning("Please Give Your Transection Id Before Appoinment Booking  ");
+      return
+    }
+    await addDoc(collection(db, "appointments"), {
+      name: appointment.name,
+      date: appointment.date,
+      trxId: appointment.trxId,
+      address: appointment.address,
+    }).then(() => {
+      console.log("Appointment added to Firestore!");
+      toast.success("Appointment SuccessFully Booked ");
+      setAppointment({ name: '', date: '', trxId: '', address: '' });
+      navigate("/home")
+    })
+      .catch((error) => {
+        console.error("Error adding appointment to Firestore: ", error);
+      });
+  }
+
+  const handleChange = (event) => {
+    setAppointment({
+      ...appointment,
+      [event.target.name]: event.target.value,
+    });
+  }
   return (
     <Box
       sx={{
@@ -22,42 +55,53 @@ const AppointmentForm = () => {
         height: "100%",
       }}
     >
-      <Box sx={{ flexGrow: 1 }}>
-        <Grid container spacing={2}>
-          <Grid item xs={12}>
-            <TextField fullWidth size="small" label="Name" />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField fullWidth size="small" label="Email" />
-          </Grid>
-          <Grid item xs={12}>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DateTimePicker
-                label="Date&Time picker"
-                value={value}
-                onChange={handleChange}
-                renderInput={(params) => <TextField {...params} fullWidth size="small" label="Appointment Time"/>}
-              />
-            </LocalizationProvider>
-          </Grid>
-        </Grid>
-      </Box>
-      <div className="mt-52 flex justify-end">
-        <button
-          style={{
-            color: "white",
-            backgroundColor: "blue",
-            padding: "8px 20px",
-            borderRadius: "10px",
-          }}
-          onClick={() => {
-            // handleFilter();
-            // setIsShow(false);
-          }}
-        >
-          Submit
-        </button>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <h1 className=' font-bold text-lg py-2'>Enter Your Full Name : </h1>
+        <input
+          className=' text-lg p-3 border-2 border-sky-500 w-full rounded-lg'
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={appointment.name}
+          onChange={handleChange}
+        />
+        <h1 className=' font-bold text-lg py-2'>Enter Your Address : </h1>
+        <input
+          className=' text-lg p-3 border-2 border-sky-500 w-full rounded-lg'
+          type="text"
+          name="address"
+          placeholder="Your Address"
+          value={appointment.address}
+          onChange={handleChange}
+        />
+
+        <h1 className=' font-bold text-lg py-2'>Enter Your Transection Id : </h1>
+        <input
+          className=' text-lg p-3 border-2 border-sky-500 w-full rounded-lg'
+          type="text"
+          name="trxId"
+          value={appointment.trxId}
+          placeholder="Transection Id"
+          onChange={handleChange}
+        />
+        <p className=' text-xs'> ** NB: Please Send <span className='font-bold text-sm'> {advocate?.fees} Tk</span> To  <span className='font-bold text-sm'>"018xxxxxxxx"</span>  Number by Bkash Before Appointment is Booked. </p>
+        <h1 className=' font-bold text-lg py-2'>Select a Date For Appointment  : </h1>
+        <input
+          className=' text-lg p-3 border-2 border-sky-500 w-full rounded-lg my-3'
+          type="date"
+          name="date"
+
+          value={appointment.date}
+          onChange={handleChange}
+        />
+
+        <div className=' grid place-items-center py-4'>
+          <button className=' bg-green-500 font-bold py-2 px-5 text-center rounded-xl text-white ' type="submit">Book Appointment</button>
+        </div>
+
+
+      </form>
+
     </Box>
   );
 };

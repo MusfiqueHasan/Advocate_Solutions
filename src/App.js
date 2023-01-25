@@ -26,7 +26,10 @@ import BiddingAmount from "./pages/bidding/BidComponents/BiddingAmount";
 import BiddHistory from "./pages/bidding/BidComponents/BiddHistory";
 import Profile from "./pages/profile/Profile";
 
-function App() {
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+function App({ children }) {
   return (
     <>
       <BrowserRouter>
@@ -187,6 +190,10 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
+      <div>
+        <ToastContainer autoClose={3000} position={"top-center"} />
+        {children}
+      </div>
     </>
   );
 }
