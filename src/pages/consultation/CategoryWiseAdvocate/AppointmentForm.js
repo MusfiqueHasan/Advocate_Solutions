@@ -6,8 +6,10 @@ import { addDoc, collection, doc, getDocs, setDoc } from "firebase/firestore";
 import dayjs from "dayjs";
 import { db } from '../../../Firebase/Firebase-config';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const AppointmentForm = (params) => {
+  const navigate = useNavigate();
   const advocate = params?.findAdv;
   const [appointment, setAppointment] = useState({
     name: '',
@@ -31,6 +33,7 @@ const AppointmentForm = (params) => {
       console.log("Appointment added to Firestore!");
       toast.success("Appointment SuccessFully Booked ");
       setAppointment({ name: '', date: '', trxId: '', address: '' });
+      navigate("/home")
     })
       .catch((error) => {
         console.error("Error adding appointment to Firestore: ", error);
@@ -87,7 +90,7 @@ const AppointmentForm = (params) => {
           className=' text-lg p-3 border-2 border-sky-500 w-full rounded-lg my-3'
           type="date"
           name="date"
-          
+
           value={appointment.date}
           onChange={handleChange}
         />
