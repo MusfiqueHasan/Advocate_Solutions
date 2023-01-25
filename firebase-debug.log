@@ -1,0 +1,134 @@
+[debug] [2023-01-25T07:15:50.075Z] ----------------------------------------------------------------------
+[debug] [2023-01-25T07:15:50.078Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2023-01-25T07:15:50.079Z] CLI Version:   11.21.0
+[debug] [2023-01-25T07:15:50.080Z] Platform:      win32
+[debug] [2023-01-25T07:15:50.080Z] Node Version:  v16.18.0
+[debug] [2023-01-25T07:15:50.081Z] Time:          Wed Jan 25 2023 13:15:50 GMT+0600 (Bangladesh Standard Time)
+[debug] [2023-01-25T07:15:50.082Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-01-25T07:15:50.181Z] Field ".functions" in "firebase.json" is possibly invalid: should be object
+[debug] [2023-01-25T07:15:50.182Z] Object ".functions[0]" in "firebase.json" has unknown property: {"additionalProperty":"hosting"}
+[debug] [2023-01-25T07:15:50.182Z] Field ".functions" in "firebase.json" is possibly invalid: should match some schema in anyOf
+[debug] [2023-01-25T07:15:50.189Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-01-25T07:15:50.189Z] > authorizing via signed-in user (ebrahimislam34@gmail.com)
+[debug] [2023-01-25T07:15:50.190Z] Field ".functions" in "firebase.json" is possibly invalid: should be object
+[debug] [2023-01-25T07:15:50.191Z] Object ".functions[0]" in "firebase.json" has unknown property: {"additionalProperty":"hosting"}
+[debug] [2023-01-25T07:15:50.191Z] Field ".functions" in "firebase.json" is possibly invalid: should match some schema in anyOf
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\Ebrahim\Advocate_Solutions
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-01-25T07:15:58.100Z] Using project from CLI flag: advocate-solutions
+[debug] [2023-01-25T07:15:58.109Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/advocate-solutions [none]
+[debug] [2023-01-25T07:15:58.687Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/advocate-solutions 200
+[debug] [2023-01-25T07:15:58.687Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/advocate-solutions {"projectId":"advocate-solutions","projectNumber":"953475527759","displayName":"Advocate-solutions","name":"projects/advocate-solutions","resources":{"hostingSite":"advocate-solutions"},"state":"ACTIVE","etag":"1_3fc79971-8234-4750-9271-7dc209b05846"}
+[info] i  Using project advocate-solutions (Advocate-solutions) 
+[info] 
+=== Functions Setup
+[debug] [2023-01-25T07:15:58.699Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-01-25T07:15:58.699Z] > authorizing via signed-in user (ebrahimislam34@gmail.com)
+[debug] [2023-01-25T07:15:58.700Z] [iam] checking project advocate-solutions for permissions ["firebase.projects.get"]
+[debug] [2023-01-25T07:15:58.701Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/advocate-solutions:testIamPermissions [none]
+[debug] [2023-01-25T07:15:58.701Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/advocate-solutions:testIamPermissions x-goog-quota-user=projects/advocate-solutions
+[debug] [2023-01-25T07:15:58.701Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/advocate-solutions:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-01-25T07:15:59.155Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/advocate-solutions:testIamPermissions 200
+[debug] [2023-01-25T07:15:59.155Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/advocate-solutions:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-01-25T07:15:59.156Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/cloudfunctions.googleapis.com [none]
+[debug] [2023-01-25T07:15:59.156Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/advocate-solutions
+[debug] [2023-01-25T07:15:59.158Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/runtimeconfig.googleapis.com [none]
+[debug] [2023-01-25T07:15:59.158Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/advocate-solutions
+[debug] [2023-01-25T07:16:00.999Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/cloudfunctions.googleapis.com 200
+[debug] [2023-01-25T07:16:00.999Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/cloudfunctions.googleapis.com [omitted]
+[debug] [2023-01-25T07:16:01.015Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/runtimeconfig.googleapis.com 200
+[debug] [2023-01-25T07:16:01.015Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/runtimeconfig.googleapis.com [omitted]
+[info] 
+Detected existing codebase(s): default
+
+[debug] [2023-01-25T07:16:21.634Z] ----------------------------------------------------------------------
+[debug] [2023-01-25T07:16:21.637Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js init
+[debug] [2023-01-25T07:16:21.638Z] CLI Version:   11.21.0
+[debug] [2023-01-25T07:16:21.638Z] Platform:      win32
+[debug] [2023-01-25T07:16:21.639Z] Node Version:  v16.18.0
+[debug] [2023-01-25T07:16:21.640Z] Time:          Wed Jan 25 2023 13:16:21 GMT+0600 (Bangladesh Standard Time)
+[debug] [2023-01-25T07:16:21.641Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-01-25T07:16:21.739Z] Field ".functions" in "firebase.json" is possibly invalid: should be object
+[debug] [2023-01-25T07:16:21.740Z] Object ".functions[0]" in "firebase.json" has unknown property: {"additionalProperty":"hosting"}
+[debug] [2023-01-25T07:16:21.740Z] Field ".functions" in "firebase.json" is possibly invalid: should match some schema in anyOf
+[debug] [2023-01-25T07:16:21.746Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-01-25T07:16:21.747Z] > authorizing via signed-in user (ebrahimislam34@gmail.com)
+[debug] [2023-01-25T07:16:21.748Z] Field ".functions" in "firebase.json" is possibly invalid: should be object
+[debug] [2023-01-25T07:16:21.748Z] Object ".functions[0]" in "firebase.json" has unknown property: {"additionalProperty":"hosting"}
+[debug] [2023-01-25T07:16:21.748Z] Field ".functions" in "firebase.json" is possibly invalid: should match some schema in anyOf
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  D:\Ebrahim\Advocate_Solutions
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-01-25T07:17:10.138Z] Using project from CLI flag: advocate-solutions
+[debug] [2023-01-25T07:17:10.143Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/advocate-solutions [none]
+[debug] [2023-01-25T07:17:10.692Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/advocate-solutions 200
+[debug] [2023-01-25T07:17:10.692Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/advocate-solutions {"projectId":"advocate-solutions","projectNumber":"953475527759","displayName":"Advocate-solutions","name":"projects/advocate-solutions","resources":{"hostingSite":"advocate-solutions"},"state":"ACTIVE","etag":"1_3fc79971-8234-4750-9271-7dc209b05846"}
+[info] i  Using project advocate-solutions (Advocate-solutions) 
+[info] 
+=== Functions Setup
+[debug] [2023-01-25T07:17:10.707Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-01-25T07:17:10.708Z] > authorizing via signed-in user (ebrahimislam34@gmail.com)
+[debug] [2023-01-25T07:17:10.709Z] [iam] checking project advocate-solutions for permissions ["firebase.projects.get"]
+[debug] [2023-01-25T07:17:10.711Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/advocate-solutions:testIamPermissions [none]
+[debug] [2023-01-25T07:17:10.711Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/advocate-solutions:testIamPermissions x-goog-quota-user=projects/advocate-solutions
+[debug] [2023-01-25T07:17:10.712Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/advocate-solutions:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-01-25T07:17:12.088Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/advocate-solutions:testIamPermissions 200
+[debug] [2023-01-25T07:17:12.088Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/advocate-solutions:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-01-25T07:17:12.089Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/cloudfunctions.googleapis.com [none]
+[debug] [2023-01-25T07:17:12.089Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/advocate-solutions
+[debug] [2023-01-25T07:17:12.091Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/runtimeconfig.googleapis.com [none]
+[debug] [2023-01-25T07:17:12.091Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/advocate-solutions
+[debug] [2023-01-25T07:17:13.853Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/runtimeconfig.googleapis.com 200
+[debug] [2023-01-25T07:17:13.853Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2023-01-25T07:17:13.882Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/cloudfunctions.googleapis.com 200
+[debug] [2023-01-25T07:17:13.882Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/advocate-solutions/services/cloudfunctions.googleapis.com [omitted]
+[info] 
+Detected existing codebase(s): default
+
+[info] 
+Overwriting codebase default...
+
+[info] +  Wrote functions/package.json 
+[info] +  Wrote functions/index.js 
+[info] +  Wrote functions/.gitignore 
