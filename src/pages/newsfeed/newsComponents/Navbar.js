@@ -64,8 +64,6 @@ const Navbar = () => {
   const handleOpenDialog = () => { setOpenDialog(true) };
   const handleCloseDialog = () => { setOpenDialog(false) };
 
-  // console.log(bookmarkedData.email)
-
   const handleSignOut = () => {
     if (currentUser) {
       dispatch(googleSignOutInitiate())

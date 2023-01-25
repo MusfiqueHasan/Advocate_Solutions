@@ -17,9 +17,12 @@ import {
   doc,
 } from "firebase/firestore";
 import { auth, db } from "../../Firebase/Firebase-config";
-import { useLocation, useNavigate } from "react-router-dom";
+import {  useLocation, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUserInfo } from "../../redux/actions/authAction";
 
 const useAuth = () => {
+  const dispatch = useDispatch()
   let usersCollectionRef = collection(db, "loginUser");
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
@@ -60,8 +63,7 @@ const useAuth = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const destination = location?.state?.from || "/home";
-        console.log(destination);
-        navigate("/home");
+        navigate(destination);
         setAuthError("");
       })
       .catch((error) => {
@@ -78,6 +80,7 @@ const useAuth = () => {
     signOut(auth)
       .then(() => {
         setUser({});
+        dispatch(setUserInfo({}))
       })
       .catch((error) => {})
       .finally(() => setIsLoading(false));
@@ -90,8 +93,8 @@ const useAuth = () => {
         const user = result.user;
         savedUser(user.email, user.displayName, "user", "google");
         setAuthError("");
-        // const destination = location?.state?.from || "/home";
-        navigate("/home");
+        const destination = location?.state?.from || "/home";
+        navigate(destination);
       })
       .catch((error) => {
         setAuthError(error.message);
@@ -106,7 +109,6 @@ const useAuth = () => {
         setUser(user);
         getIdToken(user).then((idToken) => {
           setToken(idToken);
-          console.log(idToken);
         });
       } else {
         setUser({});
@@ -117,6 +119,11 @@ const useAuth = () => {
     return () => unsubscribe;
   }, []);
 
+  useEffect(()=>{
+    if(token && user){
+      dispatch(setUserInfo(user))
+    }
+  },[dispatch, token, user])
   
 
   const savedUser = async (email, displayName, role, isGoogle) => {

@@ -1,16 +1,15 @@
 import { Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./LoginRegistration.css";
 import useAuth from "./useAuth";
 
 const UserLoginReg = () => {
+  const {currentUser} = useSelector((state)=> state.authentication)
   const [addclass, setaddclass] = useState("");
-  const {token, user,signInWithGoogle, authError, loginUser, registerUser } = useAuth();
+  const {signInWithGoogle, authError, loginUser, registerUser } = useAuth();
   const [logindata, setLogindata] = useState({});
-
-  console.log(user);
-
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -33,10 +32,10 @@ const UserLoginReg = () => {
   };
 
   useEffect(() => {
-    if (user?.email && token) {
+    if (currentUser?.email && currentUser?.accessToken) {
       navigate("/home");
     }
-  }, []);
+  }, [currentUser?.accessToken, currentUser?.email, navigate]);
 
   return (
     <div className="bodylog">

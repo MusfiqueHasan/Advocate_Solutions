@@ -58,8 +58,6 @@ const Add = () => {
   const isDialogOpen = useSelector((state) => state?.newsfeed?.openDialog);
 
 
-  // console.log(post);
-  // console.log(singlePost);
   const { currentUser } = useSelector((state) => state.authentication);
 
   // encode product image to base64

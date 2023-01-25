@@ -23,10 +23,8 @@ const CommentMain = () => {
     setComment(e.target.value);
   };
 
-  console.log(commentText);
   useEffect(() => {
     const text = localStorage.getItem("comments");
-    console.log(text);
     setCommentText(text);
   }, []);
 

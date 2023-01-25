@@ -15,7 +15,6 @@ import { Link } from 'react-router-dom';
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
-  // console.log(blogs);
 
   const blogsCollectionRef = collection(db, "Blogs");
 
@@ -24,8 +23,6 @@ const Blogs = () => {
     const getblogs = async () => {
 
       const data = await getDocs(blogsCollectionRef);
-
-      console.log(data, "data");
       setBlogs(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 

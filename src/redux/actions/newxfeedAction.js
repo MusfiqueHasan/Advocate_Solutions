@@ -26,7 +26,6 @@ export const getNewsFeeds = () => async (dispatch) => {
   try {
     const data = await getDocs(usersCollectionRef);
     const allData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
-    // console.log(allData)
     dispatch({
       type: GET_NWESFEED,
       payload: allData,

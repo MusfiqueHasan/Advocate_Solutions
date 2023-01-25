@@ -16,13 +16,10 @@ const Details = () => {
   const navigate = useNavigate();
 
 
-  console.log(
-    params?.catId, "paramadv", params?.advName, "advName"
-  );
   const [selectedNav, setSelectedNav] = useState();
   const [category, setCategory] = useState([]);
   const [advocate, setAdvocate] = useState([]);
-  console.log(advocate, "advocate");
+
 
   const categorysCollectionRef = collection(db, "categorys");
 
@@ -32,7 +29,7 @@ const Details = () => {
 
       const data = await getDocs(categorysCollectionRef);
 
-      console.log(data, "data");
+
 
       setCategory(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
 
@@ -49,10 +46,10 @@ const Details = () => {
   const findAdv = found?.all_advocates?.find(obj => {
     return obj.name === params?.advName;
   });
-  console.log(findAdv, "findAdv");
+
 
   const handleSelectedSubNav = (item) => {
-    console.log(item);
+
     const data = item.find((el) => el.checked);
     if (data) {
       setSelectedNav({ ...data });

@@ -12,13 +12,11 @@ const CategoryWiseAdvocate = () => {
   const params = useParams();
 
   const navigate = useNavigate();
-  console.log(
-    params?.catId, "param"
-  );
+
 
   const [category, setCategory] = useState([]);
   const [advocate, setAdvocate] = useState([]);
-  console.log(category);
+
 
   const categorysCollectionRef = collection(db, "categorys");
 
@@ -28,7 +26,6 @@ const CategoryWiseAdvocate = () => {
 
       const data = await getDocs(categorysCollectionRef);
 
-      console.log(data, "data");
       setCategory(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };
 
@@ -38,7 +35,6 @@ const CategoryWiseAdvocate = () => {
   const found = category.find(obj => {
     return obj.id === params?.catId;
   });
-  console.log(found, "found");
 
   return (
     <Grid container spacing={2} sx={{ mt: 10 }}>
