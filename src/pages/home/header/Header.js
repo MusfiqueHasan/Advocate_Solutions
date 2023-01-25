@@ -5,17 +5,22 @@ import MidHeader from "./mid-header/MidHeader";
 import MenuBar from "./nav-menu/MenuBar";
 import { useLocation } from "react-router-dom";
 
-const ignoreArr = ["/", "/lawyerAuth",'/comunity'];
+const ignoreArr = ["/", "/lawyerAuth", "/comunity"];
 const Header = () => {
   const location = useLocation();
   if (ignoreArr.includes(location.pathname)) {
     return null;
   }
   return (
-    <Box sx={{ height: 200, overFlow: "hidden" }}>
+    <Box
+      sx={{
+        height: location.pathname === "/profile" ? 40 : 200,
+        overFlow: "hidden",
+      }}
+    >
       <TopHeader />
-      <MidHeader />
-      <MenuBar />
+      {location.pathname !== "/profile" && <MidHeader />}
+      {location.pathname !== "/profile" && <MenuBar />}
     </Box>
   );
 };
