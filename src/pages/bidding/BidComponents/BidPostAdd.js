@@ -23,6 +23,7 @@ import { initPost } from "../Bidding";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../../Firebase/Firebase-config";
 import { useEffect } from "react";
+import ClearIcon from "@mui/icons-material/Clear";
 
 const SytledModal = styled(Modal)({
   display: "flex",
@@ -40,6 +41,7 @@ const UserBox = styled(Box)({
 const BidPostAdd = ({ setPost, post }) => {
   const [userLoginId, setUserLoginId] = useState("");
   const [isAdvocate, setIsAdvocate] = useState("");
+  const [isError, setIsError] = useState("");
   let usersCollectionRef = collection(db, "loginUser");
   const dispatch = useDispatch();
   const isDialogOpen = useSelector((state) => state?.newsfeed?.openDialog);
@@ -58,27 +60,37 @@ const BidPostAdd = ({ setPost, post }) => {
     setUserLoginId(credential?.id);
   };
 
-
   useEffect(() => {
     getLogedinUserId();
   }, [currentUser]);
 
   const handleAddBidding = () => {
-    let options = {
-      weekday: "long",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    };
-    let date = new Date();
-    let copyPost = { ...post };
-    copyPost.caseId = Date.now();
-    copyPost.userId = userLoginId;
-    copyPost.createdDate = date.toLocaleString("en-US", options);
-    dispatch(createBiddingPost(copyPost));
-    dispatch(updateStateModal(false));
-    dispatch(updateStateDialog(false));
-    setPost(initPost);
+    if (
+      post?.caseCategory === "" ||
+      post?.caseTitle === "" ||
+      post?.casedescription === ""
+    ) {
+      setIsError("Fields cannot be empty");
+      setTimeout(() => {
+        setIsError("");
+      }, 2000);
+    } else {
+      let options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      };
+      let date = new Date();
+      let copyPost = { ...post };
+      copyPost.caseId = Date.now();
+      copyPost.userId = userLoginId;
+      copyPost.createdDate = date.toLocaleString("en-US", options);
+      dispatch(createBiddingPost(copyPost));
+      dispatch(updateStateModal(false));
+      dispatch(updateStateDialog(false));
+      setPost(initPost);
+    }
   };
 
   return (
@@ -118,11 +130,23 @@ const BidPostAdd = ({ setPost, post }) => {
           color={"text.primary"}
           p={3}
           borderRadius={5}
-        // sx={{ overflowY: "scroll" }}
         >
-          <Typography variant="h6" color="gray" textAlign="center">
-            Create post
-          </Typography>
+          <Button
+            onClick={() => {
+              dispatch(updateStateModal(false));
+              dispatch(updateStateDialog(false));
+            }}
+            sx={{
+              cursor: "pointer",
+              display: "flex",
+              justifyItems: "flex-end",
+              ml:'90%'
+            }}
+          >
+            {" "}
+            <ClearIcon />
+          </Button>
+         
           <UserBox>
             <Avatar
               src={currentUser?.photoURL}
@@ -132,23 +156,33 @@ const BidPostAdd = ({ setPost, post }) => {
               {currentUser?.displayName}
             </Typography>
           </UserBox>
-
+          <Typography variant="h6" color="gray" textAlign="center" mb='15px'>
+            Create Post
+          </Typography>
           <TextField
             value={post?.caseTitle}
             onChange={(e) => setPost({ ...post, caseTitle: e.target.value })}
-            sx={{ width: "100%" }}
-            id="standard-multiline-static"
-            multiline
-            rows={2}
+            fullWidth
+            size="small"
             placeholder="Write your Case Title?"
-            variant="standard"
+            variant="outlined"
           />
 
           <Autocomplete
             sx={{ my: 2 }}
             size="small"
             id="combo-box-demo"
-            options={["Criminal lawer", "Divorce lawer", "family Lawyer", "Corporate Lawyer", "Immigration Lawyer", "Civil Rights lawyer", "Healthcare Lawyer", "Education Lawyer", "Animal Rights Lawyer"]}
+            options={[
+              "Criminal lawer",
+              "Divorce lawer",
+              "family Lawyer",
+              "Corporate Lawyer",
+              "Immigration Lawyer",
+              "Civil Rights lawyer",
+              "Healthcare Lawyer",
+              "Education Lawyer",
+              "Animal Rights Lawyer",
+            ]}
             value={post?.caseCategory}
             onChange={(e, newValue) =>
               setPost({ ...post, caseCategory: newValue })
@@ -163,19 +197,23 @@ const BidPostAdd = ({ setPost, post }) => {
             onChange={(e) =>
               setPost({ ...post, casedescription: e.target.value })
             }
-            sx={{ width: "100%" }}
+            fullWidth
             id="standard-multiline-static"
             multiline
             rows={4}
             placeholder="Write your Case Description Briefly?"
-            variant="standard"
+            variant="outlined"
           />
-
+          {isError !== "" && (
+            <p className="text-red-500 font-bold text-sm mt-2 text-center">
+              {isError}
+            </p>
+          )}
           <ButtonGroup
             fullWidth
             variant="contained"
             aria-label="outlined primary button group"
-            sx={{ marginTop: 5 }}
+            sx={{ marginTop: 3 }}
           >
             <Button onClick={handleAddBidding}>Post</Button>
           </ButtonGroup>
