@@ -15,6 +15,7 @@ import {
   addDoc,
   updateDoc,
   doc,
+  setDoc,
 } from "firebase/firestore";
 import { auth, db } from "../../Firebase/Firebase-config";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -25,6 +26,7 @@ import { toast } from "react-toastify";
 const useAuth = () => {
   const dispatch = useDispatch();
   let usersCollectionRef = collection(db, "loginUser");
+  let chatCollectionRef = collection(db, "userChats");
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   // const [admin, setAdmin] = useState(false);
@@ -34,29 +36,33 @@ const useAuth = () => {
 
   const location = useLocation();
 
-
-  const registerUser = (registerData, role) => {
+  const registerUser = async (registerData, role) => {
     const { email, password, displayName } = registerData;
-    console.log(registerData)
+
     if (registerData === null) {
       toast.error("Fields cannot be empty");
     } else {
       setIsLoading(true);
-      createUserWithEmailAndPassword(auth, email, password)
+      await createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
           const newUser = { email, displayName: displayName };
           setUser(newUser);
           // save user to database
-          savedUser(registerData, role, "register");
+          savedUser(registerData, userCredential.user.uid, role, "register");
           // send name to firebase after creation
           updateProfile(auth.currentUser, {
             displayName: displayName,
           })
             .then(() => {})
             .catch((error) => {});
+
+          const userDoc = doc(chatCollectionRef, userCredential.user.uid);
+          setDoc(userDoc, {});
         })
         .catch((error) => {
-          toast.error("The email address is already in use by another account.");
+          toast.error(
+            "The email address is already in use by another account."
+          );
         })
         .finally(() => setIsLoading(false));
     }
@@ -91,12 +97,19 @@ const useAuth = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         const user = result.user;
-        savedUser(user, "user", "google");
+        const uid = user.uid;
+        savedUser(user, uid, "user", "google");
+
+        const userDoc = doc(chatCollectionRef, result.user.uid);
+        setDoc(userDoc, {});
+
         const destination = location?.state?.from || "/home";
         navigate(destination);
       })
       .catch((error) => {
-        toast.error("The password is invalid or the user does not have a password.");
+        toast.error(
+          "The password is invalid or the user does not have a password."
+        );
       })
       .finally(() => setIsLoading(false));
   };
@@ -124,7 +137,7 @@ const useAuth = () => {
     }
   }, [dispatch, token, user]);
 
-  const savedUser = async (registerData, role, isGoogle) => {
+  const savedUser = async (registerData, uId, role, isGoogle) => {
     const { email, displayName } = registerData;
     if (isGoogle === "google") {
       const data = await getDocs(usersCollectionRef);
@@ -137,22 +150,31 @@ const useAuth = () => {
       );
       const credentialData = { ...credential };
       delete credentialData.id;
+      credentialData.uid = uId;
 
       if (!!credential) {
-        const userDoc = doc(db, "loginUser", credential?.id);
+        const userDoc = doc(db, "loginUser", uId);
         await updateDoc(userDoc, credentialData);
         toast.success("User loged in successfully");
       } else {
-        const user = { email: email, displayName: displayName, role: role };
-        await addDoc(usersCollectionRef, user);
+        const user = {
+          email: email,
+          displayName: displayName,
+          uid: uId,
+          role: role,
+        };
+        const userDoc = doc(usersCollectionRef, uId);
+        await setDoc(userDoc, user);
         toast.success("User loged in successfully");
       }
     }
     if (isGoogle === "register") {
-      const copyUser = {...registerData}
-      copyUser.role = role
-      await addDoc(usersCollectionRef, copyUser);
-      toast.success("User created successfully");
+      const copyUser = { ...registerData };
+      copyUser.role = role;
+      copyUser.uid = uId;
+      const userDoc = doc(usersCollectionRef, uId);
+      await setDoc(userDoc, copyUser);
+      toast.success("User created successfully please go to login");
     }
   };
 
