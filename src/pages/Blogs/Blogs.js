@@ -43,10 +43,10 @@ const Blogs = () => {
         </Link>
 
       </div>
-      <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7  px-40 py-5">
+      <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 md:gap-7 px-5 md:px-40 py-5">
         {blogs.slice(0, 3).map((blog) => (
           <div key={blog?.id} className=" shadow-md relative bg-slate-50 text-slate-500 ">
-           
+
             <div className="bgshadow  h-[200px]">
               <img src={blog?.image} alt="" className=" w-full h-full" />
             </div>

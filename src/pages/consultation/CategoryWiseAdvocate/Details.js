@@ -58,8 +58,8 @@ const Details = () => {
 
   return (
     <div className="my-20">
-      <div className="grid grid-cols-3 gap-4 mx-5">
-        <div className=" col-span-2">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mx-5">
+        <div className=" md:col-span-2">
           <Form className=" h-full" width="!w-[100%]">
             <div>
               <AppSubNav
@@ -84,7 +84,7 @@ const Details = () => {
         <div className="">
           <div className=" h-full border-2" >
             <div className="flex flex-col items-center justify-center">
-              <div className=" lg:w-[20rem] lg:h-[15rem] flex justify-center">
+              <div className=" pt-5 lg:w-[20rem] lg:h-[15rem] flex justify-center">
                 <img
                   src={findAdv?.img}
                   alt=""

@@ -58,16 +58,16 @@ const BiddHistory = () => {
           All Bidd History
         </h1>
       </div>
-      <div className=" grid grid-cols-2  px-5 xl:px-20">
-        <div className=" border border-sky-400 hover:border-indigo-500 rounded-xl shadow-lg w-full h-full px-5 xl:p-10 ">
+      <div className=" grid grid-cols-1 md:grid-cols-2  px-5 xl:px-20">
+        <div className=" border border-sky-400 hover:border-indigo-500 rounded-xl shadow-lg w-full h-full p-3 xl:p-10 ">
           <div className=" flex justify-end">
             <button className=" rounded-xl p-2 text-xl font-bold bg-sky-300 animate-pulse ">
               Lowest Bidd :{" "}
               {historyData?.biddingHistory?.length === 0
                 ? 0
                 : historyData?.biddingHistory
-                    .map((elm) => elm.biddingAmount)
-                    .sort((a, b) => a - b)[0]}{" "}
+                  .map((elm) => elm.biddingAmount)
+                  .sort((a, b) => a - b)[0]}{" "}
               BDT
             </button>
           </div>
@@ -90,11 +90,10 @@ const BiddHistory = () => {
                       <td className=" p-5">
                         <button
                           disabled={getStatus()}
-                          className={` disabled:cursor-not-allowed disabled:bg-slate-400 mt-2 text-center font-bold px-10 py-2 rounded-xl text-white cursor-pointer capitalize ${
-                            elm?.status === "pending"
+                          className={` disabled:cursor-not-allowed disabled:bg-slate-400 mt-2 text-center font-bold px-10 py-2 rounded-xl text-white cursor-pointer capitalize ${elm?.status === "pending"
                               ? " bg-sky-500 hover:bg-sky-600 "
                               : " bg-green-500 hover:bg-green-600 "
-                          }  `}
+                            }  `}
                           onClick={() => handleUpdateStatus(index)}
                         >
                           {elm?.status}
@@ -114,7 +113,7 @@ const BiddHistory = () => {
             </Link>
           </div>
         </div>
-        <div>
+        <div className=" ">
           <HistoryAnimation />
         </div>
       </div>

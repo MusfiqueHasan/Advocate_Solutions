@@ -33,11 +33,11 @@ const Consultation = () => {
   return (
     <div className=" p-10 mt-10">
       <div>
-        <h1 className=" text-4xl font-bold italic text-gray-800 hober:text-gold">
+        <h1 className="text-base md:text-4xl font-bold italic text-gray-800 hober:text-gold">
           Please select a speciality
         </h1>
       </div>
-      {category ? <div className=" grid grid-cols-4 mt-8 gap-5">
+      {category ? <div className=" grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 mt-8 gap-5">
         {category?.map((elem) => (
           <div key={elem?.id} className=" shadow-lg p-5 rounded-xl cursor-pointer ">
             <Link to={`/advocates/${elem.id}`}>
@@ -45,11 +45,11 @@ const Consultation = () => {
                 <img src={elem?.img} alt="catIcon" />
               </div>
               <div>
-                <h1 className=" text-xl font-bold hover:text-gold">
+                <h1 className=" text-sm md:text-xl font-bold hover:text-gold">
                   {elem?.name}
                 </h1>
 
-                <p className=" pt-4 text-gray-500 font-medium">
+                <p className="text-xs md:text-lg pt-4 text-gray-500 font-medium">
                   {elem?.description}{" "}
                 </p>
                 <p className=" text-right py-2  animate-pulse font-extrabold  text-gold ">

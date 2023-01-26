@@ -118,7 +118,7 @@ const BidPostAdd = ({ setPost, post }) => {
           color={"text.primary"}
           p={3}
           borderRadius={5}
-          // sx={{ overflowY: "scroll" }}
+        // sx={{ overflowY: "scroll" }}
         >
           <Typography variant="h6" color="gray" textAlign="center">
             Create post
@@ -148,7 +148,7 @@ const BidPostAdd = ({ setPost, post }) => {
             sx={{ my: 2 }}
             size="small"
             id="combo-box-demo"
-            options={["Criminal lawer", "Divorce lawer"]}
+            options={["Criminal lawer", "Divorce lawer", "family Lawyer", "Corporate Lawyer", "Immigration Lawyer", "Civil Rights lawyer", "Healthcare Lawyer", "Education Lawyer", "Animal Rights Lawyer"]}
             value={post?.caseCategory}
             onChange={(e, newValue) =>
               setPost({ ...post, caseCategory: newValue })

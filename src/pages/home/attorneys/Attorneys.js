@@ -43,10 +43,10 @@ const Attorneys = () => {
         </div>
       </div>
 
-      <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-7  px-36 py-5">
+      <div className=" grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-2 md:gap-7 px-3  md:px-36 py-5">
         {advocates?.map((elem) => (
           <div key={elem.id} className=" shadow-md p-3">
-            <div className=" w-[200px] h-[200px]">
+            <div className="  w-[200px] h-[200px]">
               <img src={elem?.image} alt="" className=" w-full h-full" />
             </div>
 
