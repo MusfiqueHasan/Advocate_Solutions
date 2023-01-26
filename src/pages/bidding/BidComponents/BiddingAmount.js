@@ -48,7 +48,7 @@ const BiddingAmount = () => {
     const isConfirmed = historyData?.biddingHistory?.filter(
       (elm) => elm.bidderId === isLoginUserId
     );
-    return  isConfirmed.length > 0 ? true : false;
+    return isConfirmed.length > 0 ? true : false;
   };
 
 
@@ -59,9 +59,9 @@ const BiddingAmount = () => {
   const handleUpdate = () => {
     if (biddingInfo?.bidderName === "" || biddingInfo?.biddingAmount === 0 || biddingInfo?.biddingAmount === '') {
       setIsError('Please Fill the Amount first')
-      setTimeout(()=>{
+      setTimeout(() => {
         setIsError('')
-      },2500)
+      }, 2500)
     } else {
       let copyPost = { ...historyData };
 
@@ -84,16 +84,16 @@ const BiddingAmount = () => {
           Bidd Here
         </h1>
       </div>
-      <div className=" grid grid-cols-2  px-5 xl:px-20">
-        <div className=" border border-sky-400 hover:border-indigo-500 rounded-xl shadow-lg w-full h-full px-5 xl:p-10 ">
+      <div className=" grid grid-cols-1 md:grid-cols-2  px-5 xl:px-20">
+        <div className=" border border-sky-400 hover:border-indigo-500 rounded-xl shadow-lg w-full h-full p-5 xl:p-10 ">
           <div className=" flex justify-end">
             <button className=" rounded-xl p-2 text-xl font-bold bg-sky-300 animate-pulse ">
               Lowest Bidd :{" "}
               {historyData?.biddingHistory?.length === 0
                 ? 0
                 : historyData?.biddingHistory
-                    .map((elm) => elm.biddingAmount)
-                    .sort((a, b) => a - b)[0]}{" "}
+                  .map((elm) => elm.biddingAmount)
+                  .sort((a, b) => a - b)[0]}{" "}
               BDT
             </button>
           </div>
@@ -119,7 +119,7 @@ const BiddingAmount = () => {
               placeholder=" Bidd Your Expected Amount"
               variant="outlined"
             />
-           {isError!==''&& <p className="text-left text-red-500 font-bold text-sm mt-2">{isError}</p>}
+            {isError !== '' && <p className="text-left text-red-500 font-bold text-sm mt-2">{isError}</p>}
           </div>
           <div className=" flex justify-center gap-2">
             <Link to="/bidding">

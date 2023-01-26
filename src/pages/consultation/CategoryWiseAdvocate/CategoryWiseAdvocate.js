@@ -49,9 +49,9 @@ const CategoryWiseAdvocate = () => {
     setExp(event.target.value)
   }
   return (
-    <Grid container spacing={2} sx={{ mt: 10 }}>
-      <Grid item xs={3} sx={{ position: "relative" }}>
-        <div className="ml-10  w-[20rem]">
+    <div className=" mt-16 grid grid-cols-1 md:grid-cols-4">
+      <div className=" px-3" >
+        <div className="md:ml-10 ">
           <div className="flex justify-between mb-5">
             <p className=" uppercase font-bold text-xl">Advance Search</p>
             <button className="bg-blue-600 px-4 py-2 rounded-md shadow-md">
@@ -79,13 +79,13 @@ const CategoryWiseAdvocate = () => {
             </div>
           </div>
         </div>
-      </Grid>
-      <Grid item xs={9} sx={{ p: 5 }}>
+      </div>
+      <div className=" md:col-span-3">
         {found?.all_advocates ? <div>
           {filter === true ? <div>
             {filterdata ? <div
 
-              className=" flex bg-base-100 shadow-xl h-40 rounded-md mx-[5rem] mb-[1.5rem] cursor-pointer "
+              className=" flex bg-base-100 shadow-xl h-40 rounded-md md:mx-[5rem] mb-[1.5rem] cursor-pointer "
               onClick={() => navigate(`/consultation/details/${found?.id}/${filterdata?.name}`
               )}
             >
@@ -123,7 +123,7 @@ const CategoryWiseAdvocate = () => {
 
                   <div className="bg-gray-100 flex items-center justify-between px-[3rem] h-full">
                     <div className="flex flex-col">
-                      <p className="text-3xl font-bold font-sans text-orange-600">
+                      <p className="text-lg md:text-3xl font-bold font-sans text-orange-600">
                         ট {filterdata?.fees} <span className="text-xs text-black">(incl. VAT)</span>
                       </p>
                       <p className="font-sans">Per consultation</p>
@@ -143,7 +143,7 @@ const CategoryWiseAdvocate = () => {
             {found?.all_advocates?.map((elem, index) => (
               <div
                 key={elem?.index}
-                className=" flex bg-base-100 shadow-xl h-40 rounded-md mx-[5rem] mb-[1.5rem] cursor-pointer "
+                className=" flex bg-base-100 shadow-xl h-40 rounded-md md:mx-[5rem] mb-[1.5rem] cursor-pointer "
                 onClick={() => navigate(`/consultation/details/${found?.id}/${elem?.name}`
                 )}
               >
@@ -181,7 +181,7 @@ const CategoryWiseAdvocate = () => {
 
                     <div className="bg-gray-100 flex items-center justify-between px-[3rem] h-full">
                       <div className="flex flex-col">
-                        <p className="text-3xl font-bold font-sans text-orange-600">
+                        <p className="text-lg md:text-3xl font-bold font-sans text-orange-600">
                           ট {elem?.fees} <span className="text-xs text-black">(incl. VAT)</span>
                         </p>
                         <p className="font-sans">Per consultation</p>
@@ -208,8 +208,8 @@ const CategoryWiseAdvocate = () => {
 
 
 
-      </Grid >
-    </Grid >
+      </div >
+    </div >
   );
 };
 

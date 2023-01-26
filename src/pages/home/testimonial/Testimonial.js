@@ -20,7 +20,7 @@ const Testimonial = () => {
   };
   return (
     <div className=" my-10">
-      <div className=" grid grid-cols-2 relative ">
+      <div className=" grid grid-cols-1 md:grid-cols-2 relative ">
         <div className=" testimonialBg text-white">
           <div className=" flex justify-center items-center gap-5 py-10 ">
             <div className=" top-0 border-2 border-white p-4  rounded-full">
