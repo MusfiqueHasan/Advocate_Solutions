@@ -13,10 +13,6 @@ const UserLoginReg = () => {
   const { signInWithGoogle, loginUser, registerUser } = useAuth();
   const [logindata, setLogindata] = useState({});
 
-  
-  // console.log(logindata);
-
-  console.log(location.pathname==='/about')
 
   const handleOnchange = (e) => {
     const field = e.target.name;
