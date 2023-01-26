@@ -36,11 +36,11 @@ function Bidding() {
             <img src={titlelineimg} alt="title-line-img" />
           </div>
 
-          <Stack>
+          <div>
             {/* <Sidebar setMode={setMode} mode={mode} /> */}
 
             <AllBidCard setPost={setPost} post={post} />
-          </Stack>
+          </div>
           <BidPostAdd setPost={setPost} post={post} />
         </Box>
       </ThemeProvider>
