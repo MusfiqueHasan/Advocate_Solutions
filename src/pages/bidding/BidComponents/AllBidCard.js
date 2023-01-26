@@ -47,7 +47,7 @@ const AllBidCard = () => {
 
   return (
     <div>
-      <div className=" grid grid-cols-2 gap-5 p-5">
+      <div className=" grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 p-5">
         {allBiddingPost?.map((postInfo) => {
           const {
             casedescription,
@@ -66,26 +66,26 @@ const AllBidCard = () => {
           };
 
           return (
-            <div className=" bg-slate-900 text-white rounded-lg p-5 flex flex-col justify-between">
+            <div className=" bg-white-900  rounded-lg p-5 flex flex-col justify-between border-2  shadow-md">
               <div>
                 <div className="">
-                  <div className="flex justify-between">
-                    <p className=" text-lg  font-bold">Case Id : {caseId}</p>
-                    <h1 className=" text-xl font-bold">
+                  <div className="">
+                    <p className=" text-sm  font-bold">Case Id : {caseId}</p>
+                    <h1 className=" text-sm font-bold">
                       {" "}
-                      Remaing Time:{createdDate}
+                      Post date:{createdDate}
                     </h1>
                   </div>
 
-                  <p className=" text-lg font-semibold">
+                  <p className=" text-base font-semibold">
                     Case Category : {caseCategory}
                   </p>
-                  <p className=" text-lg font-semibold">
+                  <p className=" text-base font-semibold">
                     Case Title :{" "}
-                    <span className=" text-lg font-semibold">{caseTitle}</span>
+                    <span className=" text-base font-semibold">{caseTitle}</span>
                   </p>
                   <p className="text-sm ">
-                    <span className="text-lg  font-semibold ">
+                    <span className="text-base  font-semibold ">
                       Case Details :{" "}
                     </span>
                     {casedescription}
@@ -98,11 +98,10 @@ const AllBidCard = () => {
                   <Link to={`/bidding_amount`} state={{ data: postInfo }}>
                     <button
                       disabled={getConfirmation()}
-                      className={` ${
-                        getConfirmation()
-                          ? "bg-green-600 hover:bg-green-700 disabled:cursor-not-allowed"
-                          : "bg-sky-600 hover:bg-sky-700"
-                      } mt-2 text-center font-bold px-10 py-2 rounded-xl  `}
+                      className={` ${getConfirmation()
+                        ? " text-white bg-green-600 hover:bg-green-700 disabled:cursor-not-allowed"
+                        : "text-white bg-sky-600 hover:bg-sky-700"
+                        } mt-2 text-center font-bold px-10 py-2 rounded-xl  `}
                     >
                       {getConfirmation() ? "Booked" : "Go For Bid"}
                     </button>
