@@ -6,8 +6,14 @@ const Footer = () => {
   const location = useLocation().pathname;
   return (
     <div
-      className={`${location === "/comunity" || location === "/" || location === "/lawyerAuth" ? "hidden" : "block"
-        } footerBg mt-20`}
+      className={`${
+        location === "/comunity" ||
+        location === "/" ||
+        location === "/lawyerAuth" ||
+        location === "/chat"
+          ? "hidden"
+          : "block"
+      } footerBg mt-20`}
     >
       <div className=" grid grid-cols-3 gap-5 px-20">
         <div className=" flex flex-col justify-center items-center">

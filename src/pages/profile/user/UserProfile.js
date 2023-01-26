@@ -6,7 +6,7 @@ import About from "./About";
 
 const UserProfile = () => {
     const { currentUser } = useSelector((state) => state.authentication);
-console.log(currentUser?.photoURL)
+    
   return (
     <div>
       <AppProfile
@@ -14,16 +14,16 @@ console.log(currentUser?.photoURL)
         profileImg={currentUser?.photoURL? currentUser?.photoURL:null}
         shortInfo={
           <div>
-            <p className="font-extrabold ">{currentUser?.displayName}</p>
             <p className="text-sm text-gray-500">
-              <span className=""> User </span>
+              <span className=""> Name </span>
             </p>
+            <p className="font-extrabold ">{currentUser?.displayName}</p>
           </div>
         }
         othersInfo={
           <div>
-            <p className="text-sm text-gray-500 text-center">Email</p>
-            <p className="font-extrabold text-center">{currentUser?.email}</p>
+            <p className="text-sm text-gray-500 text-center">Role</p>
+            <p className="font-extrabold text-center">User</p>
           </div>
         }
       >

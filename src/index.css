@@ -17,7 +17,7 @@ code {
 }
 
 .formContainer {
-  background-color: #a7bcff;
+  background-color: white;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -80,7 +80,7 @@ code {
   margin-top: 10px;
 }
 .home {
-  background-color: #a7bcff;
+  background-color: white;
   height: 100vh;
   display: flex;
   align-items: center;
