@@ -73,7 +73,7 @@ const AllBidCard = () => {
                     <p className=" text-lg  font-bold">Case Id : {caseId}</p>
                     <h1 className=" text-xl font-bold">
                       {" "}
-                      Remaing Time:{createdDate}
+                      Remaining Time:{createdDate}
                     </h1>
                   </div>
 
