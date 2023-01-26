@@ -1,7 +1,6 @@
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 import React, { useCallback, useRef } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
 import Blogs from "../Blogs/Blogs";
 import News from "../news/News";
 import Attorneys from "./attorneys/Attorneys";
@@ -11,7 +10,6 @@ import Testimonial from "./testimonial/Testimonial";
 
 const Home = () => {
   const { currentUser } = useSelector((state) => state.authentication);
-  const location = useLocation().pathname;
   const tawkMessengerRef = useRef();
 
   const onChatMaximized = useCallback(() => {
@@ -52,16 +50,14 @@ const Home = () => {
       <Blogs />
       <Testimonial />
       <News />
-      {currentUser?.email &&
-        location ===
-          "/" &&(
-            <TawkMessengerReact
-              propertyId="63bcf58dc2f1ac1e202c9bdc"
-              widgetId="1gmd1uctb"
-              ref={tawkMessengerRef}
-              onChatMaximized={onChatMaximized}
-            />
-          )}
+      {currentUser?.email && (
+        <TawkMessengerReact
+          propertyId="63bcf58dc2f1ac1e202c9bdc"
+          widgetId="1gmd1uctb"
+          ref={tawkMessengerRef}
+          onChatMaximized={onChatMaximized}
+        />
+      )}
     </div>
   );
 };

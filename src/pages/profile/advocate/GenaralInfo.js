@@ -2,7 +2,7 @@ import React from "react";
 import { Paper, Typography, Box } from "@mui/material";
 import { useSelector } from "react-redux";
 
-const GenaralInfo = ({ doctorInfo }) => {
+const GenaralInfo = ({ user }) => {
   const { currentUser } = useSelector((state) => state.authentication);
   return (
     <div className="">
@@ -20,7 +20,7 @@ const GenaralInfo = ({ doctorInfo }) => {
               fontWeight: "800",
               fontSize: 16,
               ml: 2,
-              color: currentUser?.emailVerified ? "green" : "blue",
+              color: currentUser?.emailVerified ? "green" : "green",
               
             }}
           >
@@ -30,18 +30,18 @@ const GenaralInfo = ({ doctorInfo }) => {
         <Box sx={{ display: "flex", flexWrap: "wrap" }}>
           <Box sx={{ width: "50%" }}>
             <Typography sx={{ fontWeight: "500", fontSize: 16, mt: 3 }}>
-              Education
+              Advocate Id
             </Typography>
             <Typography sx={{ fontWeight: "400", fontSize: 16, mt: 0.5 }}>
-              {/* {d_education} */}
+              {user?.uid}
             </Typography>
           </Box>
           <Box>
             <Typography sx={{ fontWeight: "500", fontSize: 16, mt: 3 }}>
-              Experience
+              Specialization
             </Typography>
             <Typography sx={{ fontWeight: "400", fontSize: 16, mt: 0.5 }}>
-              {/* {d_experience} */}
+              {user?.specialization}
             </Typography>
           </Box>
         </Box>
@@ -49,18 +49,10 @@ const GenaralInfo = ({ doctorInfo }) => {
         <Box sx={{ display: "flex", my: 5 }}>
           <Box sx={{ width: "50%" }}>
             <Typography sx={{ fontWeight: "500", fontSize: 16 }}>
-              Doctor ID
+             Courts
             </Typography>
             <Typography sx={{ fontWeight: "400", fontSize: 16, mt: 0.5 }}>
-              {/* {d_id} */}
-            </Typography>
-          </Box>
-          <Box>
-            <Typography sx={{ fontWeight: "500", fontSize: 16 }}>
-              Fee
-            </Typography>
-            <Typography sx={{ fontWeight: "400", fontSize: 16, mt: 0.5 }}>
-              {/* ট {d_charge} */}
+              {user?.courts}
             </Typography>
           </Box>
         </Box>
