@@ -1,9 +1,7 @@
 import React from "react";
 import { Paper, Typography, Box } from "@mui/material";
-import { useSelector } from "react-redux";
 
-const Address = ({ doctorInfo }) => {
-    const { currentUser } = useSelector((state) => state.authentication);
+const Address = ({ user }) => {
 
   return (
     <Paper sx={{ borderRadius: "12px", p: 4 }}>
@@ -11,21 +9,21 @@ const Address = ({ doctorInfo }) => {
         Contact Information
       </Typography>
 
-      <Box sx={{ mt: 3 }}>
-        <Box sx={{ mb: 2 }}>
+      <Box sx={{ display: "flex", my: 5, width:'100%' }}>
+        <Box sx={{width: "50%",}}>
           <Typography sx={{ fontWeight: "500", fontSize: 16 }}>
-            Working Place
+            Email Address
           </Typography>
           <Typography sx={{ fontWeight: "400", fontSize: 16, mt: 0.5 }}>
-            {/* {d_woking_place_detials} */}
+            {user?.email}
           </Typography>
         </Box>
-        <Box>
+        <Box sx={{width: "50%" }}>
           <Typography sx={{ fontWeight: "500", fontSize: 16 }}>
-            Location
+            Phone Number
           </Typography>
           <Typography sx={{ fontWeight: "400", fontSize: 16, mt: 0.5 }}>
-            {/* {d_district} , {d_division} */}
+            {user?.phoneNumber}
           </Typography>
         </Box>
       </Box>
