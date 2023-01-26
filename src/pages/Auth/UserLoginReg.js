@@ -6,9 +6,10 @@ import "./LoginRegistration.css";
 import useAuth from "./useAuth";
 
 const UserLoginReg = () => {
-  const {currentUser} = useSelector((state)=> state.authentication)
+  const { currentUser } = useSelector((state) => state.authentication);
   const [addclass, setaddclass] = useState("");
-  const {signInWithGoogle, authError, loginUser, registerUser } = useAuth();
+  const { authSucces, signInWithGoogle, authError, loginUser, registerUser } =
+    useAuth();
   const [logindata, setLogindata] = useState({});
 
   const location = useLocation();
@@ -33,7 +34,7 @@ const UserLoginReg = () => {
 
   useEffect(() => {
     if (currentUser?.email && currentUser?.accessToken) {
-      navigate("/home");
+      navigate("/profile");
     }
   }, [currentUser?.accessToken, currentUser?.email, navigate]);
 
@@ -44,10 +45,8 @@ const UserLoginReg = () => {
           <form className="formlog">
             <h3>Create A User Account</h3>
 
-            <div >
-              <button
-                className="social"
-              >
+            <div>
+              <button className="social">
                 <i class="fab fa-google-plus-g"></i>
               </button>
             </div>
@@ -81,9 +80,15 @@ const UserLoginReg = () => {
               name="password"
               onChange={handleOnchange}
             />
-              {!(authError === "") && (
+            {!(authError === "") && (
               <p className="mb-5 text-sm text-center text-red-500 font-bold">
                 The email address is already in use by another account.
+              </p>
+            )}
+
+            {authSucces !== "" && (
+              <p className="mb-5 text-sm text-center text-green-500 font-bold">
+                {authSucces}
               </p>
             )}
             <button className="btnlog" onClick={handleRegisterSubmit}>
@@ -135,6 +140,7 @@ const UserLoginReg = () => {
                 The password is invalid or the user does not have a password.
               </p>
             )}
+
             <button onClick={handleSubmit} className="btnlog">
               Login
             </button>
@@ -172,7 +178,7 @@ const UserLoginReg = () => {
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              {/* <h1 className="text-2xl font-bold ">Hello, Friend!</h1> */}
+              <h1 className="text-4xl font-bold ">Welcome To Advocate Solutions</h1>
               <p className=" plog heading">
                 Enter your personal details and start journey with us.
               </p>

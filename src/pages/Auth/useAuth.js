@@ -17,16 +17,17 @@ import {
   doc,
 } from "firebase/firestore";
 import { auth, db } from "../../Firebase/Firebase-config";
-import {  useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../redux/actions/authAction";
 
 const useAuth = () => {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   let usersCollectionRef = collection(db, "loginUser");
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [authError, setAuthError] = useState("");
+  const [authSucces, setAuthSuccess] = useState("");
   // const [admin, setAdmin] = useState(false);
   const [token, setToken] = useState("");
   const navigate = useNavigate();
@@ -62,7 +63,7 @@ const useAuth = () => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const destination = location?.state?.from || "/home";
+        const destination = location?.state?.from || "/profile";
         navigate(destination);
         setAuthError("");
       })
@@ -80,7 +81,7 @@ const useAuth = () => {
     signOut(auth)
       .then(() => {
         setUser({});
-        dispatch(setUserInfo({}))
+        dispatch(setUserInfo({}));
       })
       .catch((error) => {})
       .finally(() => setIsLoading(false));
@@ -93,7 +94,7 @@ const useAuth = () => {
         const user = result.user;
         savedUser(user.email, user.displayName, "user", "google");
         setAuthError("");
-        const destination = location?.state?.from || "/home";
+        const destination = location?.state?.from || "/profile";
         navigate(destination);
       })
       .catch((error) => {
@@ -119,12 +120,11 @@ const useAuth = () => {
     return () => unsubscribe;
   }, []);
 
-  useEffect(()=>{
-    if(token && user){
-      dispatch(setUserInfo(user))
+  useEffect(() => {
+    if (token && user) {
+      dispatch(setUserInfo(user));
     }
-  },[dispatch, token, user])
-  
+  }, [dispatch, token, user]);
 
   const savedUser = async (email, displayName, role, isGoogle) => {
     if (isGoogle === "google") {
@@ -142,17 +142,29 @@ const useAuth = () => {
       if (!!credential) {
         const userDoc = doc(db, "loginUser", credential?.id);
         await updateDoc(userDoc, credentialData);
-        console.log("updated successfully");
+        setAuthSuccess("User created successfully");
+        setTimeout(() => {
+          setAuthSuccess("");
+        }, 2000);
+        
       } else {
         const user = { email: email, displayName: displayName, role: role };
         await addDoc(usersCollectionRef, user);
-        console.log("created successfully");
+        setAuthSuccess("User created successfully");
+        setTimeout(() => {
+          setAuthSuccess("");
+        }, 2000);
+        
       }
     }
     if (isGoogle === "register") {
       const user = { email: email, displayName: displayName, role: role };
       await addDoc(usersCollectionRef, user);
-      console.log("created successfully");
+      setAuthSuccess("User created successfully");
+      setTimeout(() => {
+        setAuthSuccess("");
+      }, 2000);
+      
     }
   };
 
@@ -165,6 +177,7 @@ const useAuth = () => {
     isLoading,
     authError,
     signInWithGoogle,
+    authSucces
   };
 };
 
