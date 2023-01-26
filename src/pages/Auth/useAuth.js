@@ -20,58 +20,57 @@ import { auth, db } from "../../Firebase/Firebase-config";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUserInfo } from "../../redux/actions/authAction";
+import { toast } from "react-toastify";
 
 const useAuth = () => {
   const dispatch = useDispatch();
   let usersCollectionRef = collection(db, "loginUser");
   const [user, setUser] = useState({});
   const [isLoading, setIsLoading] = useState(true);
-  const [authError, setAuthError] = useState("");
-  const [authSucces, setAuthSuccess] = useState("");
   // const [admin, setAdmin] = useState(false);
   const [token, setToken] = useState("");
   const navigate = useNavigate();
   const googleProvider = new GoogleAuthProvider();
 
   const location = useLocation();
-  const registerUser = (email, password, name, role) => {
-    setIsLoading(true);
-    createUserWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        setAuthError("");
-        const newUser = { email, displayName: name };
-        setUser(newUser);
-        // save user to database
-        savedUser(email, name, role, "register");
-        // send name to firebase after creation
-        updateProfile(auth.currentUser, {
-          displayName: name,
+
+
+  const registerUser = (registerData, role) => {
+    const { email, password, displayName } = registerData;
+    console.log(registerData)
+    if (registerData === null) {
+      toast.error("Fields cannot be empty");
+    } else {
+      setIsLoading(true);
+      createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+          const newUser = { email, displayName: displayName };
+          setUser(newUser);
+          // save user to database
+          savedUser(registerData, role, "register");
+          // send name to firebase after creation
+          updateProfile(auth.currentUser, {
+            displayName: displayName,
+          })
+            .then(() => {})
+            .catch((error) => {});
         })
-          .then(() => {})
-          .catch((error) => {});
-      })
-      .catch((error) => {
-        setAuthError(error.message);
-        setTimeout(() => {
-          setAuthError("");
-        }, 2000);
-      })
-      .finally(() => setIsLoading(false));
+        .catch((error) => {
+          toast.error("The email address is already in use by another account.");
+        })
+        .finally(() => setIsLoading(false));
+    }
   };
 
   const loginUser = (email, password, location) => {
     setIsLoading(true);
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const destination = location?.state?.from || "/profile";
+        const destination = location?.state?.from || "/home";
         navigate(destination);
-        setAuthError("");
       })
       .catch((error) => {
-        setAuthError(error.message);
-        setTimeout(() => {
-          setAuthError("");
-        }, 2000);
+        toast.error("Credential does not match");
       })
       .finally(() => setIsLoading(false));
   };
@@ -92,13 +91,12 @@ const useAuth = () => {
     signInWithPopup(auth, googleProvider)
       .then((result) => {
         const user = result.user;
-        savedUser(user.email, user.displayName, "user", "google");
-        setAuthError("");
-        const destination = location?.state?.from || "/profile";
+        savedUser(user, "user", "google");
+        const destination = location?.state?.from || "/home";
         navigate(destination);
       })
       .catch((error) => {
-        setAuthError(error.message);
+        toast.error("The password is invalid or the user does not have a password.");
       })
       .finally(() => setIsLoading(false));
   };
@@ -126,7 +124,8 @@ const useAuth = () => {
     }
   }, [dispatch, token, user]);
 
-  const savedUser = async (email, displayName, role, isGoogle) => {
+  const savedUser = async (registerData, role, isGoogle) => {
+    const { email, displayName } = registerData;
     if (isGoogle === "google") {
       const data = await getDocs(usersCollectionRef);
       const allData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
@@ -142,29 +141,18 @@ const useAuth = () => {
       if (!!credential) {
         const userDoc = doc(db, "loginUser", credential?.id);
         await updateDoc(userDoc, credentialData);
-        setAuthSuccess("User created successfully");
-        setTimeout(() => {
-          setAuthSuccess("");
-        }, 2000);
-        
+        toast.success("User loged in successfully");
       } else {
         const user = { email: email, displayName: displayName, role: role };
         await addDoc(usersCollectionRef, user);
-        setAuthSuccess("User created successfully");
-        setTimeout(() => {
-          setAuthSuccess("");
-        }, 2000);
-        
+        toast.success("User loged in successfully");
       }
     }
     if (isGoogle === "register") {
-      const user = { email: email, displayName: displayName, role: role };
-      await addDoc(usersCollectionRef, user);
-      setAuthSuccess("User created successfully");
-      setTimeout(() => {
-        setAuthSuccess("");
-      }, 2000);
-      
+      const copyUser = {...registerData}
+      copyUser.role = role
+      await addDoc(usersCollectionRef, copyUser);
+      toast.success("User created successfully");
     }
   };
 
@@ -175,9 +163,7 @@ const useAuth = () => {
     logOut,
     loginUser,
     isLoading,
-    authError,
     signInWithGoogle,
-    authSucces
   };
 };
 

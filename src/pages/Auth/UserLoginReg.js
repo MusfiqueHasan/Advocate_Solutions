@@ -6,14 +6,17 @@ import "./LoginRegistration.css";
 import useAuth from "./useAuth";
 
 const UserLoginReg = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { currentUser } = useSelector((state) => state.authentication);
   const [addclass, setaddclass] = useState("");
-  const { authSucces, signInWithGoogle, authError, loginUser, registerUser } =
-    useAuth();
+  const { signInWithGoogle, loginUser, registerUser } = useAuth();
   const [logindata, setLogindata] = useState({});
 
-  const location = useLocation();
-  const navigate = useNavigate();
+  
+  // console.log(logindata);
+
+  console.log(location.pathname==='/about')
 
   const handleOnchange = (e) => {
     const field = e.target.name;
@@ -28,15 +31,36 @@ const UserLoginReg = () => {
     e.preventDefault();
   };
   const handleRegisterSubmit = (e) => {
-    registerUser(logindata.email, logindata.password, logindata.name, "user");
+    registerUser(logindata, "user");
     e.preventDefault();
   };
 
   useEffect(() => {
     if (currentUser?.email && currentUser?.accessToken) {
-      navigate("/profile");
+      navigate("/home");
+    
     }
   }, [currentUser?.accessToken, currentUser?.email, navigate]);
+
+  // useEffect(() => {
+  //   // check if the user is not on login page
+  //   if (location.pathname !== "/" && currentUser?.email && currentUser?.accessToken) {
+  //     // store the current location in session storage
+  //     sessionStorage.setItem("currentLocation", location.pathname);
+  //     setCurrentLocation(location.pathname)
+  //   }
+  // }, [currentUser?.accessToken, currentUser?.email, location]);
+
+  // useEffect(() => {
+  //   // When the page is refreshed, check for the current location in session storage
+  //   if (sessionStorage.getItem("currentLocation") && currentUser?.email && currentUser?.accessToken) {
+  //     // If it exists, redirect the user to that location
+  //     const currentLocation = sessionStorage.getItem("currentLocation");
+  //     if (location.pathname === "/") {
+  //       navigate(currentLocation);
+  //     }
+  //   }
+  // }, [currentUser?.accessToken, currentUser?.email, location.pathname, navigate]);
 
   return (
     <div className="bodylog">
@@ -55,7 +79,7 @@ const UserLoginReg = () => {
               type="text"
               className="inputlog"
               placeholder="Full Name"
-              name="name"
+              name="displayName"
               onChange={handleOnchange}
             />
             <input
@@ -80,23 +104,12 @@ const UserLoginReg = () => {
               name="password"
               onChange={handleOnchange}
             />
-            {!(authError === "") && (
-              <p className="mb-5 text-sm text-center text-red-500 font-bold">
-                The email address is already in use by another account.
-              </p>
-            )}
-
-            {authSucces !== "" && (
-              <p className="mb-5 text-sm text-center text-green-500 font-bold">
-                {authSucces}
-              </p>
-            )}
-            <button className="btnlog" onClick={handleRegisterSubmit}>
+            <button className="btnlog my-4" onClick={handleRegisterSubmit}>
               REGISTER
             </button>
 
             <Link to="/lawyerAuth">
-              <p className=" text-sm text-red-600 hover:text-sky-600 hover:text-base duration-1000 py-2">
+              <p className=" text-sm text-blue-600 hover:text-sky-600 hover:text-base duration-1000 py-2">
                 Are You a Lawyer? please click here{" "}
               </p>
             </Link>
@@ -135,12 +148,6 @@ const UserLoginReg = () => {
             />
             <br />
 
-            {!(authError === "") && (
-              <p className="mb-5 text-sm text-center text-red-500 font-bold">
-                The password is invalid or the user does not have a password.
-              </p>
-            )}
-
             <button onClick={handleSubmit} className="btnlog">
               Login
             </button>
@@ -178,7 +185,9 @@ const UserLoginReg = () => {
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-              <h1 className="text-4xl font-bold ">Welcome To Advocate Solutions</h1>
+              <h1 className="text-4xl font-bold ">
+                Welcome To Advocate Solutions
+              </h1>
               <p className=" plog heading">
                 Enter your personal details and start journey with us.
               </p>

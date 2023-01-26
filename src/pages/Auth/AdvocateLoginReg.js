@@ -2,17 +2,20 @@ import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import "./LoginRegistration.css";
 import useAuth from "./useAuth";
 
 const AdvocateLoginReg = () => {
   const { currentUser } = useSelector((state) => state.authentication);
   const [addclass, setaddclass] = useState("");
-  const { loginUser, registerUser, authError, authSucces } = useAuth();
+  const { loginUser, registerUser } = useAuth();
 
   const [logindata, setLogindata] = useState({});
   const location = useLocation();
   const navigate = useNavigate();
+
+  console.log(logindata);
 
   const handleOnChange = (e) => {
     const field = e.target.name;
@@ -23,37 +26,37 @@ const AdvocateLoginReg = () => {
   };
 
   const handleLoginSubmit = (e) => {
-    loginUser(logindata.email, logindata.password,  location);
+    loginUser(logindata.email, logindata.password, location);
     e.preventDefault();
   };
 
   const handleRegisterSubmit = (e) => {
-    registerUser(
-      logindata.email,
-      logindata.password,
-      logindata.name,
-      "advocate"
-    );
+    if (
+      logindata?.displayName === "" ||
+      logindata.email === "" ||
+      logindata.phoneNumber === "" ||
+      logindata.password === ""
+    ) {
+      toast.error("Fields cannot be empty");
+    } else {
+      registerUser(logindata, "advocate");
+    }
     e.preventDefault();
   };
   useEffect(() => {
     if (currentUser?.email && currentUser?.accessToken) {
-      navigate("/profile");
+      navigate("/home");
     }
   }, [currentUser?.accessToken, currentUser?.email, navigate]);
   return (
     <div className="bodylog">
       <div className={`containerlog ${addclass}`} id="container">
         <div className="form-container sign-up-container">
-          <form
-            className="formlog"
-          >
+          <form className="formlog">
             <h3>Create A Lawayer Account</h3>
 
             <div class="">
-              <button
-                className="social"
-              >
+              <button className="social">
                 <i class="fab fa-google-plus-g"></i>
               </button>
             </div>
@@ -62,7 +65,7 @@ const AdvocateLoginReg = () => {
               type="text"
               className="inputlog"
               placeholder="Full Name"
-              name="name"
+              name="displayName"
               onChange={handleOnChange}
             />
             <input
@@ -79,20 +82,40 @@ const AdvocateLoginReg = () => {
               placeholder="Phone Number"
               onChange={handleOnChange}
             />
-            <input
-              type="text"
-              name="Specialization"
-              className="inputlog"
+            <select
+              name="specialization"
+              className="inputlog pr-2"
               placeholder="Specialization"
               onChange={handleOnChange}
-            />
-            <input
-              type="text"
-              name="PracticingCourts"
-              className="inputlog"
+            >
+              <option> Select Specialization</option>
+              <option>Criminal lawer</option>
+              <option>Divorce lawer</option>
+              <option>family Lawyer</option>
+              <option>Corporate Lawyer</option>
+              <option>Immigration Lawyer</option>
+              <option>Civil Rights lawyer</option>
+              <option>Healthcare Lawyer</option>
+              <option>Education Lawyer</option>
+              <option>Animal Rights Lawyer</option>
+            </select>
+            <select
+              name="courts"
+              className="inputlog pr-2"
               placeholder="Practicing Courts"
               onChange={handleOnChange}
-            />
+            >
+              <option className="text-gray-600 font-bold">
+                {" "}
+                Select Practicing Courts
+              </option>
+              <option>Dhaka</option>
+              <option>Chittagong</option>
+              <option>Rajshahi</option>
+              <option>Khulna</option>
+              <option>Barishal</option>
+              <option>Syhlet</option>
+            </select>
 
             <input
               type="password"
@@ -101,21 +124,11 @@ const AdvocateLoginReg = () => {
               name="password"
               onChange={handleOnChange}
             />
-            {!(authError === "") && (
-              <p className="mb-5 text-sm text-center text-red-500 font-bold">
-                The email address is already in use by another account.
-              </p>
-            )}
-            {authSucces !== "" && (
-              <p className="mb-5 text-sm text-center text-green-500 font-bold">
-                {authSucces}
-              </p>
-            )}
-            <button className="btnlog" onClick={handleRegisterSubmit}>
+            <button className="btnlog my-4" onClick={handleRegisterSubmit}>
               REGISTER
             </button>
             <Link to="/">
-              <p className=" text-sm text-red-600 hover:text-sky-600 hover:text-base duration-1000">
+              <p className=" text-sm text-blue-600 hover:text-sky-600 hover:text-base duration-1000">
                 Are You not a Lawyer? please click here{" "}
               </p>
             </Link>
@@ -125,14 +138,12 @@ const AdvocateLoginReg = () => {
           <form className="formlog">
             <h1 className="h1log">Lawayer Login</h1>
 
-            <div class="social-container">
-            </div>
+            <div class="social-container"></div>
 
             <input
               required
               type="email"
               className="inputlog"
-              
               placeholder="Your  Email"
               name="email"
               onChange={handleOnChange}
@@ -142,28 +153,21 @@ const AdvocateLoginReg = () => {
               className="inputlog"
               required
               placeholder="Your Password"
-            
               type="password"
               name="password"
               onChange={handleOnChange}
             />
             <br />
-            {!(authError === "") && (
-              <p className="mb-5 text-sm text-center text-red-500 font-bold">
-                The password is invalid or the user does not have a password.
-              </p>
-            )}
 
-        
             <Link to="/home">
-              <button className="btnlog" onClick={handleLoginSubmit}>
+              <button className="btnlog my-4" onClick={handleLoginSubmit}>
                 Login
               </button>
             </Link>
 
             <br />
             <Link to="/">
-              <p className=" text-sm text-red-600 hover:text-sky-600 hover:text-base duration-1000">
+              <p className=" text-sm text-blue-600 hover:text-sky-600 hover:text-base duration-1000">
                 Are You not a Lawyer? please click here{" "}
               </p>
             </Link>
@@ -186,7 +190,9 @@ const AdvocateLoginReg = () => {
               </button>
             </div>
             <div className="overlay-panel overlay-right">
-            <h1 className="text-4xl font-bold ">Welcome To Advocate Solutions</h1>
+              <h1 className="text-4xl font-bold ">
+                Welcome To Advocate Solutions
+              </h1>
               <p className="  plog heading">
                 Enter your personal details and start journey with us.
               </p>

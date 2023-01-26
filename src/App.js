@@ -1,3 +1,4 @@
+
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import About from "./pages/about/About";
@@ -29,7 +30,10 @@ import Profile from "./pages/profile/Profile";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+
 function App({ children }) {
+
+
   return (
     <>
       <BrowserRouter>
