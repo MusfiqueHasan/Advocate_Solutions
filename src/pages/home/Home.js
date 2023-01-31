@@ -15,18 +15,16 @@ const Home = () => {
   const onChatMaximized = useCallback(() => {
     tawkMessengerRef.current.setAttributes(
       {
-        id: "hello",
+        id: currentUser?.uid,
       },
       function (error) {
         console.log(error);
       }
     );
-    // const { firstName, lastName } = authUser?.profile || {};
-    // const fullName = firstName + ' ' + lastName ? lastName : '';
     tawkMessengerRef.current.setAttributes(
       {
-        name: "Musfique",
-        email: "musfiquehasan08@gmail.com",
+        name: currentUser?.displayName,
+        email: currentUser?.email,
         // hash: uniqueId(),
       },
       function (error) {
@@ -38,13 +36,6 @@ const Home = () => {
   return (
     <div className=" overflow-hidden">
       <HeaderCarousel />
-      {/* <div className="animate__animated animate__fadeInUp"></div>
-      <div clas> </div>
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div> */}
-
       <Attorneys />
       <TotalCounting />
       <Blogs />

@@ -40,6 +40,9 @@ const MenuBar = () => {
      else if (path === "bidding") {
       navigate("/bidding");
     }
+     else if (path === "chat") {
+      navigate("/chat");
+    }
   };
 
   return (
@@ -214,6 +217,26 @@ const MenuBar = () => {
                 >
                   {" "}
                   Comunity{" "}
+                </Button>
+                <Button
+                  onClick={() => navigationHandler("chat")}
+                  sx={{
+                    height: 100,
+                    color: "white",
+                    fontFamily: "-moz-initial",
+                    fontWeight: "bold",
+                    boxSizing: "border-box",
+                    display: "flex",
+                    alignItems: "center",
+                    cursor: "pointer",
+                    "&:hover": {
+                      borderTop: "3.5px solid #ccae62",
+                      color: "white",
+                      bgcolor: "#192a56",
+                    },
+                  }}
+                >
+                 Chat
                 </Button>
                 <Button
                   onClick={() => navigationHandler("all_blogs")}

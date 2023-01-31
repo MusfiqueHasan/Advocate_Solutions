@@ -25,3 +25,4 @@ export const GET_SINGLE_BIDDING = "get_single_bidding"
 export const UPDATE_BIDDING = "update_biding"
 
 export const SET_USERINFO = "set_userinfo"
+export const CHANGE_USER = "CHANGE_USER"
