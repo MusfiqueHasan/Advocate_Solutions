@@ -46,9 +46,9 @@ const BiddingAmount = () => {
 
   const getStatus = () => {
     const isConfirmed = historyData?.biddingHistory?.filter(
-      (elm) => elm.bidderId === isLoginUserId
+      (elm) => elm?.bidderId === isLoginUserId
     );
-    return isConfirmed.length > 0 ? true : false;
+    return isConfirmed?.length > 0 ? true : false;
   };
 
 

@@ -29,6 +29,7 @@ import Profile from "./pages/profile/Profile";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AppChat from "./pages/components/AppChat";
 
 
 function App({ children }) {
@@ -80,6 +81,14 @@ function App({ children }) {
             element={
               <PrivateRoute>
                 <Consultation />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/chat"
+            element={
+              <PrivateRoute>
+                <AppChat />
               </PrivateRoute>
             }
           />

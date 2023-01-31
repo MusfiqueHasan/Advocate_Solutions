@@ -52,12 +52,6 @@ const CategoryWiseAdvocate = () => {
     <div className=" mt-16 grid grid-cols-1 md:grid-cols-4">
       <div className=" px-3" >
         <div className="md:ml-10 ">
-          <div className="flex justify-between mb-5">
-            <p className=" uppercase font-bold text-xl">Advance Search</p>
-            <button className="bg-blue-600 px-4 py-2 rounded-md shadow-md">
-              <HiOutlineBars3BottomLeft className="text-2xl text-white cursor-pointer" />
-            </button>
-          </div>
 
           <div className="mt-3">
             <p className="font-bold mb-3">Filter By Experience</p>
