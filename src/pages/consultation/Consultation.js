@@ -30,6 +30,8 @@ const Consultation = () => {
 
     getcategory();
   }, []);
+
+  
   return (
     <div className=" p-10 mt-10">
       <div>
