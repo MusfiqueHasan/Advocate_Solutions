@@ -47,9 +47,7 @@ const BiddHistory = () => {
     }
   }, []);
 
-  // useEffect(() => {
 
-  // }, []);
 
   return (
     <div className=" my-16">

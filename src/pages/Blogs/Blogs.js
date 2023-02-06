@@ -28,14 +28,21 @@ const Blogs = () => {
 
     getblogs();
   }, []);
+
+
+
+
+
   return (
     <div className=" mt-12">
-      <div className="news_title flex flex-col justify-center items-center gap-y-3 ">
+      
+      <div role='button' className="news_title flex flex-col justify-center items-center gap-y-3 ">
         <h1 className=" text-3xl font-bold text-center mt-5 ">
           Advocates Blog
         </h1>
         <img src={titlelineimg} alt="title-line-img" />
       </div>
+      
       <div className=" flex justify-end pr-6">
         <Link to="/all_blogs">
           <button className="text-xl font-bold text-end hover:text-sky-500">View All</button>
@@ -91,7 +98,6 @@ const Blogs = () => {
             </div>
           </div>
         ))}
-
 
       </div>
     </div>

@@ -27,6 +27,9 @@ const ViewAllBlogs = () => {
 
     getblogs();
   }, []);
+
+ 
+
   return (
     <div className=" mt-12">
       <div className="news_title flex flex-col justify-center items-center gap-y-3 ">
@@ -35,9 +38,8 @@ const ViewAllBlogs = () => {
         </h1>
         <img src={titlelineimg} alt="title-line-img" />
       </div>
-      {/* <div className=" flex justify-end pr-6">
-        <button className="text-xl font-bold text-end hover:text-sky-500">View All</button>
-      </div> */}
+    
+
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7  px-40 py-5">
         {blogs.map((blog) => (
           <div className=" shadow-md relative bg-slate-50 text-slate-500 ">
